@@ -1,0 +1,70 @@
+@using Syncfusion.Blazor.Inputs
+
+<header>
+    <div class='e-input-group'>
+        <span class="e-icons e-search header-searchbar-icon"></span>
+        <input class='e-input' Placeholder='Search' type='text'>
+    </div>
+    <div class="header-icon-container">
+        <div class="header-icon-frame">
+            <span class="e-icons e-line-small header-icon"></span>
+        </div>
+        <div class="header-icon-frame">
+            <span class="e-icons e-clock header-icon"></span>
+        </div>
+        <div class="header-icon-frame">
+            <span class="e-icons e-brightness header-icon"></span>
+        </div>
+        <div class="header-icon-frame">
+            <img alt="user photo" src="./images/Ellipse 961.png" />
+        </div>
+    </div>
+</header>
+
+<style>
+    header {
+        width: 1312px;
+        margin: 16px auto 0px 112px;
+        padding: 16px;
+        border-radius: 16px;
+        background-color: white;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .e-input-group {
+        margin: auto 0;
+        width: 310px;
+        height: 28px;
+        border-radius: 8px;
+        border: 0px;
+        background-color: #F7F8FC;
+        color: #1C1C1C;
+    }
+
+
+    .header-searchbar-icon {
+        margin: 8px;
+    }
+
+    .header-icon-container {
+        display: flex;
+    }
+
+    .header-icon-frame {
+        margin: 5px;
+        width: 32px;
+        height: 32px;
+        border-radius: 16px;
+        border: 1px solid #DDDDDD;
+    }
+
+    .header-icon {
+        width: 16px;
+        height: 16px;
+        position: relative;
+        left: 5px;
+        top: 2px;
+        color: #A4A4A4;
+    }
+</style>

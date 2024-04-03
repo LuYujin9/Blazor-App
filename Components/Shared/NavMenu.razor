@@ -1,0 +1,79 @@
+﻿@namespace Shared
+@using Syncfusion.Blazor.Navigations
+@using Syncfusion.Blazor.Buttons
+
+<SfSidebar Width="80px" class="nav-menu">
+    <ChildContent>
+        <div>Sidebar</div>
+        <div class="sidebar-item">
+            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                <img src="./images/home.png" class="nav-icon" />
+            </NavLink>
+        </div>
+        <div class="sidebar-item">
+            <NavLink class="nav-link" href="passwordGenerator">
+                <img src="./images/grid_view.png" class="nav-icon" />
+            </NavLink>
+        </div>
+        <div class="sidebar-item">
+            <NavLink class="nav-link" href="fizzBuzz">
+                <img src="./images/Frame 8.png" class="nav-icon" />
+            </NavLink>
+        </div>
+        <div class="sidebar-item">
+            <NavLink class="nav-link" href="base64Converter">
+                <img src="./images/energy_program_saving.png" class="nav-icon" />
+            </NavLink>
+        </div>
+        <div class="sidebar-item">
+            <NavLink class="nav-link" href="classCollision">
+                <img src="./images/apartment.png" class="nav-icon" />
+            </NavLink>
+        </div>
+        <div class="sidebar-item">
+            <NavLink class="nav-link" href="counter">
+                Counter
+            </NavLink>
+        </div>
+    </ChildContent>
+</SfSidebar>
+
+<style>
+    .e-sidebar {
+        margin: 16px;
+        background-color: #001360;
+        color: black;
+        border-radius: 16px;
+        height: 1948px;
+    }
+
+    .sidebar-item {
+        margin: auto;
+        color: blue;
+        border-radius: 5px;
+    }
+
+    .nav-link {
+        margin: 16px auto;
+        width: 48px;
+        height: 48px;
+        box-sizing: content-box;
+    }
+
+    .nav-icon {
+        margin: auto;
+        padding: 0;
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+    }
+
+    .text-content {
+        font-size: 1.5rem;
+        padding: 3rem;
+    }
+
+    .main>div {
+        padding: 0px !important;
+    }
+</style>

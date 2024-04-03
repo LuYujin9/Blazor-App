@@ -1,0 +1,69 @@
+@page "/fizzBuzz"
+@rendermode InteractiveServer
+
+<PageTitle>Fizz Buzz</PageTitle>
+
+<h1>Fizz Buzz Game</h1>
+
+@* <input type="number" min="0" @oninput="HandleInput" /> *@
+<EditForm Model="Model" OnValidSubmit="HandleSubmit">
+  <DataAnnotationsValidator />
+  <ValidationSummary />
+  <InputNumber TValue="int" @bind-Value="Model!.InputValue" />
+  <button type="submit" class="btn btn-primary">Click me</button>
+</EditForm>
+
+<p role="status">@message</p>
+
+@code {
+  public class FormData
+  {
+    public int InputValue { get; set; }
+  }
+
+  [SupplyParameterFromForm]
+  private FormData? Model { get; set; }
+
+  private void HandleSubmit()
+  {
+    Console.WriteLine($"Value: {Model!.InputValue}");
+    FizzBuzzFn();
+  }
+
+  protected override void OnInitialized()
+  {
+    Model = new();
+  }
+
+  private string message = "Please give a positive integer.";
+  @* public int number = -1;
+private void HandleInput(ChangeEventArgs e)
+{
+string? inputString = e.Value?.ToString();
+string inputValue = inputString ?? "";
+
+message = "Please give a positive integer.";
+if (!int.TryParse(inputValue, out int result) || result < 0)
+{
+number = -1;
+return;
+}
+number = result;
+} *@
+  private void FizzBuzzFn()
+  {
+    message = Model!.InputValue == -1 ? "This is not a positive integer." : "";
+    if (Model!.InputValue % 3 == 0)
+    {
+      message = message + "Fizz";
+    }
+    if (Model!.InputValue % 5 == 0)
+    {
+      message = message + "Buzz";
+    }
+    if (Model!.InputValue != -1 && message == "")
+    {
+      message = Model!.InputValue.ToString();
+    }
+  }
+}

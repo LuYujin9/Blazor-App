@@ -1,0 +1,56 @@
+@page "/classCollision"
+@using System.Text;
+@rendermode InteractiveServer
+
+<PageTitle>Class Collision</PageTitle>
+<h1>Class Collision</h1>
+<label>Class one x:
+    <InputNumber TValue="int" name="classOneX" @bind-Value="circleOne.X" />
+</label>
+<label>Class one y:
+    <InputNumber TValue="int" name="classOneY" @bind-Value="circleOne.Y" />
+</label>
+<label>Class one r:
+    <InputNumber TValue="double" name="classOneR" @bind-Value="circleOne.R" />
+</label>
+<label>Class two x:
+    <InputNumber TValue="int" name="classOneX" @bind-Value="circleTwo.X" />
+</label>
+<label>Class two y:
+    <InputNumber TValue="int" name="classOneY" @bind-Value="circleTwo.Y" />
+</label>
+<label>Class two r:
+    <InputNumber TValue="double" name="classOneR" @bind-Value="circleTwo.R" />
+</label>
+<button class="btn btn-primary" @onclick="IsCollision">Click me</button>
+<p>@message</p>
+
+@code {
+    private string message = "";
+    public class Circle(int x, int y, double r)
+    {
+        public int X { get; set; } = x;
+        public int Y { get; set; } = y;
+        public double R { get; set; } = r;
+    }
+    public Circle circleOne = new Circle(1, 2, 1.2);
+    public Circle circleTwo = new Circle(2, 2, 1.5);
+    private void IsCollision()
+    {
+        int x1 = circleOne.X;
+        int y1 = circleOne.Y;
+        double r1 = circleOne.R;
+        int x2 = circleTwo.X;
+        int y2 = circleTwo.Y;
+        double r2 = circleTwo.R;
+        double distence = Math.Sqrt(Math.Pow(Math.Abs(x2 - x1), 2) + Math.Pow(Math.Abs(y2 - y1), 2));
+        if (distence < r1 + r2)
+        {
+            message = "collision";
+        }
+        else
+        {
+            message = "not collision";
+        }
+    }
+}

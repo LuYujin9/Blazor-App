@@ -1,0 +1,295 @@
+﻿@page "/copy"
+@rendermode InteractiveServer
+@using Syncfusion.Blazor.Schedule
+@using Syncfusion.Blazor.SplitButtons
+@using Syncfusion.Blazor.DropDowns
+@using Syncfusion.Blazor.Navigations
+@using Syncfusion.Blazor.Lists
+@using Syncfusion.Blazor.Buttons
+
+<PageTitle>Home</PageTitle>
+<div class="container">
+    <div class="contet-container">
+        <div class="title-container">
+            <h1>Learning Paths</h1>
+            <h2>Learning Paths</h2>
+            <div class="subtitle">This scheduler is the central hub for tracking and managing the automated, adaptive
+                micro-learning paths.
+            </div>
+        </div>
+        <div class="users-list-container">
+            <div class="users-list">
+                <div class="users-list-title">Company
+                </div>
+                <SfDropDownList Width="300px" TValue="string" TItem="DropListItems" Placeholder="@companies[0].Text"
+                    DataSource="@companies" PopupHeight="500px" CssClass="e-users-list">
+                    <DropDownListFieldSettings Value="Text" Text="Text"></DropDownListFieldSettings>
+                    @* <DropDownListEvents TValue="string" TItem="DropListItems" ValueChange="OnValueChange"> *@
+                    @* </DropDownListEvents> *@
+                </SfDropDownList>
+            </div>
+            <div class="users-list">
+                <div class="users-list-title">Users
+                </div>
+                <SfDropDownList Width="300px" TValue="string" TItem="DropListItems" Placeholder="@users[0].Text"
+                    DataSource="@users" PopupHeight="500px" class="e-users-list">
+                    <DropDownListFieldSettings Value="Text" Text="Text"></DropDownListFieldSettings>
+                    @* <DropDownListEvents TValue="string" TItem="DropListItems" ValueChange="OnValueChange"> *@
+                    @* </DropDownListEvents> *@
+                </SfDropDownList>
+            </div>
+        </div>
+        <div class="list-container">
+            <div class="filter-container">
+                @* 修改为dropdownlist *@
+                <SfDropDownButton Content="Filter by" CssClass="filter" IconCss="e-icons e-menu">
+                    <DropDownMenuItems>
+                        <DropDownMenuItem Text="Having Course today"></DropDownMenuItem>
+                    </DropDownMenuItems>
+                </SfDropDownButton>
+                <SfDropDownButton Content="Sort by" CssClass="filter" IconCss="e-icons e-menu">
+                    <DropDownMenuItems>
+                        <DropDownMenuItem Text="Newest Users"></DropDownMenuItem>
+                        <DropDownMenuItem Text="Last Active"></DropDownMenuItem>
+                    </DropDownMenuItems>
+                </SfDropDownButton>
+            </div>
+            <div class="infos-container">
+                <h3>Acme Inc</h3>
+                <div class="date-choose-container">
+                    <SfButtonGroup>
+                        <ButtonGroupButton IconCss="e-icons e-chevron-left" CssClass="pagination-button">
+                        </ButtonGroupButton>
+                        <ButtonGroupButton IconCss="e-icons e-chevron-right" CssClass="pagination-button">
+                        </ButtonGroupButton>
+                    </SfButtonGroup>
+                    <SfDropDownList Width="200px" TValue="string" TItem="DropListItems" Placeholder="@date[0].Text"
+                        DataSource="@date" PopupHeight="500px" CssClass="e-date-list">
+                        <DropDownListFieldSettings Value="Text" Text="Text"></DropDownListFieldSettings>
+                        @* <DropDownListEvents TValue="string" TItem="DropListItems" ValueChange="OnValueChange">
+                        </DropDownListEvents> *@
+                    </SfDropDownList>
+                </div>
+                <SfGantt DataSource="@paginatedRecords" Height="450px" Width="700px" AllowFiltering="true">
+                    <GanttTaskFields Id="TaskId" Name="TaskName" StartDate="StartDate" EndDate="EndDate"
+                        Duration="Duration" Progress="Progress" ParentID="ParentId">
+                    </GanttTaskFields>
+                </SfGantt>
+            </div>
+            <SfPager @ref="@Pager" PageSize=@pageSize NumericItemsCount=@(records.Count / pageSize)
+                TotalItemsCount=@(records.Count)>
+            </SfPager>
+        </div>
+    </div>
+</div>
+
+@* 思考:能不能schedule搭配不同的user? *@
+@code {
+    public class DropListItems
+    {
+        public string? ID { get; set; }
+        public string? Text { get; set; }
+    }
+    List<DropListItems> companies = new List<DropListItems> {
+new DropListItems() { ID= "0", Text= "Acme Inc" },
+};
+    List<DropListItems> users = new List<DropListItems> {
+new DropListItems() { ID= "0", Text= "Label, Label," },
+new DropListItems() { ID= "1", Text= "Label, Label," },
+new DropListItems() { ID= "2", Text= "Label, Label," },
+new DropListItems() { ID= "3", Text= "Label, Label," }
+};
+    List<DropListItems> date = new List<DropListItems> {
+new DropListItems() { ID= "0", Text= "02-08 February 2024" },
+new DropListItems() { ID= "1", Text= "09-15 February 2024" },
+new DropListItems() { ID= "2", Text= "16-22 February 2024" }
+};
+    //为什么只有一个value
+    public void OnValueChange(ChangeEventArgs<string, DropListItems> args)
+    {
+        Console.WriteLine("The DropDownList Value is: ", args.Value);
+    }
+
+    public class GanttRecord
+    {
+        public required string User { get; set; }
+        public required string LastActive { get; set; }
+    }
+
+    SfPager Pager;
+    public List<GanttRecord> records { get; set; } = [];
+
+    public List<GanttRecord> paginatedRecords
+    {
+        get
+        {
+            if (Pager is null) return [];
+            return records?
+            .Skip(Pager.CurrentPage * pageSize)
+            .Take(pageSize)
+            .ToList() ?? [];
+        }
+    }
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        records.Add(new GanttRecord() { User = "test", LastActive = "22/02/24" });
+        records.Add(new GanttRecord() { User = "test", LastActive = "22/02/24" });
+        records.Add(new GanttRecord() { User = "test", LastActive = "22/02/24" });
+        records.Add(new GanttRecord() { User = "test", LastActive = "22/02/24" });
+        records.Add(new GanttRecord() { User = "test", LastActive = "22/02/24" });
+        records.Add(new GanttRecord() { User = "test", LastActive = "22/02/24" });
+        records.Add(new GanttRecord() { User = "test", LastActive = "22/02/24" });
+        records.Add(new GanttRecord() { User = "test", LastActive = "22/02/24" });
+    }
+    public int pageSize = 5;
+}
+
+
+<style>
+    .container {
+        margin-left: 60px;
+    }
+
+    .contet-container {
+        display: flex;
+        flex-direction: column;
+        gap: 50px;
+    }
+
+    .title-container {
+        padding: 10px;
+        padding-top: 0px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .subtitle {
+        font-size: 15px;
+        font-weight: 400;
+        color: #4D4D4D;
+    }
+
+    .users-list-container {
+        display: flex;
+        gap: 32px;
+    }
+
+    .users-list-title {
+        font-size: 15px;
+        font-weight: 600;
+        height: 28px;
+        color: #212121;
+    }
+
+    .users-list {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .e-users-list {
+        magrin: auto;
+        height: 50px;
+        font-size: 16px;
+        font-weight: 400;
+        color: #212121;
+        border: 1px solid #001360;
+    }
+
+    .filter-container {
+        height: 40px;
+        width: 1312px;
+        display: flex;
+        gap: 16px;
+    }
+
+    .filter.e-dropdown-btn {
+        background-color: white;
+    }
+
+    .list-container {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+    }
+
+    .e-custom.e-input-group,
+    .e-custom.e-input-group.e-control-wrapper {
+        height: 40px;
+        background-color: #ECEEF6;
+        font-size: 15px;
+        font-weight: 400;
+        border: none;
+    }
+
+    .infos-container {
+        background-color: white;
+        padding: 24px;
+        height: 797px;
+        border-radius: 16px;
+    }
+
+    .e-control-wrapper.e-input-group.e-control-container.e-keyboard {
+        width: 300px;
+        height: 50px;
+        border-radius: 4px;
+        font-size: 16px;
+        color: black;
+        background-color: #FFFFFF;
+        border: solid 1px #001360;
+        //为什么 某些属性 不起作用?
+    }
+
+    .date-choose-container {
+        width: 1258px;
+        padding: 8px 0;
+        border-radius: 16px;
+        display: flex;
+        gap: 20px;
+        background-color: #ECEEF6;
+        ;
+    }
+
+    .e-btn {
+        font-weight: 400;
+        font-size: :14px;
+        color: #0C1116;
+        width: 110px;
+        height: 40px;
+        border-radius: 32px;
+        background-color: #ECEEF6;
+        border: 0px;
+    }
+
+    .e-btn-group:not(.e-outline) {
+        box-shadow: none;
+    }
+
+    .pagination-button.e-btn {
+        width: 32px;
+    }
+
+    .e-date-list.e-ddl.e-lib {
+        height: 40px;
+        background-color: inherit;
+    }
+
+    .e-schedule .e-month-view .e-work-cells {
+        position: relative;
+    }
+
+    .e-schedule .templatewrap {
+        text-align: center;
+        position: absolute;
+        width: 100%;
+    }
+
+    .e-schedule .caption {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        vertical-align: middle;
+    }
+
+    @*.overflow-ellipsis{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;width:300px;}*@
+</style>
