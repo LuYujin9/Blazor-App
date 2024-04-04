@@ -4,10 +4,8 @@
 @if (User != null)
 {
     <li class="table-row user-row">
-    <label class="user-name">
-        <InputCheckbox @bind-Value="User.Checked" />@User.Name
-    </label>
-    <p class="last-active">@User.LastActive</p>
+    <div class="user-name">@User.Name</div>
+    <div class="last-active">@User.LastActive</div>
     <DateBlock AppointmentParameter=null />
     <DateBlock AppointmentParameter=@User.Appointments?[0] />
     <DateBlock />
@@ -27,7 +25,6 @@
         public required string Id { get; set; }
         public required string Name { get; set; }
         public required string LastActive { get; set; }
-        public required bool Checked { get; set; }
         public required string Team { get; set; }
         public List<Appointment>? Appointments { get; set; }
     }

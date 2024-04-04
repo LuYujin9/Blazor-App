@@ -38,11 +38,7 @@
 
         @foreach (var team in Teams)
         {
-            <div class="table-row team-row">
-                <label>
-                    <InputCheckbox @bind-Value="TeamChecked" />@team.TeamName TEAM
-                </label>
-            </div>
+            <div class="table-row team-row">@team.TeamName TEAM</div>
             @foreach (var user in team.Users)
             {
                 <TableRow User="user" />
@@ -50,7 +46,10 @@
         }
     }
 </ul>
-<SfPager @ref="@Page" PageSize=5 NumericItemsCount=5 TotalItemsCount=@UserItems.Count() ItemClick="Click">
+<SfPager @ref="@Page" PageSize=7 NumericItemsCount=5 TotalItemsCount=@UserItems.Count() ItemClick="Click">
+    @* <SfPager TotalItemsCount=@UserItems.Count() PageSizes=@pagesizes PageSize="5" NumericItemsCount="5"
+    ItemClick="Click"
+    ShowAllInPageSizes="true"> *@
 </SfPager>
 
 @code {
@@ -64,21 +63,20 @@ new DropListItems() { ID= "0", Text= "02-08 February 2024" },
 new DropListItems() { ID= "1", Text= "09-15 February 2024" },
 new DropListItems() { ID= "2", Text= "16-22 February 2024" }
 };
-    private bool TeamChecked = false; //it should be changed all the Checked in UserItem
     private List<UserItem> UserItems = new List<UserItem>(){
-new UserItem(){Id="0",Name="Javier Holloway",LastActive="22/02/24",Checked=false, Team="MARKETING", Appointments=new
+new UserItem(){Id="0",Name="Javier Holloway",LastActive="22/02/24", Team="MARKETING", Appointments=new
 List<Appointment>(){
 new Appointment(){Content="How to Overcome Procrastination", Date="03.02.2024", BeginnTime="14:00", EndTime="14:27",
 Background="#EEF5FC", Color="#001360", Duration=1},
 new Appointment(){Content="The 25-5 Rule",Date="05.02.2024", BeginnTime="14:00", Background="#FFEDD1", Color="#9B5E08",
 Duration=2}
 }},
-new UserItem(){Id="1",Name="Javier Holloway",LastActive="22/02/24",Checked=false, Team="MARKETING"},
-new UserItem(){Id="2",Name="Javier Holloway",LastActive="22/02/24",Checked=false, Team="MARKETING"},
-new UserItem(){Id="3",Name="Javier Holloway",LastActive="22/02/24",Checked=false, Team="MARKETING"},
-new UserItem(){Id="4",Name="Javier Holloway",LastActive="22/02/24",Checked=false, Team="MARKETING"},
-new UserItem(){Id="5",Name="Javier Holloway",LastActive="22/02/24",Checked=false, Team="MARKETING"},
-new UserItem(){Id="0",Name="Derek Larson 1",LastActive="12/02/24",Checked=false, Team="DEPARTMENT", Appointments=new
+new UserItem(){Id="1",Name="Javier Holloway",LastActive="22/02/24", Team="MARKETING"},
+new UserItem(){Id="2",Name="Javier Holloway",LastActive="22/02/24", Team="MARKETING"},
+new UserItem(){Id="3",Name="Javier Holloway",LastActive="22/02/24", Team="MARKETING"},
+new UserItem(){Id="4",Name="Javier Holloway",LastActive="22/02/24", Team="MARKETING"},
+new UserItem(){Id="5",Name="Javier Holloway",LastActive="22/02/24", Team="MARKETING"},
+new UserItem(){Id="0",Name="Derek Larson 1",LastActive="12/02/24", Team="DEPARTMENT", Appointments=new
 List<Appointment>(){
 new Appointment(){Content="How to Overcome Procrastination", Date="03.02.2024", BeginnTime="14:00", EndTime="14:27",
 Background="#EEF5FC", Color="#001360", Duration=2},
@@ -86,15 +84,15 @@ new Appointment(){Content="The 25-5 Rule", Date="05.02.2024", BeginnTime="14:00"
 Duration=1}
 }
 },
-new UserItem(){Id="0",Name="Derek Larson",LastActive="12/02/24",Checked=false, Team="DEPARTMENT"},
-new UserItem(){Id="0",Name="Derek Larson",LastActive="12/02/24",Checked=false, Team="DEPARTMENT"},
-new UserItem(){Id="0",Name="Derek Larson",LastActive="12/02/24",Checked=false, Team="DEPARTMENT"},
-new UserItem(){Id="0",Name="Derek Larson",LastActive="12/02/24",Checked=false, Team="DEPARTMENT"},
-new UserItem(){Id="0",Name="Derek Larson",LastActive="12/02/24",Checked=false, Team="DEPARTMENT"},
-new UserItem(){Id="0",Name="Derek Larson",LastActive="12/02/24",Checked=false, Team="DEPARTMENT"},
-new UserItem(){Id="0",Name="Derek Larson",LastActive="12/02/24",Checked=false, Team="DEPARTMENT"},
-new UserItem(){Id="0",Name="Derek Larson",LastActive="12/02/24",Checked=false, Team="DEPARTMENT"},
-new UserItem(){Id="0",Name="Derek Larson",LastActive="22/02/24",Checked=false, Team="DEPARTMENT"}
+new UserItem(){Id="0",Name="Derek Larson",LastActive="12/02/24", Team="DEPARTMENT"},
+new UserItem(){Id="0",Name="Derek Larson",LastActive="12/02/24", Team="DEPARTMENT"},
+new UserItem(){Id="0",Name="Derek Larson",LastActive="12/02/24", Team="DEPARTMENT"},
+new UserItem(){Id="0",Name="Derek Larson",LastActive="12/02/24", Team="DEPARTMENT"},
+new UserItem(){Id="0",Name="Derek Larson",LastActive="12/02/24", Team="DEPARTMENT"},
+new UserItem(){Id="0",Name="Derek Larson",LastActive="12/02/24", Team="DEPARTMENT"},
+new UserItem(){Id="0",Name="Derek Larson",LastActive="12/02/24", Team="DEPARTMENT"},
+new UserItem(){Id="0",Name="Derek Larson",LastActive="12/02/24", Team="DEPARTMENT"},
+new UserItem(){Id="0",Name="Derek Larson",LastActive="22/02/24", Team="DEPARTMENT"}
 };
 
 
@@ -113,6 +111,10 @@ new UserItem(){Id="0",Name="Derek Larson",LastActive="22/02/24",Checked=false, T
     {
         SkipValue = (args.CurrentPage * Page!.PageSize) - Page.PageSize;
         TakeValue = Page.PageSize;
+    }
+
+    @code {
+        public List<int> pagesizes = new List<int> { 5, 10 };
     }
 }
 
