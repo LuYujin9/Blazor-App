@@ -1,7 +1,7 @@
 ﻿@page "/"
 @rendermode InteractiveServer
 
-
+<NavMenu />
 <PageTitle>Home</PageTitle>
 <div class="container">
     <div class="context-container">
@@ -26,19 +26,19 @@
                 <div class="users-list-title">Users
                 </div>
                 <SfDropDownList Width="300px" TValue="string" TItem="DropListItems" Placeholder="@users[0].Text"
-                    DataSource="@users" PopupHeight="500px" class="e-users-list">
+                    DataSource="@users" PopupHeight="500px" CssClass="e-users-list">
                     <DropDownListFieldSettings Value="Text" Text="Text"></DropDownListFieldSettings>
                 </SfDropDownList>
             </div>
         </div>
         <div class="list-container">
             <div class="filter-container">
-                <SfDropDownButton Content="Filter by" CssClass="filter" IconCss="e-icons e-menu">
+                <SfDropDownButton Content="Filter by" CssClass="filter">
                     <DropDownMenuItems>
                         <DropDownMenuItem Text="Having Course today"></DropDownMenuItem>
                     </DropDownMenuItems>
                 </SfDropDownButton>
-                <SfDropDownButton Content="Sort by" CssClass="filter" IconCss="e-icons e-menu">
+                <SfDropDownButton Content="Sort by" CssClass="filter">
                     <DropDownMenuItems>
                         <DropDownMenuItem Text="Newest Users"></DropDownMenuItem>
                         <DropDownMenuItem Text="Last Active"></DropDownMenuItem>
@@ -47,6 +47,7 @@
             </div>
             <div class="infos-container">
                 <h3>Acme Inc</h3>
+                <Table />
             </div>
         </div>
     </div>

@@ -3,14 +3,6 @@
 
 @if (User != null)
 {
-    if (User.Name == "Derek Larson 1")
-    {
-        <div class="table-row team-row">
-    <label>
-        <InputCheckbox @bind-Value="DepartmentTeamChecked" />DEPARTMENT TEAM
-    </label>
-</div>
-    }
     <li class="table-row user-row">
     <label class="user-name">
         <InputCheckbox @bind-Value="User.Checked" />@User.Name
@@ -30,8 +22,6 @@
 }
 
 @code {
-    private bool DepartmentTeamChecked = false; //it should be changed all the Checked in UserItem
-
     public class UserItem
     {
         public required string Id { get; set; }
@@ -51,13 +41,13 @@
     }
 
     .user-name {
-        width: 200px;
+        width: 170px;
         height: 60px;
         border: 1px solid #DFDDDD;
     }
 
     .last-active {
-        width: 150px;
+        width: 110px;
         height: 60px;
         border: 1px solid #DFDDDD;
     }

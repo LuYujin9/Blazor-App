@@ -1,5 +1,7 @@
-﻿@using Syncfusion.Blazor.Navigations
+﻿@namespace Shared
+@using Syncfusion.Blazor.Navigations
 @using Syncfusion.Blazor.Buttons
+@* TODO: this component should be delete after solving the problem in layout *@
 
 <SfSidebar Width="80px">
     <ChildContent>
@@ -53,9 +55,7 @@
         border-radius: 5px;
     }
 
-    .e-sidebar.e-left {
-        left: 80px;
-    }
+
 
     .nav-link {
         margin: 16px auto;
@@ -64,12 +64,10 @@
         box-sizing: content-box;
     }
 
-    // TODO: this setting doesn't work, Why?
     .e-sidebar.e-left.e-close {
         visibility: visible;
     }
 
-    // TODO: this is a hack to display the navbar in the layout. Needs later fix. Please find reason why e-hidden class is set
     .e-hidden {
         display: inline-block;
     }

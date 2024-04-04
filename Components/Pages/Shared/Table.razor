@@ -1,4 +1,3 @@
-@page "/test"
 @namespace Shared
 @using static Shared.TableRow
 @rendermode InteractiveServer
@@ -29,16 +28,25 @@
         <div class="header-cell date-header">8 <span>Sun</span></div>
         <div></div>
     </div>
-    <div class="table-row team-row">
-        <label>
-            <InputCheckbox @bind-Value="MarketingTeamChecked" />MARKETING TEAM
-        </label>
-    </div>
+
     @{
         var CurrentItems = UserItems.Skip(SkipValue).Take(TakeValue).ToList();
-        @foreach (var user in CurrentItems)
+        List<Team> Teams = CurrentItems
+        .GroupBy(u => u.Team)
+        .Select(g => new Team { TeamName = g.Key, Users = g.ToList() })
+        .ToList();
+
+        @foreach (var team in Teams)
         {
-            <TableRow User="user" />
+            <div class="table-row team-row">
+                <label>
+                    <InputCheckbox @bind-Value="TeamChecked" />@team.TeamName TEAM
+                </label>
+            </div>
+            @foreach (var user in team.Users)
+            {
+                <TableRow User="user" />
+            }
         }
     }
 </ul>
@@ -56,8 +64,7 @@ new DropListItems() { ID= "0", Text= "02-08 February 2024" },
 new DropListItems() { ID= "1", Text= "09-15 February 2024" },
 new DropListItems() { ID= "2", Text= "16-22 February 2024" }
 };
-    private bool MarketingTeamChecked = false; //it should be changed all the Checked in UserItem
-    private bool DepartmentTeamChecked = false; //it should be changed all the Checked in UserItem
+    private bool TeamChecked = false; //it should be changed all the Checked in UserItem
     private List<UserItem> UserItems = new List<UserItem>(){
 new UserItem(){Id="0",Name="Javier Holloway",LastActive="22/02/24",Checked=false, Team="MARKETING", Appointments=new
 List<Appointment>(){
@@ -90,6 +97,15 @@ new UserItem(){Id="0",Name="Derek Larson",LastActive="12/02/24",Checked=false, T
 new UserItem(){Id="0",Name="Derek Larson",LastActive="22/02/24",Checked=false, Team="DEPARTMENT"}
 };
 
+
+    public class Team
+    {
+        public required string TeamName { get; set; }
+        public required List<UserItem> Users { get; set; }
+    }
+
+
+
     SfPager? Page;
     public int SkipValue;
     public int TakeValue = 5;
@@ -107,9 +123,12 @@ new UserItem(){Id="0",Name="Derek Larson",LastActive="22/02/24",Checked=false, T
         flex-direction: row;
     }
 
+    .user-name {
+        width: 190px;
+    }
+
     .table-header {
         width: 1250px;
-
     }
 
     .header-cell {
@@ -125,12 +144,12 @@ new UserItem(){Id="0",Name="Derek Larson",LastActive="22/02/24",Checked=false, T
     }
 
     .user-header {
-        width: 200px;
+        width: 170px;
         border: 1px solid #DFDDDD;
     }
 
     .last-active-header {
-        width: 150px;
+        width: 110px;
         height: 60px;
         border: 1px solid #DFDDDD;
     }

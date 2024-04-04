@@ -4,7 +4,7 @@
     @if (AppointmentParameter != null)
     {
         <div class="appointment-box"
-            style="background-color: @AppointmentParameter?.Background; border: 2px solid @AppointmentParameter.Color; width:@(width)px ;">
+            style="background-color: @AppointmentParameter?.Background; border: 2px solid @AppointmentParameter?.Color; width:@(width)px ;">
             <div class="appointment-content-container">
                 <div class="appointment-content" style="color:@AppointmentParameter.Color"> @AppointmentParameter.Content
                 </div>
