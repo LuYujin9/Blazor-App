@@ -1,16 +1,15 @@
 @namespace Shared
-@using Shared
 
-@if (User != null)
+@if (UserData != null)
 {
     <li class="table-row user-row">
-    <div class="user-name">@User.Name</div>
-    <div class="last-active">@User.LastActive</div>
+    <div class="user-name">@UserData.Name</div>
+    <div class="last-active">@UserData.LastActive</div>
     <DateBlock AppointmentParameter=null />
-    <DateBlock AppointmentParameter=@User.Appointments?[0] />
+    <DateBlock AppointmentParameter=@UserData.Appointments?[0] />
     <DateBlock />
     <DateBlock />
-    <DateBlock AppointmentParameter=@User.Appointments?[1] />
+    <DateBlock AppointmentParameter=@UserData.Appointments?[1] />
     <DateBlock />
     <DateBlock />
     <button class="edit-button">
@@ -20,7 +19,9 @@
 }
 
 @code {
-    public class UserItem
+    [Parameter]
+    public UserInfo? UserData { get; set; }
+    public class UserInfo
     {
         public required string Id { get; set; }
         public required string Name { get; set; }
@@ -28,8 +29,6 @@
         public required string Team { get; set; }
         public List<Appointment>? Appointments { get; set; }
     }
-    [Parameter]
-    public UserItem? User { get; set; }
 }
 
 <style>

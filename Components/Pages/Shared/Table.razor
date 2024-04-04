@@ -1,5 +1,6 @@
 @namespace Shared
 @using static Shared.TableRow
+@* Question: 为什么这里是staic, 当我都使用namespace shared的时候,为什么只有navmenu可以使用@using Shared *@
 @rendermode InteractiveServer
 
 
@@ -10,8 +11,8 @@
         <ButtonGroupButton IconCss="e-icons e-chevron-right" CssClass="pagination-button">
         </ButtonGroupButton>
     </SfButtonGroup>
-    <SfDropDownList Width="200px" TValue="string" TItem="DropListItems" Placeholder="@date[0].Text" DataSource="@date"
-        PopupHeight="500px" CssClass="e-date-list">
+    <SfDropDownList Width="200px" TValue="string" TItem="DropListItem" Placeholder="@_dateDropList[0].Text"
+        DataSource="@_dateDropList" PopupHeight="500px" CssClass="e-date-list">
         <DropDownListFieldSettings Value="Text" Text="Text"></DropDownListFieldSettings>
     </SfDropDownList>
 </div>
@@ -30,53 +31,49 @@
     </div>
 
     @{
-        var CurrentItems = UserItems.Skip(SkipValue).Take(TakeValue).ToList();
-        List<Team> Teams = CurrentItems
+        var currentUsers = _userInofs.Skip(SkipValue).Take(TakeValue).ToList();
+        //Question: 为什么这里不能用private　
+        List<Team> Teams = currentUsers
         .GroupBy(u => u.Team)
         .Select(g => new Team { TeamName = g.Key, Users = g.ToList() })
         .ToList();
-
         @foreach (var team in Teams)
         {
             <div class="table-row team-row">@team.TeamName TEAM</div>
             @foreach (var user in team.Users)
             {
-                <TableRow User="user" />
+                <TableRow UserData="user" />
             }
         }
     }
 </ul>
-<SfPager @ref="@Page" PageSize=7 NumericItemsCount=5 TotalItemsCount=@UserItems.Count() ItemClick="Click">
-    @* <SfPager TotalItemsCount=@UserItems.Count() PageSizes=@pagesizes PageSize="5" NumericItemsCount="5"
+<SfPager @ref="@Page" PageSize=@(Page?.PageSize??DefaultPageSize) NumericItemsCount=5
+    TotalItemsCount=@_userInofs.Count() ItemClick="Click">
+    @* <SfPager TotalItemsCount=@_userInofs.Count() PageSizes=@pagesizes PageSize="5" NumericItemsCount="5"
     ItemClick="Click"
     ShowAllInPageSizes="true"> *@
 </SfPager>
 
 @code {
-    public class DropListItems
-    {
-        public string? ID { get; set; }
-        public string? Text { get; set; }
-    }
-    List<DropListItems> date = new List<DropListItems> {
-new DropListItems() { ID= "0", Text= "02-08 February 2024" },
-new DropListItems() { ID= "1", Text= "09-15 February 2024" },
-new DropListItems() { ID= "2", Text= "16-22 February 2024" }
+    private List<DropListItem> _dateDropList = new List<DropListItem> {
+new DropListItem() { Id= "0", Text= "02-08 February 2024" },
+new DropListItem() { Id= "1", Text= "09-15 February 2024" },
+new DropListItem() { Id= "2", Text= "16-22 February 2024" }
 };
-    private List<UserItem> UserItems = new List<UserItem>(){
-new UserItem(){Id="0",Name="Javier Holloway",LastActive="22/02/24", Team="MARKETING", Appointments=new
+    private List<UserInfo> _userInofs = new List<UserInfo>(){
+new UserInfo(){Id="0",Name="Javier Holloway",LastActive="22/02/24", Team="MARKETING", Appointments=new
 List<Appointment>(){
 new Appointment(){Content="How to Overcome Procrastination", Date="03.02.2024", BeginnTime="14:00", EndTime="14:27",
 Background="#EEF5FC", Color="#001360", Duration=1},
 new Appointment(){Content="The 25-5 Rule",Date="05.02.2024", BeginnTime="14:00", Background="#FFEDD1", Color="#9B5E08",
 Duration=2}
 }},
-new UserItem(){Id="1",Name="Javier Holloway",LastActive="22/02/24", Team="MARKETING"},
-new UserItem(){Id="2",Name="Javier Holloway",LastActive="22/02/24", Team="MARKETING"},
-new UserItem(){Id="3",Name="Javier Holloway",LastActive="22/02/24", Team="MARKETING"},
-new UserItem(){Id="4",Name="Javier Holloway",LastActive="22/02/24", Team="MARKETING"},
-new UserItem(){Id="5",Name="Javier Holloway",LastActive="22/02/24", Team="MARKETING"},
-new UserItem(){Id="0",Name="Derek Larson 1",LastActive="12/02/24", Team="DEPARTMENT", Appointments=new
+new UserInfo(){Id="1",Name="Javier Holloway",LastActive="22/02/24", Team="MARKETING"},
+new UserInfo(){Id="2",Name="Javier Holloway",LastActive="22/02/24", Team="MARKETING"},
+new UserInfo(){Id="3",Name="Javier Holloway",LastActive="22/02/24", Team="MARKETING"},
+new UserInfo(){Id="4",Name="Javier Holloway",LastActive="22/02/24", Team="MARKETING"},
+new UserInfo(){Id="5",Name="Javier Holloway",LastActive="22/02/24", Team="MARKETING"},
+new UserInfo(){Id="0",Name="Derek Larson 1",LastActive="12/02/24", Team="DEPARTMENT", Appointments=new
 List<Appointment>(){
 new Appointment(){Content="How to Overcome Procrastination", Date="03.02.2024", BeginnTime="14:00", EndTime="14:27",
 Background="#EEF5FC", Color="#001360", Duration=2},
@@ -84,37 +81,43 @@ new Appointment(){Content="The 25-5 Rule", Date="05.02.2024", BeginnTime="14:00"
 Duration=1}
 }
 },
-new UserItem(){Id="0",Name="Derek Larson",LastActive="12/02/24", Team="DEPARTMENT"},
-new UserItem(){Id="0",Name="Derek Larson",LastActive="12/02/24", Team="DEPARTMENT"},
-new UserItem(){Id="0",Name="Derek Larson",LastActive="12/02/24", Team="DEPARTMENT"},
-new UserItem(){Id="0",Name="Derek Larson",LastActive="12/02/24", Team="DEPARTMENT"},
-new UserItem(){Id="0",Name="Derek Larson",LastActive="12/02/24", Team="DEPARTMENT"},
-new UserItem(){Id="0",Name="Derek Larson",LastActive="12/02/24", Team="DEPARTMENT"},
-new UserItem(){Id="0",Name="Derek Larson",LastActive="12/02/24", Team="DEPARTMENT"},
-new UserItem(){Id="0",Name="Derek Larson",LastActive="12/02/24", Team="DEPARTMENT"},
-new UserItem(){Id="0",Name="Derek Larson",LastActive="22/02/24", Team="DEPARTMENT"}
+new UserInfo(){Id="0",Name="Derek Larson",LastActive="12/02/24", Team="DEPARTMENT"},
+new UserInfo(){Id="0",Name="Derek Larson",LastActive="12/02/24", Team="DEPARTMENT"},
+new UserInfo(){Id="0",Name="Derek Larson",LastActive="12/02/24", Team="DEPARTMENT"},
+new UserInfo(){Id="0",Name="Derek Larson",LastActive="12/02/24", Team="DEPARTMENT"},
+new UserInfo(){Id="0",Name="Derek Larson",LastActive="12/02/24", Team="DEPARTMENT"},
+new UserInfo(){Id="0",Name="Derek Larson",LastActive="12/02/24", Team="DEPARTMENT"},
+new UserInfo(){Id="0",Name="Derek Larson",LastActive="12/02/24", Team="DEPARTMENT"},
+new UserInfo(){Id="0",Name="Derek Larson",LastActive="12/02/24", Team="DEPARTMENT"},
+new UserInfo(){Id="0",Name="Derek Larson",LastActive="22/02/24", Team="DEPARTMENT"}
 };
 
-
-    public class Team
-    {
-        public required string TeamName { get; set; }
-        public required List<UserItem> Users { get; set; }
-    }
-
-
-
+    //TO DO: 还需要考虑default PageSize的必要性
     SfPager? Page;
     public int SkipValue;
-    public int TakeValue = 5;
+    public int DefaultPageSize = 5;
+    public int TakeValue;
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        TakeValue = Page?.PageSize ?? DefaultPageSize;
+    }
     public void Click(PagerItemClickEventArgs args)
     {
         SkipValue = (args.CurrentPage * Page!.PageSize) - Page.PageSize;
         TakeValue = Page.PageSize;
     }
+    @* public List<int> pagesizes = new List<int> { 5, 10 }; *@
 
-    @code {
-        public List<int> pagesizes = new List<int> { 5, 10 };
+    public class Team
+    {
+        public required string TeamName { get; set; }
+        public required List<UserInfo> Users { get; set; }
+    }
+    public class DropListItem
+    {
+        public string? Id { get; set; }
+        public string? Text { get; set; }
     }
 }
 

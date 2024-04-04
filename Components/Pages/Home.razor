@@ -1,5 +1,6 @@
 ﻿@page "/"
 @rendermode InteractiveServer
+@using static Shared.Table
 
 <NavMenu />
 <PageTitle>Home</PageTitle>
@@ -16,8 +17,9 @@
             <div class="users-list">
                 <div class="users-list-title">Company
                 </div>
-                <SfDropDownList Width="300px" TValue="string" TItem="DropListItems" Placeholder="@companies[0].Text"
-                    DataSource="@companies" PopupHeight="500px" CssClass="e-users-list">
+                <SfDropDownList Width="300px" TValue="string" TItem="DropListItem"
+                    Placeholder="@_companyDropList[0].Text" DataSource="@_companyDropList" PopupHeight="500px"
+                    CssClass="e-users-list">
                     <DropDownListFieldSettings Value="Text" Text="Text">
                     </DropDownListFieldSettings>
                 </SfDropDownList>
@@ -25,8 +27,8 @@
             <div class="users-list">
                 <div class="users-list-title">Users
                 </div>
-                <SfDropDownList Width="300px" TValue="string" TItem="DropListItems" Placeholder="@users[0].Text"
-                    DataSource="@users" PopupHeight="500px" CssClass="e-users-list">
+                <SfDropDownList Width="300px" TValue="string" TItem="DropListItem" Placeholder="@_userDropList[0].Text"
+                    DataSource="@_userDropList" PopupHeight="500px" CssClass="e-users-list">
                     <DropDownListFieldSettings Value="Text" Text="Text"></DropDownListFieldSettings>
                 </SfDropDownList>
             </div>
@@ -55,39 +57,15 @@
 
 
 @code {
-    public class DropListItems
-    {
-        public string? Id { get; set; }
-        public string? Text { get; set; }
-    }
-    List<DropListItems> companies = new List<DropListItems> {
-new DropListItems() { Id= "0", Text= "Acme Inc" },
+
+    private List<DropListItem> _companyDropList = new List<DropListItem> {
+new DropListItem() { Id= "0", Text= "Acme Inc" },
 };
-    List<DropListItems> users = new List<DropListItems> {
-new DropListItems() { Id= "0", Text= "Label, Label," },
-new DropListItems() { Id= "1", Text= "Label, Label," },
-new DropListItems() { Id= "2", Text= "Label, Label," },
-new DropListItems() { Id= "3", Text= "Label, Label," }
-};
-
-    public void OnValueChange(ChangeEventArgs<string, DropListItems> args)
-    {
-        Console.WriteLine("The DropDownList Value is: " + args.Value);
-    }
-
-    public class UserItem
-    {
-        public required string Id { get; set; }
-        public required string name { get; set; }
-    }
-
-    private List<UserItem> usersItem = new List<UserItem>(300){
-new UserItem(){Id="0",name="Javier Holloway"},
-new UserItem(){Id="1",name="Javier Holloway"},
-new UserItem(){Id="2",name="Javier Holloway"},
-new UserItem(){Id="3",name="Javier Holloway"},
-new UserItem(){Id="4",name="Javier Holloway"},
-new UserItem(){Id="5",name="Javier Holloway"},
+    private List<DropListItem> _userDropList = new List<DropListItem> {
+new DropListItem() { Id= "0", Text= "Label, Label," },
+new DropListItem() { Id= "1", Text= "Label, Label," },
+new DropListItem() { Id= "2", Text= "Label, Label," },
+new DropListItem() { Id= "3", Text= "Label, Label," }
 };
 }
 

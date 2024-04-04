@@ -3,16 +3,17 @@
 <div class="date-block">
     @if (AppointmentParameter != null)
     {
+        //Question: is there a way to simplify the code and avoid repeating AppointmentParameter?. multiple times?
         <div class="appointment-box"
-            style="background-color: @AppointmentParameter?.Background; border: 2px solid @AppointmentParameter?.Color; width:@(width)px ;">
+            style="background-color: @AppointmentParameter?.Background; border: 2px solid @AppointmentParameter?.Color; width:@(_width)px ;">
             <div class="appointment-content-container">
-                <div class="appointment-content" style="color:@AppointmentParameter.Color"> @AppointmentParameter.Content
+                <div class="appointment-content" style="color:@AppointmentParameter?.Color"> @AppointmentParameter?.Content
                 </div>
                 <div class="appointment-time">
-                    @AppointmentParameter.BeginnTime
-                    @if (AppointmentParameter.EndTime != null)
+                    @AppointmentParameter?.BeginnTime
+                    @if (AppointmentParameter?.EndTime != null)
                     {
-                        <span class="end-time"> | @AppointmentParameter.EndTime</span>
+                        <span class="end-time"> | @AppointmentParameter?.EndTime</span>
                     }
                 </div>
             </div>
@@ -21,7 +22,18 @@
 </div>
 
 @code {
+    [Parameter]
+    public Appointment? AppointmentParameter { get; set; }
 
+    //Question: why it is protected override
+    protected override void OnInitialized()
+    {
+        if (AppointmentParameter != null)
+        {
+            _width = 115 * (AppointmentParameter?.Duration ?? 0) - 4;
+        }
+    }
+    private int _width = 111;
     public class Appointment
     {
         public required string Content { get; set; }
@@ -32,18 +44,6 @@
         public required string Color { get; set; }
         public required int Duration { get; set; }
 
-    }
-    [Parameter]
-    public Appointment? AppointmentParameter { get; set; }
-
-    private int width = 111;
-
-    protected override void OnInitialized()
-    {
-        if (AppointmentParameter != null)
-        {
-            width = 115 * (AppointmentParameter?.Duration ?? 0) - 4;
-        }
     }
 }
 
