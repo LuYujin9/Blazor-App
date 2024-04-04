@@ -1,0 +1,142 @@
+@page "/test"
+@namespace Shared
+@using static Shared.TableRow
+@rendermode InteractiveServer
+
+
+<div class="date-choose-container">
+    <SfButtonGroup>
+        <ButtonGroupButton IconCss="e-icons e-chevron-left" CssClass="pagination-button">
+        </ButtonGroupButton>
+        <ButtonGroupButton IconCss="e-icons e-chevron-right" CssClass="pagination-button">
+        </ButtonGroupButton>
+    </SfButtonGroup>
+    <SfDropDownList Width="200px" TValue="string" TItem="DropListItems" Placeholder="@date[0].Text" DataSource="@date"
+        PopupHeight="500px" CssClass="e-date-list">
+        <DropDownListFieldSettings Value="Text" Text="Text"></DropDownListFieldSettings>
+    </SfDropDownList>
+</div>
+<ul>
+    <div class="table-row table-header">
+        <div class="header-cell user-header">User <span>96</span></div>
+        <div class="header-cell last-active-header"> Last Active</div>
+        <div class="header-cell date-header">2 <span>Mon</span></div>
+        <div class="header-cell date-header">3 <span>Tue</span></div>
+        <div class="header-cell date-header">4 <span>Wed</span></div>
+        <div class="header-cell date-header">5 <span>Thu</span></div>
+        <div class="header-cell date-header">6 <span>Fri</span></div>
+        <div class="header-cell date-header">7 <span>Sat</span></div>
+        <div class="header-cell date-header">8 <span>Sun</span></div>
+        <div></div>
+    </div>
+    <div class="table-row team-row">
+        <label>
+            <InputCheckbox @bind-Value="MarketingTeamChecked" />MARKETING TEAM
+        </label>
+    </div>
+    @{
+        var CurrentItems = UserItems.Skip(SkipValue).Take(TakeValue).ToList();
+        @foreach (var user in CurrentItems)
+        {
+            <TableRow User="user" />
+        }
+    }
+</ul>
+<SfPager @ref="@Page" PageSize=5 NumericItemsCount=5 TotalItemsCount=@UserItems.Count() ItemClick="Click">
+</SfPager>
+
+@code {
+    public class DropListItems
+    {
+        public string? ID { get; set; }
+        public string? Text { get; set; }
+    }
+    List<DropListItems> date = new List<DropListItems> {
+new DropListItems() { ID= "0", Text= "02-08 February 2024" },
+new DropListItems() { ID= "1", Text= "09-15 February 2024" },
+new DropListItems() { ID= "2", Text= "16-22 February 2024" }
+};
+    private bool MarketingTeamChecked = false; //it should be changed all the Checked in UserItem
+    private bool DepartmentTeamChecked = false; //it should be changed all the Checked in UserItem
+    private List<UserItem> UserItems = new List<UserItem>(){
+new UserItem(){Id="0",Name="Javier Holloway",LastActive="22/02/24",Checked=false, Team="MARKETING", Appointments=new
+List<Appointment>(){
+new Appointment(){Content="How to Overcome Procrastination", Date="03.02.2024", BeginnTime="14:00", EndTime="14:27",
+Background="#EEF5FC", Color="#001360", Duration=1},
+new Appointment(){Content="The 25-5 Rule",Date="05.02.2024", BeginnTime="14:00", Background="#FFEDD1", Color="#9B5E08",
+Duration=2}
+}},
+new UserItem(){Id="1",Name="Javier Holloway",LastActive="22/02/24",Checked=false, Team="MARKETING"},
+new UserItem(){Id="2",Name="Javier Holloway",LastActive="22/02/24",Checked=false, Team="MARKETING"},
+new UserItem(){Id="3",Name="Javier Holloway",LastActive="22/02/24",Checked=false, Team="MARKETING"},
+new UserItem(){Id="4",Name="Javier Holloway",LastActive="22/02/24",Checked=false, Team="MARKETING"},
+new UserItem(){Id="5",Name="Javier Holloway",LastActive="22/02/24",Checked=false, Team="MARKETING"},
+new UserItem(){Id="0",Name="Derek Larson 1",LastActive="12/02/24",Checked=false, Team="DEPARTMENT", Appointments=new
+List<Appointment>(){
+new Appointment(){Content="How to Overcome Procrastination", Date="03.02.2024", BeginnTime="14:00", EndTime="14:27",
+Background="#EEF5FC", Color="#001360", Duration=2},
+new Appointment(){Content="The 25-5 Rule", Date="05.02.2024", BeginnTime="14:00", Background="#FFEDD1", Color="#9B5E08",
+Duration=1}
+}
+},
+new UserItem(){Id="0",Name="Derek Larson",LastActive="12/02/24",Checked=false, Team="DEPARTMENT"},
+new UserItem(){Id="0",Name="Derek Larson",LastActive="12/02/24",Checked=false, Team="DEPARTMENT"},
+new UserItem(){Id="0",Name="Derek Larson",LastActive="12/02/24",Checked=false, Team="DEPARTMENT"},
+new UserItem(){Id="0",Name="Derek Larson",LastActive="12/02/24",Checked=false, Team="DEPARTMENT"},
+new UserItem(){Id="0",Name="Derek Larson",LastActive="12/02/24",Checked=false, Team="DEPARTMENT"},
+new UserItem(){Id="0",Name="Derek Larson",LastActive="12/02/24",Checked=false, Team="DEPARTMENT"},
+new UserItem(){Id="0",Name="Derek Larson",LastActive="12/02/24",Checked=false, Team="DEPARTMENT"},
+new UserItem(){Id="0",Name="Derek Larson",LastActive="12/02/24",Checked=false, Team="DEPARTMENT"},
+new UserItem(){Id="0",Name="Derek Larson",LastActive="22/02/24",Checked=false, Team="DEPARTMENT"}
+};
+
+    SfPager? Page;
+    public int SkipValue;
+    public int TakeValue = 5;
+    public void Click(PagerItemClickEventArgs args)
+    {
+        SkipValue = (args.CurrentPage * Page!.PageSize) - Page.PageSize;
+        TakeValue = Page.PageSize;
+    }
+}
+
+<style>
+    .table-row {
+        background-color: white;
+        display: flex;
+        flex-direction: row;
+    }
+
+    .table-header {
+        width: 1250px;
+
+    }
+
+    .header-cell {
+        width: fit-content;
+    }
+
+    .date-header {
+        width: 115px;
+        height: 60px;
+        border: 1px solid #DFDDDD;
+        background-color: #F3F3F3;
+        position: relative;
+    }
+
+    .user-header {
+        width: 200px;
+        border: 1px solid #DFDDDD;
+    }
+
+    .last-active-header {
+        width: 150px;
+        height: 60px;
+        border: 1px solid #DFDDDD;
+    }
+</style>
+
+@* 如果字的换行不完全一样.
+重要吗? *@
+
+@* SfPager Page; 感觉加?不好, requeired也不行 *@

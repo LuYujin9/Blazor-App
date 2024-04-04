@@ -1,0 +1,92 @@
+@namespace Shared
+
+<div class="date-block">
+    @if (AppointmentParameter != null)
+    {
+        <div class="appointment-box"
+            style="background-color: @AppointmentParameter?.Background; border: 2px solid @AppointmentParameter.Color; width:@(width)px ;">
+            <div class="appointment-content-container">
+                <div class="appointment-content" style="color:@AppointmentParameter.Color"> @AppointmentParameter.Content
+                </div>
+                <div class="appointment-time">
+                    @AppointmentParameter.BeginnTime
+                    @if (AppointmentParameter.EndTime != null)
+                    {
+                        <span class="end-time"> | @AppointmentParameter.EndTime</span>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@code {
+
+    public class Appointment
+    {
+        public required string Content { get; set; }
+        public required string Date { get; set; }
+        public required string BeginnTime { get; set; }
+        public string? EndTime { get; set; }
+        public required string Background { get; set; }
+        public required string Color { get; set; }
+        public required int Duration { get; set; }
+
+    }
+    [Parameter]
+    public Appointment? AppointmentParameter { get; set; }
+
+    private int width = 111;
+
+    protected override void OnInitialized()
+    {
+        if (AppointmentParameter != null)
+        {
+            width = 115 * (AppointmentParameter?.Duration ?? 0) - 4;
+        }
+    }
+}
+
+<style>
+    .date-block {
+        width: 115px;
+        height: 60px;
+        border: 1px solid #DFDDDD;
+        background-color: #F3F3F3;
+        position: relative;
+    }
+
+    .appointment-box {
+        border-radius: 4px;
+        height: 52px;
+        position: absolute;
+        z-index: 100;
+        margin: 4px auto 4px 2px;
+    }
+
+    .appointment-content-container {
+        width: 107px;
+        height: 53px;
+        padding: 4px 0;
+    }
+
+    .appointment-content {
+        height: 25px;
+        font-size: 11px;
+        line-height: 11px;
+        text-align: center;
+    }
+
+    .appointment-time {
+        margin-top: 3px;
+        height: 13px;
+        font-size: 10px;
+        line-height: 16px;
+        text-align: center;
+        color: #747474;
+    }
+
+    .end-time {
+        color: #121D22;
+    }
+</style>

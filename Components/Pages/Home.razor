@@ -1,11 +1,6 @@
 ﻿@page "/"
 @rendermode InteractiveServer
-@using Syncfusion.Blazor.Schedule
-@using Syncfusion.Blazor.SplitButtons
-@using Syncfusion.Blazor.DropDowns
-@using Syncfusion.Blazor.Navigations
-@using Syncfusion.Blazor.Lists
-@using Syncfusion.Blazor.Buttons
+
 
 <PageTitle>Home</PageTitle>
 <div class="container">
@@ -52,224 +47,49 @@
             </div>
             <div class="infos-container">
                 <h3>Acme Inc</h3>
-                <div class="date-choose-container">
-                    <SfButtonGroup>
-                        <ButtonGroupButton IconCss="e-icons e-chevron-left" CssClass="pagination-button">
-                        </ButtonGroupButton>
-                        <ButtonGroupButton IconCss="e-icons e-chevron-right" CssClass="pagination-button">
-                        </ButtonGroupButton>
-                    </SfButtonGroup>
-                    <SfDropDownList Width="200px" TValue="string" TItem="DropListItems" Placeholder="@date[0].Text"
-                        DataSource="@date" PopupHeight="500px" CssClass="e-date-list">
-                        <DropDownListFieldSettings Value="Text" Text="Text"></DropDownListFieldSettings>
-                    </SfDropDownList>
-                </div>
-                <div class="date-choose-container">
-
-                    <SfSchedule TValue="EventData" Width="100%" Height="650px" @bind-SelectedDate="@CurrentDate">
-                        <ScheduleGroup EnableCompactView="false" Resources="@GroupData"></ScheduleGroup>
-                        <ScheduleResources>
-                            <ScheduleResource TItem="ResourceData" TValue="int" DataSource="@ResourceDatasource"
-                                Field="ResourceId" Title="Resource" Name="Resources" TextField="Text" IdField="Id"
-                                ColorField="Color" AllowMultiple="true"></ScheduleResource>
-                        </ScheduleResources>
-                        <ScheduleEventSettings DataSource="@AppointmentData"></ScheduleEventSettings>
-                        <ScheduleViews>
-                            <ScheduleView Option="View.TimelineMonth" AllowVirtualScrolling="true" IsSelected="true">
-                            </ScheduleView>
-                            <ScheduleView Option="View.TimelineYear"
-                                Orientation="Syncfusion.Blazor.Schedule.Orientation.Vertical"
-                                AllowVirtualScrolling="true"></ScheduleView>
-                        </ScheduleViews>
-                    </SfSchedule>
-                </div>
-
-                <SfGantt DataSource="@TaskCollection" Height="450px" Width="1231px">
-                    <GanttTaskFields Id="TaskId" Name="User" StartDate="StartDate" EndDate="EndDate" Duration="Duration"
-                        Progress="Progress" ParentID="ParentId">
-                    </GanttTaskFields>
-                    <GanttTimelineSettings TimelineUnitSize="120">
-                        <GanttTopTierSettings Unit="TimelineViewMode.Week" Format="MMM" Count="1">
-                        </GanttTopTierSettings>
-                        <GanttBottomTierSettings Unit="TimelineViewMode.Day" Format="" Count="1">
-                        </GanttBottomTierSettings>
-                    </GanttTimelineSettings>
-                    <GanttColumns>
-                        <GanttColumn Field="TaskName" HeaderText="User" Width="200"></GanttColumn>
-                        <GanttColumn Field="StartDate" HeaderText="Last Axctive" Width="150"></GanttColumn>
-                        <GanttColumn Field="" HeaderText="" Width="200"></GanttColumn>
-                    </GanttColumns>
-                </SfGantt>
             </div>
         </div>
     </div>
 </div>
 
+
 @code {
     public class DropListItems
     {
-        public string? ID { get; set; }
+        public string? Id { get; set; }
         public string? Text { get; set; }
     }
     List<DropListItems> companies = new List<DropListItems> {
-new DropListItems() { ID= "0", Text= "Acme Inc" },
+new DropListItems() { Id= "0", Text= "Acme Inc" },
 };
     List<DropListItems> users = new List<DropListItems> {
-new DropListItems() { ID= "0", Text= "Label, Label," },
-new DropListItems() { ID= "1", Text= "Label, Label," },
-new DropListItems() { ID= "2", Text= "Label, Label," },
-new DropListItems() { ID= "3", Text= "Label, Label," }
+new DropListItems() { Id= "0", Text= "Label, Label," },
+new DropListItems() { Id= "1", Text= "Label, Label," },
+new DropListItems() { Id= "2", Text= "Label, Label," },
+new DropListItems() { Id= "3", Text= "Label, Label," }
 };
-    List<DropListItems> date = new List<DropListItems> {
-new DropListItems() { ID= "0", Text= "02-08 February 2024" },
-new DropListItems() { ID= "1", Text= "09-15 February 2024" },
-new DropListItems() { ID= "2", Text= "16-22 February 2024" }
-};
+
     public void OnValueChange(ChangeEventArgs<string, DropListItems> args)
     {
-        Console.WriteLine("The DropDownList Value is: ", args.Value);
+        Console.WriteLine("The DropDownList Value is: " + args.Value);
     }
 
-    SfPager? Page;
-
-    private List<TaskData> TaskCollection { get; set; } = [];
-    private string DateFormat = "MM/dd/yyyy";
-    protected override void OnInitialized()
+    public class UserItem
     {
-        this.TaskCollection = GetTaskCollection();
+        public required string Id { get; set; }
+        public required string name { get; set; }
     }
 
-    public class TaskData
-    {
-        public int TaskId { get; set; }
-        public string TaskName { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime? EndDate { get; set; }
-        public DateOnly? StartDateOnly { get; set; }
-        public TimeOnly? StartTimeOnly { get; set; }
-        public string Duration { get; set; }
-        public int Progress { get; set; }
-        public string Status { get; set; }
-        public int WorkersCount { get; set; }
-        public int? ParentId { get; set; }
-    }
-
-    public static List<TaskData> GetTaskCollection()
-    {
-        List<TaskData> Tasks = new List<TaskData>()
-{
-
-new TaskData() { TaskId = 1, TaskName = "Project initiation", StartDate = new DateTime(2022, 04, 05), EndDate = new
-DateTime(2022, 04, 21), Status="Progress", WorkersCount=20, StartDateOnly = new DateOnly(2021, 03, 02), StartTimeOnly =
-new TimeOnly(10, 00, 00)},
-new TaskData() { TaskId = 2, TaskName = "Identify Site location", StartDate = new DateTime(2022, 04, 05), Duration =
-"0", Progress = 5, Status="Progress", WorkersCount=10, ParentId = 1, StartDateOnly = new DateOnly(2021, 03, 04),
-StartTimeOnly = new TimeOnly(11, 30, 00)},
-
-new TaskData() { TaskId = 3, TaskName = "Perform soil test", StartDate = new DateTime(2022, 04, 05), Duration = "1",
-Progress = 10, Status="Hold", WorkersCount=15, ParentId = 1, StartDateOnly = new DateOnly(2021, 03, 06), StartTimeOnly =
-new TimeOnly(12, 00, 00)},
-new TaskData() { TaskId = 3, TaskName = "Perform soil test", StartDate = new DateTime(2022, 04, 07), Duration = "2",
-Progress = 10, Status="Hold", WorkersCount=15, ParentId = 1, StartDateOnly = new DateOnly(2021, 03, 08), StartTimeOnly =
-new TimeOnly(12, 00, 00)},
-
-new TaskData() { TaskId = 4, TaskName = "Soil test approval", StartDate = new DateTime(2022, 04, 05), Duration = "0",
-Progress = 30, Status="PostPoned", WorkersCount=5, ParentId = 1, StartDateOnly = new DateOnly(2021, 03, 08),
-StartTimeOnly = new TimeOnly(13, 30, 00)},
-new TaskData() { TaskId = 5, TaskName = "Project estimation", StartDate = new DateTime(2022, 04, 06), EndDate = new
-DateTime(2022, 04, 21), Status="Progress", WorkersCount=25,StartDateOnly = new DateOnly(2021, 07, 10), StartTimeOnly =
-new TimeOnly(14, 00, 00) },
-new TaskData() { TaskId = 6, TaskName = "Develop floor plan for estimation", StartDate = new DateTime(2022, 04, 06),
-Duration = "3", Progress = 30, Status="PostPoned", WorkersCount=10, ParentId = 5 , StartDateOnly = new DateOnly(2021,
-10, 12), StartTimeOnly = new TimeOnly(16, 00, 00)},
-new TaskData() { TaskId = 7, TaskName = "List materials", StartDate = new DateTime(2022, 04, 06), Duration = "3",
-Progress = 40, Status="Progress", WorkersCount=5, ParentId = 5, StartDateOnly = new DateOnly(2021, 10, 14),
-StartTimeOnly = new TimeOnly(17, 30, 00) },
-new TaskData() { TaskId = 8, TaskName = "Estimation approval", StartDate = new DateTime(2022, 04, 06), Duration = "0",
-Progress = 30, Status="Progress", WorkersCount=10, ParentId = 5,StartDateOnly = new DateOnly(2021, 10, 16),
-StartTimeOnly = new TimeOnly(18, 00, 00) }
+    private List<UserItem> usersItem = new List<UserItem>(300){
+new UserItem(){Id="0",name="Javier Holloway"},
+new UserItem(){Id="1",name="Javier Holloway"},
+new UserItem(){Id="2",name="Javier Holloway"},
+new UserItem(){Id="3",name="Javier Holloway"},
+new UserItem(){Id="4",name="Javier Holloway"},
+new UserItem(){Id="5",name="Javier Holloway"},
 };
-        return Tasks;
-    }
-
-    DateTime CurrentDate = new DateTime(2023, 4, 1);
-    static EventData data = new EventData();
-    public static List<ResourceData> ResourceDatasource = GenerateResourceData();
-    public static List<EventData> AppointmentData = GenerateStaticEvents();
-    public string[] GroupData { get; set; } = { "Resources" };
-    static public List<ResourceData> GenerateResourceData()
-    {
-        List<ResourceData> resources = new List<ResourceData>(300);
-        var colors = new string[] { "#ff8787", "#9775fa", "#748ffc", "#3bc9db", "#69db7c",
-"#fdd835", "#748ffc", "#9775fa", "#df5286", "#7fa900",
-"#fec200", "#5978ee", "#00bdae", "#ea80fc"};
-        for (int a = 1; a <= 300; a++)
-        {
-            int index = a % colors.Length;
-            index = index == 0 ? (colors.Length / a) : index;
-            resources.Add(new ResourceData
-                {
-                    Id = a,
-                    Text = "Resource " + a,
-                    Color = colors[index]
-                });
-        }
-        return resources;
-    }
-
-    public static List<EventData> GenerateStaticEvents()
-    {
-        DateTime date = new DateTime(2023, 4, 1);
-        List<EventData> data = new List<EventData>(3600);
-        var id = 1;
-        for (var i = 0; i < 300; i++)
-        {
-            Random random = new Random();
-            List<int> listNumbers = new List<int>();
-            int[] randomCollection = new int[24];
-            int number;
-            int max = 30;
-            for (int a = 0; a < 12; a++)
-            {
-                do
-                {
-                    number = random.Next(max);
-                } while (listNumbers.Contains(number));
-                listNumbers.Add(number);
-                var startDate = date.AddDays(number);
-                startDate = startDate.AddMilliseconds((((number % 10) * 10) * (1000 * 60)));
-                var endDate = startDate.AddMilliseconds(((1440 + 30) * (1000 * 60)));
-                data.Add(new EventData
-                    {
-                        Id = id,
-                        Subject = "Event #" + id,
-                        StartTime = startDate,
-                        EndTime = endDate,
-                        IsAllDay = (id % 10 == 0) ? false : true,
-                        ResourceId = i + 1
-                    });
-                id++;
-            }
-        }
-        return data;
-    }
-    public class EventData
-    {
-        public int Id { get; set; }
-        public string Subject { get; set; }
-        public DateTime StartTime { get; set; }
-        public DateTime EndTime { get; set; }
-        public bool IsAllDay { get; set; }
-        public int ResourceId { get; set; }
-    }
-
-    public class ResourceData
-    {
-        public int Id { get; set; }
-        public string Text { get; set; }
-        public string Color { get; set; }
-    }
 }
+
 
 <style>
     .container {
@@ -292,7 +112,6 @@ StartTimeOnly = new TimeOnly(18, 00, 00) }
 
     .subtitle {
         font-size: 15px;
-        font-weight: 400;
         color: #4D4D4D;
     }
 
@@ -314,10 +133,9 @@ StartTimeOnly = new TimeOnly(18, 00, 00) }
     }
 
     .e-users-list {
-        magrin: auto;
+        margin: auto;
         height: 50px;
         font-size: 16px;
-        font-weight: 400;
         color: #212121;
         border: 1px solid #001360;
     }
@@ -344,7 +162,6 @@ StartTimeOnly = new TimeOnly(18, 00, 00) }
         height: 40px;
         background-color: #ECEEF6;
         font-size: 15px;
-        font-weight: 400;
         border: none;
     }
 
@@ -363,7 +180,6 @@ StartTimeOnly = new TimeOnly(18, 00, 00) }
         color: black;
         background-color: #FFFFFF;
         border: solid 1px #001360;
-        //为什么 某些属性 不起作用?
     }
 
     .date-choose-container {
@@ -377,8 +193,7 @@ StartTimeOnly = new TimeOnly(18, 00, 00) }
     }
 
     .e-btn {
-        font-weight: 400;
-        font-size: :14px;
+        font-size: 14px;
         color: #0C1116;
         width: 110px;
         height: 40px;

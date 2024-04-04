@@ -1,0 +1,71 @@
+@namespace Shared
+@using Shared
+
+@if (User != null)
+{
+    if (User.Name == "Derek Larson 1")
+    {
+        <div class="table-row team-row">
+    <label>
+        <InputCheckbox @bind-Value="DepartmentTeamChecked" />DEPARTMENT TEAM
+    </label>
+</div>
+    }
+    <li class="table-row user-row">
+    <label class="user-name">
+        <InputCheckbox @bind-Value="User.Checked" />@User.Name
+    </label>
+    <p class="last-active">@User.LastActive</p>
+    <DateBlock AppointmentParameter=null />
+    <DateBlock AppointmentParameter=@User.Appointments?[0] />
+    <DateBlock />
+    <DateBlock />
+    <DateBlock AppointmentParameter=@User.Appointments?[1] />
+    <DateBlock />
+    <DateBlock />
+    <button class="edit-button">
+        <SfIcon Name="IconName.Edit" Title="edit"></SfIcon>
+    </button>
+</li>
+}
+
+@code {
+    private bool DepartmentTeamChecked = false; //it should be changed all the Checked in UserItem
+
+    public class UserItem
+    {
+        public required string Id { get; set; }
+        public required string Name { get; set; }
+        public required string LastActive { get; set; }
+        public required bool Checked { get; set; }
+        public required string Team { get; set; }
+        public List<Appointment>? Appointments { get; set; }
+    }
+    [Parameter]
+    public UserItem? User { get; set; }
+}
+
+<style>
+    .user-row {
+        height: 60px;
+    }
+
+    .user-name {
+        width: 200px;
+        height: 60px;
+        border: 1px solid #DFDDDD;
+    }
+
+    .last-active {
+        width: 150px;
+        height: 60px;
+        border: 1px solid #DFDDDD;
+    }
+
+    .edit-button {
+        width: 115px;
+        height: 60px;
+        border: 1px solid #DFDDDD;
+        background-color: white;
+    }
+</style>

@@ -29,6 +29,10 @@ h3 {
   padding: 12px;
 }
 
+li {
+  list-style-type: none;
+}
+
 .btn-primary {
   color: #fff;
   background-color: #1b6ec2;
