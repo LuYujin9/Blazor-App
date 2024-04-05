@@ -1,5 +1,5 @@
 .container {
-  margin-left: 3.5rem;
+  margin-left: 3.2rem;
   margin-top: 0.4rem;
   display: flex;
   flex-direction: column;
@@ -39,6 +39,8 @@
 }
 
 .filter-sort-container {
+  display: flex;
+  gap: 0.6rem;
 }
 
 .infos-container {

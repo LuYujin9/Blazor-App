@@ -1,85 +1,62 @@
-﻿@using Syncfusion.Blazor.Navigations
-@using Syncfusion.Blazor.Buttons
-
-<SfSidebar Width="80px">
+﻿<SfSidebar Width="80px">
     <ChildContent>
-        <div>Sidebar</div>
-        <div class="sidebar-item">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <img src="./images/home.png" class="nav-icon" />
-            </NavLink>
+        <div class="sidebar-item sidebar-head">
+            <img src="./images/home.png" />
         </div>
-        <div class="sidebar-item">
-            <NavLink class="nav-link" href="passwordGenerator">
-                <img src="./images/grid_view.png" class="nav-icon" />
-            </NavLink>
-        </div>
-        <div class="sidebar-item">
-            <NavLink class="nav-link" href="fizzBuzz">
-                <img src="./images/Frame 8.png" class="nav-icon" />
-            </NavLink>
-        </div>
-        <div class="sidebar-item">
-            <NavLink class="nav-link" href="base64Converter">
-                <img src="./images/energy_program_saving.png" class="nav-icon" />
-            </NavLink>
-        </div>
-        <div class="sidebar-item">
-            <NavLink class="nav-link" href="classCollision">
-                <img src="./images/apartment.png" class="nav-icon" />
-            </NavLink>
-        </div>
-        <div class="sidebar-item">
-            <NavLink class="nav-link" href="counter">
-                Counter
-            </NavLink>
-        </div>
+        <NavLink class="sidebar-item nav-link selected" href="passwordGenerator">
+            <SfIcon Name="IconName.GridView" Size="IconSize.Medium"></SfIcon>
+        </NavLink>
+        <NavLink class="sidebar-item nav-link" href="fizzBuzz">
+            <SfIcon Name="IconName.CriticalPath"></SfIcon>
+        </NavLink>
+        <NavLink class="sidebar-item nav-link" href="base64Converter">
+            <SfIcon Name="IconName.Settings"></SfIcon>
+        </NavLink>
+        <NavLink class="sidebar-item nav-link" href="classCollision">
+            <SfIcon Name="IconName.TableNested"></SfIcon>
+        </NavLink>
     </ChildContent>
 </SfSidebar>
 
 <style>
     .e-sidebar {
-        margin: 16px;
-        background-color: #001360;
-        color: black;
-        border-radius: 16px;
-        height: 1948px;
-
+        height: 97.4rem;
+        margin: 0.8rem;
+        padding: 0.8rem;
+        padding-top: 1.2rem;
+        background-color: var(--theme-color-main);
+        border-radius: 0.8rem;
+        display: grid;
+        grid-template-rows: 5.4rem repeat(4, 2.6rem);
     }
 
     .sidebar-item {
-        margin: auto;
-        color: blue;
-        border-radius: 5px;
+        width: 2.4rem;
+        height: 2.4rem;
+        border-radius: 0.6rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
-    .e-sidebar.e-left {
-        left: 80px;
+    .sidebar-head {
+        background-color: white;
+    }
+
+    .sidebar-head>img {
+        width: 1.6rem;
+        height: 1.6rem;
     }
 
     .nav-link {
-        margin: 16px auto;
-        width: 48px;
-        height: 48px;
-        box-sizing: content-box;
+        background-color: inherit;
+        color: white;
+        text-decoration: none;
     }
 
-    // TODO: this setting doesn't work, Why?
-    .e-sidebar.e-left.e-close {
-        visibility: visible;
-    }
-
-    // TODO: this is a hack to display the navbar in the layout. Needs later fix. Please find reason why e-hidden class is set
-    .e-hidden {
-        display: inline-block;
-    }
-
-    .nav-icon {
-        margin: auto;
-        padding: 0;
-        width: 42px;
-        height: 42px;
-        border-radius: 12px;
+    .selected.nav-link {
+        background-color: white;
+        color: #255157;
     }
 
     .text-content {

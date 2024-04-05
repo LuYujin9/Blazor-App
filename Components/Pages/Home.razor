@@ -1,7 +1,6 @@
 ﻿@page "/"
 @rendermode InteractiveServer
 
-<NavMenu />
 <PageTitle>Home</PageTitle>
 <div class="container">
     <div class="title-container">
@@ -33,17 +32,17 @@
         </div>
     </div>
     <div class="filter-sort-container">
-        <SfDropDownButton Content="Filter by" CssClass="filter-sort" @bind-Value="SelectedFilter">
-            <DropDownMenuItems>
-                <DropDownMenuItem Text="Having Course today"></DropDownMenuItem>
-            </DropDownMenuItems>
-        </SfDropDownButton>
-        <SfDropDownButton Content="Sort by" CssClass="filter-sort" @bind-Value="SelectedSort">
-            <DropDownMenuItems>
-                <DropDownMenuItem Text="Newest Users"></DropDownMenuItem>
-                <DropDownMenuItem Text="Last Active"></DropDownMenuItem>
-            </DropDownMenuItems>
-        </SfDropDownButton>
+        <SfDropDownList Width="108px" TValue="string" TItem="DropListItem" Placeholder="Filter by"
+            DataSource="@_filterDropList" @bind-Value="SelectedFilter" PopupHeight="500px" PopupWidth="250px"
+            CssClass="filter-sort">
+            <DropDownListFieldSettings Value="Text" Text="Text"></DropDownListFieldSettings>
+        </SfDropDownList>
+        @* question 这里有个问题, 如果filter选择了一个项次,超出的text可能会被省略, 建议不要固定filter宽度 *@
+        <SfDropDownList Width="108px" TValue="string" TItem="DropListItem" Placeholder="Filter by"
+            DataSource="@_sortDropList" @bind-Value="SelectedSort" PopupHeight="500px" PopupWidth="250px"
+            CssClass="filter-sort">
+            <DropDownListFieldSettings Value="Text" Text="Text"></DropDownListFieldSettings>
+        </SfDropDownList>
     </div>
     <div class="infos-container">
         <h3 class="inof-title">Acme Inc</h3>
@@ -51,9 +50,7 @@
     </div>
 </div>
 
-
 @code {
-
     private List<DropListItem> _companyDropList = new List<DropListItem> {
 new DropListItem() { Id= "0", Text= "Acme Inc" },
 };
@@ -64,6 +61,13 @@ new DropListItem() { Id= "2", Text= "Label, Label, Label, Label, Label, Label," 
 new DropListItem() { Id= "3", Text= "Label, Label, Label, Label, Label, Label," }
 };
 
+    private List<DropListItem> _filterDropList = new List<DropListItem> {
+new DropListItem() { Id= "0", Text= "Having Course today" }
+};
+    private List<DropListItem> _sortDropList = new List<DropListItem> {
+new DropListItem() { Id= "0", Text= "Newest Users" },
+new DropListItem() { Id= "1", Text= "Last Active" },
+};
     public string? SelectedCompany;
     public string? SelectedUser;
     public string? SelectedFilter;
@@ -72,38 +76,44 @@ new DropListItem() { Id= "3", Text= "Label, Label, Label, Label, Label, Label," 
 
 
 <style>
-    .e-ddl.e-input-group.e-control-container.company-users-dropdown-list.e-control-wrapper.e-lib {
+    .company-users-dropdown-list.e-ddl.e-input-group.e-control-container.e-control-wrapper.e-lib {
+        width: 9.1rem;
         height: 2.5rem;
+        padding-left: 0;
+        border: 1px solid #001360;
         font-size: 0.8rem;
         color: #212121;
+        -webkit-text-fill-color: #212121;
         display: flex;
         align-items: center;
         justify-content: space-between;
         gap: 1rem;
-        -webkit-text-fill-color: #212121;
-        border: 1px solid #001360;
-        //TO DO: 设定为1px的话,和设计的不一样粗
+        //TO DO: 设定为1px的话,和figma上看起来不一样粗
         //TO DO: 如何加上项目的数量? 也许取消?
         //TO DO: 点击的时候 icon 没有改变
     }
 
-    .e-control.e-input.e-dropdownlist {
-        width: 9.1rem;
-        padding-left: 0;
-        font-size: 0.8rem;
-    }
-
-    .e-control.e-btn.e-lib.e-dropdown-btn.filter-sort {
+    .filter-sort.e-ddl.e-input-group.e-control-container.e-control-wrapper.e-lib {
+        height: 2rem;
+        padding: 0 12px;
+        border: 0;
+        border-radius: 1.6rem;
         font-size: 0.7rem;
         color: #0c1116;
-        width: 5.4rem;
-        height: 2rem;
-        padding: 0;
-        margin-right: 0.6rem;
-        border-radius: 1.6rem;
         background-color: white;
+        -webkit-text-fill-color: #212121;
         box-shadow: none;
-        border: 0;
+        display: flex;
+        align-items: center;
+    }
+
+    //TO DO:不起作用
+    .e-input-group-icon.e-ddl-icon.e-icons.e-ddl-disable-icon {
+        width: 0.8rem;
+    }
+
+    .filter-sort.e-ddl.e-input-group.e-control-wrapper .e-ddl-icon::before {
+        content: '\e7f7';
     }
 
     //TO DO: 如果没有check box , edit button是不是也不需要了?

@@ -3,7 +3,7 @@
   height: 50px;
   font-size: 0.8rem;
   color: #212121;
-  border: 1px solid #001360;
+  border: 1px solid #var(--theme-color-main);
 } */
 /* 
 .filter-sort {
@@ -36,7 +36,7 @@
   font-size: 0.8rem;
   color: black;
   background-color: #ffffff;
-  border: solid 1px #001360;
+  border: solid 1px #var(--theme-color-main);
 }
 
 .date-choose-container {

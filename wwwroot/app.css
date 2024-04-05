@@ -1,6 +1,8 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+
 html,
 body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Inter", sans-serif;
   background-color: #eceef6;
   margin-bottom: 5rem;
 }
@@ -12,6 +14,7 @@ body {
   --text-color-dark: #1c1c1c;
   --text-color-light: #ffffff;
   --text-color-subtitle: #4d4d4d;
+  --theme-color-main: #001360;
   /* --text-subtitle: #464648; */
 }
 
