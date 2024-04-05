@@ -1,6 +1,5 @@
 @namespace Shared
 @using static Shared.TableRow
-@* Question: 为什么这里是staic, 当我都使用namespace shared的时候,为什么只有navmenu可以使用@using Shared *@
 @rendermode InteractiveServer
 
 
@@ -47,11 +46,8 @@
         }
     }
 </ul>
-<SfPager @ref="@Page" PageSize=@(Page?.PageSize??DefaultPageSize) NumericItemsCount=5
-    TotalItemsCount=@_userInofs.Count() ItemClick="Click">
-    @* <SfPager TotalItemsCount=@_userInofs.Count() PageSizes=@pagesizes PageSize="5" NumericItemsCount="5"
-    ItemClick="Click"
-    ShowAllInPageSizes="true"> *@
+<SfPager @ref="@Page" PageSize="5" PageSizes=@pagesizes NumericItemsCount=5 TotalItemsCount=@_userInofs.Count()
+    ItemClick="Click">
 </SfPager>
 
 @code {
@@ -92,33 +88,28 @@ new UserInfo(){Id="0",Name="Derek Larson",LastActive="12/02/24", Team="DEPARTMEN
 new UserInfo(){Id="0",Name="Derek Larson",LastActive="22/02/24", Team="DEPARTMENT"}
 };
 
-    //TO DO: 还需要考虑default PageSize的必要性
     SfPager? Page;
     public int SkipValue;
-    public int DefaultPageSize = 5;
     public int TakeValue;
+    public List<int> pagesizes = new List<int> { 5, 10, 12, 20 };
+    //TO DO:也许可以加一个功能,选择pagesizes时, 刷新页面.即当pagesize改变的时候 ,rerender
     protected override void OnInitialized()
     {
         base.OnInitialized();
-        TakeValue = Page?.PageSize ?? DefaultPageSize;
+        TakeValue = pagesizes[0];
     }
     public void Click(PagerItemClickEventArgs args)
     {
         SkipValue = (args.CurrentPage * Page!.PageSize) - Page.PageSize;
         TakeValue = Page.PageSize;
     }
-    @* public List<int> pagesizes = new List<int> { 5, 10 }; *@
 
     public class Team
     {
         public required string TeamName { get; set; }
         public required List<UserInfo> Users { get; set; }
     }
-    public class DropListItem
-    {
-        public string? Id { get; set; }
-        public string? Text { get; set; }
-    }
+
 }
 
 <style>
