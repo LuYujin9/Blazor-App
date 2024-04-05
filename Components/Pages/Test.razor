@@ -3,7 +3,6 @@
 @using Syncfusion.Blazor.Lists
 @page "/test"
 
-Question:为什么clicksize失灵?
 
 <div class="col-lg-12 control-section sb-property-border">
     @{
@@ -12,14 +11,17 @@ Question:为什么clicksize失灵?
             <ListViewFieldSettings TValue="DataModel" Id="Id" Text="Name"></ListViewFieldSettings>
         </SfListView>
     }
-    <SfPager @ref="@Page" PageSize=5 NumericItemsCount=10 TotalItemsCount=25 ItemClick="Click">
+    @* <SfPager @ref="@Page" PageSize=5 NumericItemsCount=4 TotalItemsCount=25 ItemClick="Click">
+    </SfPager> *@
+    <SfPager @ref="@Page" TotalItemsCount="25" PageSizes=@pagesizes PageSize="5" NumericItemsCount="3"
+        ShowAllInPageSizes="true" ItemClick="Click">
     </SfPager>
 </div>
 @code {
-    SfPager Page;
-    public SfListView<DataModel> List { get; set; }
+    SfPager? Page;
+    public SfListView<DataModel>? List { get; set; }
     public int SkipValue;
-    public int TakeValue = 7;
+    public int TakeValue = 5;
     List<DataModel> ListData = new List<DataModel>();
     protected override void OnInitialized()
     {
@@ -53,19 +55,14 @@ Question:为什么clicksize失灵?
     }
     public void Click(PagerItemClickEventArgs args)
     {
-        SkipValue = (args.CurrentPage * Page.PageSize) - Page.PageSize;
+        SkipValue = (args.CurrentPage * Page!.PageSize) - Page.PageSize;
         TakeValue = Page.PageSize;
     }
     public class DataModel
     {
-        public string Name { get; set; }
-        public string Id { get; set; }
+        public string? Name { get; set; }
+        public string? Id { get; set; }
     }
-}
-@*
-<SfPager TotalItemsCount="75" PageSizes=@pagesizes PageSize="5" NumericItemsCount="3" ShowAllInPageSizes="true">
-</SfPager>
 
-@code {
-public List<int> pagesizes = new List<int> { 5, 10, 12, 20 };
-} *@
+    public List<int> pagesizes = new List<int> { 5, 10, 12, 20 };
+}
