@@ -1,132 +1,54 @@
 .container {
-  margin-left: 60px;
+  margin-left: 3.5rem;
+  margin-top: 0.4rem;
   display: flex;
   flex-direction: column;
-  gap: 50px;
+  gap: 2.5rem;
 }
 
 .title-container {
-  padding: 10px;
-  padding-top: 0px;
+  padding: 0.5rem;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 1rem;
 }
 
 .subtitle {
-  font-size: 15px;
-  color: #4d4d4d;
+  font-size: 0.75rem;
+  color: var(--text-color-subtitle);
+}
+
+.dropdown {
+  display: flex;
+  gap: 1.6rem;
+}
+
+.dropdown-item-title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  height: 1.4rem;
+  color: #212121;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
 }
 
 .dropdown-container {
   display: flex;
-  gap: 32px;
-}
-
-.dropdown-item-title {
-  font-size: 15px;
-  font-weight: 600;
-  height: 28px;
-  color: #212121;
-}
-
-.dropdown-list {
-  display: flex;
   flex-direction: column;
 }
-/* .dropdown-item .e-ddl .e-input {
-  margin: auto;
-  height: 50px;
-  font-size: 16px;
-  color: #212121;
-  border: 1px solid #001360;
-} */
-/* .filter-container {
-  height: 40px;
-  width: 1312px;
-  display: flex;
-  gap: 16px;
+
+.filter-sort-container {
 }
 
-.filter.e-dropdown-btn {
+.infos-container {
   background-color: white;
+  padding: 1.2rem;
+  height: 40rem;
+  border-radius: 0.8rem;
+  margin-top: -1.5rem;
 }
 
-.list-container {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-} */
-
-/* .e-custom.e-input-group,
-.e-custom.e-input-group.e-control-wrapper {
-  height: 40px;
-  background-color: #eceef6;
-  font-size: 15px;
-  border: none;
-} */
-
-/* .infos-container {
-  background-color: white;
-  padding: 24px;
-  height: 797px;
-  border-radius: 16px;
+.info-title {
+  margin-top: 1.6rem;
 }
-
-.e-control-wrapper.e-input-group.e-control-container.e-keyboard {
-  width: 300px;
-  height: 50px;
-  border-radius: 4px;
-  font-size: 16px;
-  color: black;
-  background-color: #ffffff;
-  border: solid 1px #001360;
-}
-
-.date-choose-container {
-  width: 1258px;
-  padding: 8px 0;
-  border-radius: 16px;
-  display: flex;
-  gap: 20px;
-  background-color: #eceef6;
-}
-
-.e-btn {
-  font-size: 14px;
-  color: #0c1116;
-  width: 110px;
-  height: 40px;
-  border-radius: 32px;
-  background-color: #eceef6;
-  border: 0px;
-}
-
-.e-btn-group:not(.e-outline) {
-  box-shadow: none;
-}
-
-.pagination-button.e-btn {
-  width: 32px;
-}
-
-.e-date-list.e-ddl.e-lib {
-  height: 40px;
-  background-color: inherit;
-}
-
-.e-schedule .e-month-view .e-work-cells {
-  position: relative;
-}
-
-.e-schedule .templatewrap {
-  text-align: center;
-  position: absolute;
-  width: 100%;
-}
-
-.e-schedule .caption {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  vertical-align: middle;
-} */

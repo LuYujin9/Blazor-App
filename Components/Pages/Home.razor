@@ -11,47 +11,43 @@
             micro-learning paths.
         </div>
     </div>
-    <div class="dropdown-container">
-        <div class="dropdown-list">
+    <div class="dropdown">
+        <div class="dropdown-container">
             <label class="dropdown-item-title">Company
             </label>
             <SfDropDownList PopupHeight="500px" Width="300px" TValue="string" TItem="DropListItem"
                 Placeholder="@_companyDropList[0].Text" DataSource="@_companyDropList" @bind-Value="SelectedCompany"
-                CssClass="company-users-dropdown">
+                CssClass="company-users-dropdown-list">
                 <DropDownListFieldSettings Value="Text" Text="Text">
                 </DropDownListFieldSettings>
-                @* 加入项目的数量标签
-                省略超过的部分 *@
             </SfDropDownList>
         </div>
-        <div class="dropdown-list">
+        <div class="dropdown-container">
             <label class="dropdown-item-title">Users
             </label>
             <SfDropDownList Width="300px" TValue="string" TItem="DropListItem" Placeholder="@_userDropList[0].Text"
                 DataSource="@_userDropList" @bind-Value="SelectedUser" PopupHeight="500px"
-                CssClass="company-users-dropdown">
+                CssClass="company-users-dropdown-list">
                 <DropDownListFieldSettings Value="Text" Text="Text"></DropDownListFieldSettings>
             </SfDropDownList>
         </div>
     </div>
-    <div class="list-container">
-        <div class="filter-container">
-            <SfDropDownButton Content="Filter by" CssClass="filter" @bind-Value="SelectedFilter">
-                <DropDownMenuItems>
-                    <DropDownMenuItem Text="Having Course today"></DropDownMenuItem>
-                </DropDownMenuItems>
-            </SfDropDownButton>
-            <SfDropDownButton Content="Sort by" CssClass="filter" @bind-Value="SelectedSort">
-                <DropDownMenuItems>
-                    <DropDownMenuItem Text="Newest Users"></DropDownMenuItem>
-                    <DropDownMenuItem Text="Last Active"></DropDownMenuItem>
-                </DropDownMenuItems>
-            </SfDropDownButton>
-        </div>
-        <div class="infos-container">
-            <h3>Acme Inc</h3>
-            <Table />
-        </div>
+    <div class="filter-sort-container">
+        <SfDropDownButton Content="Filter by" CssClass="filter-sort" @bind-Value="SelectedFilter">
+            <DropDownMenuItems>
+                <DropDownMenuItem Text="Having Course today"></DropDownMenuItem>
+            </DropDownMenuItems>
+        </SfDropDownButton>
+        <SfDropDownButton Content="Sort by" CssClass="filter-sort" @bind-Value="SelectedSort">
+            <DropDownMenuItems>
+                <DropDownMenuItem Text="Newest Users"></DropDownMenuItem>
+                <DropDownMenuItem Text="Last Active"></DropDownMenuItem>
+            </DropDownMenuItems>
+        </SfDropDownButton>
+    </div>
+    <div class="infos-container">
+        <h3 class="inof-title">Acme Inc</h3>
+        <Table />
     </div>
 </div>
 
@@ -76,29 +72,39 @@ new DropListItem() { Id= "3", Text= "Label, Label, Label, Label, Label, Label," 
 
 
 <style>
-    .e-input-group.company-users-dropdown:not(.e-success):not(.e-warning):not(.e-error) {
-        border: 1.5px solid #001360;
-    }
-
-    .e-input-group.company-users-dropdown {
-        border: 1.5px solid #001360;
-    }
-
-    .e-ddl.e-input-group.e-control-container.company-users-dropdown {
-        height: 50px;
-        font-size: 16px;
+    .e-ddl.e-input-group.e-control-container.company-users-dropdown-list.e-control-wrapper.e-lib {
+        height: 2.5rem;
+        font-size: 0.8rem;
         color: #212121;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 20px;
+        gap: 1rem;
         -webkit-text-fill-color: #212121;
+        border: 1px solid #001360;
         //TO DO: 设定为1px的话,和设计的不一样粗
+        //TO DO: 如何加上项目的数量? 也许取消?
+        //TO DO: 点击的时候 icon 没有改变
     }
 
     .e-control.e-input.e-dropdownlist {
-        width: 182px;
+        width: 9.1rem;
         padding-left: 0;
-        font-size: 16px;
+        font-size: 0.8rem;
     }
+
+    .e-control.e-btn.e-lib.e-dropdown-btn.filter-sort {
+        font-size: 0.7rem;
+        color: #0c1116;
+        width: 5.4rem;
+        height: 2rem;
+        padding: 0;
+        margin-right: 0.6rem;
+        border-radius: 1.6rem;
+        background-color: white;
+        box-shadow: none;
+        border: 0;
+    }
+
+    //TO DO: 如果没有check box , edit button是不是也不需要了?
 </style>
