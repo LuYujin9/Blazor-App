@@ -17,7 +17,7 @@
         </SfDropDownList>
     </div>
     <ul class="table-container">
-        <div class="table-row table-header">
+        <li class="table-row table-header">
             <div class="header-cell header-user">User <span class="user-count-span">@_userInofs.Count()</span></div>
             <div class="header-cell header-last-active"> Last Active</div>
             @foreach (var date in _tableHeaderDates)
@@ -27,7 +27,7 @@
                 </div>
             }
             <div class="header-cell header-empty"></div>
-        </div>
+        </li>
         @{
             var currentUsers = _userInofs.Skip(SkipValue).Take(TakeValue).ToList();
             //Question: 为什么这里不能用private　
@@ -55,7 +55,7 @@
     private List<TableHeaderDate> _tableHeaderDates = new List<TableHeaderDate>{
 new TableHeaderDate(){Date=2,Day="Mon",IsToday=false},
 new TableHeaderDate(){Date=3,Day="Tue",IsToday=false},
-new TableHeaderDate(){Date=4,Day="Wen",IsToday=true},
+new TableHeaderDate(){Date=4,Day="Wed",IsToday=true},
 new TableHeaderDate(){Date=5,Day="Thu",IsToday=false},
 new TableHeaderDate(){Date=6,Day="Fri",IsToday=false},
 new TableHeaderDate(){Date=7,Day="Sat",IsToday=false},
@@ -171,22 +171,22 @@ new UserInfo(){Id="0",Name="Derek Larson",LastActive="22/02/24", Team="DEPARTMEN
     }
 
     .week-change-list>.e-lib.e-input.e-control.e-dropdownlist::placeholder {
-        font-size: 0.75rem;
+        font-size: 15px;
         color: black;
     }
 
     .week-change-list.e-ddl.e-lib.e-input-group>.e-input-group-icon.e-ddl-icon.e-icons.e-ddl-disable-icon::before {
         width: 0.9rem;
-        font-size: 0.8rem;
+        font-size: 16px;
         color: black;
     }
 
     .table-container {
+        margin-top: 0.8rem;
         padding: 0;
-        border-radius: 0.22rem;
-        overflow: hidden;
+        max-height: 31.7rem;
+        overflow-y: scroll;
     }
-
 
     .table-row.table-header,
     .table-row.user-row {
@@ -195,7 +195,7 @@ new UserInfo(){Id="0",Name="Derek Larson",LastActive="22/02/24", Team="DEPARTMEN
         display: grid;
         grid-template-columns: 10rem 7rem repeat(8, 1fr);
 
-        font-size: 0.75rem;
+        font-size: 15px;
         font-weight: 700;
         text-align: center;
     }
@@ -218,7 +218,7 @@ new UserInfo(){Id="0",Name="Derek Larson",LastActive="22/02/24", Team="DEPARTMEN
 
     .user-name,
     .table-last-active {
-        font-size: 0.7rem;
+        font-size: 14px;
         font-weight: 400;
     }
 
@@ -230,7 +230,7 @@ new UserInfo(){Id="0",Name="Derek Larson",LastActive="22/02/24", Team="DEPARTMEN
         padding: 0.4rem 0 0.3rem 0;
         border-left: 0;
         border-right: 0;
-        font-size: 0.9rem;
+        font-size: 18px;
         font-weight: 500;
         display: flex;
         flex-direction: column;
@@ -241,7 +241,7 @@ new UserInfo(){Id="0",Name="Derek Larson",LastActive="22/02/24", Team="DEPARTMEN
 
     .header-cell.header-date>.day-span {
         height: 0.9rem;
-        font-size: 0.6rem;
+        font-size: 12px;
         font-weight: 400;
         color: #9F9EA4;
     }
@@ -288,7 +288,7 @@ new UserInfo(){Id="0",Name="Derek Larson",LastActive="22/02/24", Team="DEPARTMEN
         height: 1.1rem;
         padding-top: 0.15rem;
         border-radius: 1.5rem;
-        font-size: 0.6rem;
+        font-size: 12px;
         color: #9F9EA4;
         border: 1px solid var(--theme-color-gray)
     }
@@ -297,7 +297,7 @@ new UserInfo(){Id="0",Name="Derek Larson",LastActive="22/02/24", Team="DEPARTMEN
         height: 1.6rem;
         color: #799F79;
         background-color: #F5FBF5;
-        font-size: 0.6rem;
+        font-size: 12px;
         font-weight: 700;
 
     }

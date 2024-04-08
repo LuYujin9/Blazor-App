@@ -3,7 +3,7 @@
     {
         //Question: is there a way to simplify the code and avoid repeating AppointmentParameter?. multiple times?
         <div class="appointment-box"
-            style="background-color: @AppointmentParameter?.Background; border: 2px solid @AppointmentParameter?.Color; width:@(_width)px ;">
+            style="background-color: @AppointmentParameter?.Background; border: 2px solid @AppointmentParameter?.Color; width: calc(@_width - 4px);">
             <div class="appointment-content-container" info=@AppointmentParameter?.Info>
                 <div class="appointment-content" style="color:@AppointmentParameter?.Color"> @AppointmentParameter?.Content
                 </div>
@@ -23,15 +23,15 @@
     [Parameter]
     public Appointment? AppointmentParameter { get; set; }
 
-    //Question: why it is protected override
     protected override void OnInitialized()
     {
         if (AppointmentParameter != null)
         {
-            _width = 115 * (AppointmentParameter?.Duration ?? 0) - 4;
+            _width = ((AppointmentParameter?.Duration ?? 0) * 100).ToString() + "%";
         }
+        //question: 为什么当超过100%的时候,是用113.75来算的.
     }
-    private int _width = 111;
+    private string _width = "100%";
     public class Appointment
     {
         public required string Content { get; set; }

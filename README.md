@@ -25,13 +25,14 @@
 # TO DO
 
 - style the date cell, when it is 'today'
-- style the header date cell
+- style table-row.table-header border radius
 - style the width of appointment box, that it changes with the width of DateBlock
 - style the color of team row
 - table overflow:scroll
 - find a better way to style table-container border radius
 - make the border of table better
 - change some class name
+- add a color to the frame of appointment box
 
 # Questions
 

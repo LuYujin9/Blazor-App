@@ -14,7 +14,7 @@
 }
 
 .subtitle {
-  font-size: 0.75rem;
+  font-size: 15px;
   color: var(--text-color-subtitle);
 }
 
@@ -24,7 +24,7 @@
 }
 
 .dropdown-item-title {
-  font-size: 0.75rem;
+  font-size: 15px;
   font-weight: 600;
   height: 1.4rem;
   color: #212121;
