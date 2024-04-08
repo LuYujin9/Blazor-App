@@ -1,4 +1,4 @@
-namespace Shared; 
+namespace Global; 
  
  public class DropListItem
     {

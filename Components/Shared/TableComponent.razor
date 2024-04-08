@@ -1,0 +1,309 @@
+@using static BlazorApp.Components.Shared.DateBlock
+@using static BlazorApp.Components.Shared.TableRow
+@rendermode InteractiveServer
+
+<div class="infos-container">
+    <h3 class="inof-title">Acme Inc</h3>
+    <div class="week-choose-container">
+        <SfButtonGroup CssClass="week-change-btn-group">
+            <ButtonGroupButton IconCss="e-icons e-chevron-left" CssClass="week-change-button prev-week-button">
+            </ButtonGroupButton>
+            <ButtonGroupButton IconCss="e-icons e-chevron-right" CssClass="week-change-button next-week-button">
+            </ButtonGroupButton>
+        </SfButtonGroup>
+        <SfDropDownList Width="200px" TValue="string" TItem="DropListItem" Placeholder="@_dateDropList[0].Text"
+            DataSource="@_dateDropList" PopupHeight="500px" PopupWidth="250px" CssClass="week-change-list">
+            <DropDownListFieldSettings Value="Text" Text="Text"></DropDownListFieldSettings>
+        </SfDropDownList>
+    </div>
+    <ul class="table-container">
+        <div class="table-row table-header">
+            <div class="header-cell header-user">User <span class="user-count-span">@_userInofs.Count()</span></div>
+            <div class="header-cell header-last-active"> Last Active</div>
+            @foreach (var date in _tableHeaderDates)
+            {
+                <div class="header-cell header-date @(date.IsToday?"header-today":"")">@date.Date <span
+                        class="day-span">@date.Day</span>
+                </div>
+            }
+            <div class="header-cell header-empty"></div>
+        </div>
+        @{
+            var currentUsers = _userInofs.Skip(SkipValue).Take(TakeValue).ToList();
+            //Question: 为什么这里不能用private　
+            List<Team> Teams = currentUsers
+            .GroupBy(u => u.Team)
+            .Select(g => new Team { TeamName = g.Key, Users = g.ToList() })
+            .ToList();
+            @foreach (var team in Teams)
+            {
+                <div class="table-row team-row">@team.TeamName TEAM</div>
+                @foreach (var user in team.Users)
+                {
+                    <TableRow UserData="user" />
+                }
+            }
+        }
+    </ul>
+</div>
+
+<SfPager @ref="@Page" PageSize="5" PageSizes=@pagesizes NumericItemsCount=5 TotalItemsCount=@_userInofs.Count()
+    ItemClick="Click">
+</SfPager>
+
+@code {
+    private List<TableHeaderDate> _tableHeaderDates = new List<TableHeaderDate>{
+new TableHeaderDate(){Date=2,Day="Mon",IsToday=false},
+new TableHeaderDate(){Date=3,Day="Tue",IsToday=false},
+new TableHeaderDate(){Date=4,Day="Wen",IsToday=true},
+new TableHeaderDate(){Date=5,Day="Thu",IsToday=false},
+new TableHeaderDate(){Date=6,Day="Fri",IsToday=false},
+new TableHeaderDate(){Date=7,Day="Sat",IsToday=false},
+new TableHeaderDate(){Date=8,Day="Sun",IsToday=false}
+};
+    private List<DropListItem> _dateDropList = new List<DropListItem> {
+new DropListItem() { Id= "0", Text= "02 - 08 February 2024" },
+new DropListItem() { Id= "1", Text= "09 - 15 February 2024" },
+new DropListItem() { Id= "2", Text= "16 - 22 February 2024" }
+};
+    private List<UserInfo> _userInofs = new List<UserInfo>(){
+new UserInfo(){Id="0",Name="Javier Holloway",LastActive="22/02/24", Team="MARKETING", Appointments=new
+List<Appointment>(){
+new Appointment(){Content="How to Overcome Procrastination", Date="03.02.2024", BeginnTime="14:00", EndTime="14:27",
+Background="#EEF5FC", Color="#001360", Duration=1, Info="Module: Module 1, Started: Yes, Start Times: 3"},
+new Appointment(){Content="The 25-5 Rule",Date="05.02.2024", BeginnTime="14:00", Background="#FFEDD1", Color="#9B5E08",
+Duration=2, Info="Module: Module 1, Started: Yes, Start Times: 3"}
+}},
+new UserInfo(){Id="1",Name="Javier Holloway",LastActive="22/02/24", Team="MARKETING"},
+new UserInfo(){Id="2",Name="Javier Holloway",LastActive="22/02/24", Team="MARKETING"},
+new UserInfo(){Id="3",Name="Javier Holloway",LastActive="22/02/24", Team="MARKETING"},
+new UserInfo(){Id="4",Name="Javier Holloway",LastActive="22/02/24", Team="MARKETING"},
+new UserInfo(){Id="5",Name="Javier Holloway",LastActive="22/02/24", Team="MARKETING"},
+new UserInfo(){Id="0",Name="Derek Larson 1",LastActive="12/02/24", Team="DEPARTMENT", Appointments=new
+List<Appointment>(){
+new Appointment(){Content="How to Overcome Procrastination", Date="03.02.2024", BeginnTime="14:00", EndTime="14:27",
+Background="#EEF5FC", Color="#001360", Duration=2, Info="Module: Module 1, Started: Yes, Start Times: 3"},
+new Appointment(){Content="The 25-5 Rule", Date="05.02.2024", BeginnTime="14:00", Background="#FFEDD1", Color="#9B5E08",
+Duration=1, Info="Module: Module 1, Started: No, Start Times: 0"}
+}
+},
+new UserInfo(){Id="0",Name="Derek Larson",LastActive="12/02/24", Team="DEPARTMENT"},
+new UserInfo(){Id="0",Name="Derek Larson",LastActive="12/02/24", Team="DEPARTMENT"},
+new UserInfo(){Id="0",Name="Derek Larson",LastActive="12/02/24", Team="DEPARTMENT"},
+new UserInfo(){Id="0",Name="Derek Larson",LastActive="12/02/24", Team="DEPARTMENT"},
+new UserInfo(){Id="0",Name="Derek Larson",LastActive="12/02/24", Team="DEPARTMENT"},
+new UserInfo(){Id="0",Name="Derek Larson",LastActive="12/02/24", Team="DEPARTMENT"},
+new UserInfo(){Id="0",Name="Derek Larson",LastActive="12/02/24", Team="DEPARTMENT"},
+new UserInfo(){Id="0",Name="Derek Larson",LastActive="12/02/24", Team="DEPARTMENT"},
+new UserInfo(){Id="0",Name="Derek Larson",LastActive="22/02/24", Team="DEPARTMENT"}
+};
+    SfPager? Page;
+    public int SkipValue;
+    public int TakeValue;
+    public List<int> pagesizes = new List<int> { 5, 10, 12, 20 };
+    //TO DO:也许可以加一个功能,选择pagesizes时, 刷新页面.即当pagesize改变的时候 ,rerender
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        TakeValue = pagesizes[0];
+    }
+    public void Click(PagerItemClickEventArgs args)
+    {
+        SkipValue = (args.CurrentPage * Page!.PageSize) - Page.PageSize;
+        TakeValue = Page.PageSize;
+    }
+
+    public class Team
+    {
+        public required string TeamName { get; set; }
+        public required List<UserInfo> Users { get; set; }
+    }
+    public class TableHeaderDate
+    {
+        public required int Date { get; set; }
+        public required string Day { get; set; }
+        public required bool IsToday { get; set; }
+    }
+}
+
+@* TO DO:为什么css档案没有用 *@
+@* TO DO:给button加改变week 的fuction *@
+
+<style>
+    .infos-container {
+        width: 65.5rem;
+        background-color: white;
+        padding: 1.2rem;
+        height: 40rem;
+        border-radius: 0.8rem;
+        margin-top: -1.5rem;
+    }
+
+    .info-title {
+        margin-top: 1.6rem;
+    }
+
+    .week-choose-container {
+        height: 2.8rem;
+        border-radius: 0.8rem;
+        background-color: var(--theme-color-background);
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .week-change-btn-group.e-btn-group {
+        box-shadow: none;
+    }
+
+    .week-change-button.e-btn.e-lib.e-icon-btn {
+        width: 1.6rem;
+        padding: 0;
+        border: none;
+        background-color: inherit;
+        color: black;
+    }
+
+    .week-change-list.e-ddl.e-lib.e-input-group {
+        width: 9.15rem;
+        border: none;
+        background-color: inherit;
+    }
+
+    .week-change-list>.e-lib.e-input.e-control.e-dropdownlist::placeholder {
+        font-size: 0.75rem;
+        color: black;
+    }
+
+    .week-change-list.e-ddl.e-lib.e-input-group>.e-input-group-icon.e-ddl-icon.e-icons.e-ddl-disable-icon::before {
+        width: 0.9rem;
+        font-size: 0.8rem;
+        color: black;
+    }
+
+    .table-container {
+        padding: 0;
+        border-radius: 0.22rem;
+        overflow: hidden;
+    }
+
+
+    .table-row.table-header,
+    .table-row.user-row {
+        height: 3rem;
+        background-color: inherit;
+        display: grid;
+        grid-template-columns: 10rem 7rem repeat(8, 1fr);
+
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-align: center;
+    }
+
+    .table-row.table-header>*,
+    .table-row.user-row>*,
+    .table-row.team-row,
+    .table-container {
+        border: 0.5px solid var(--theme-color-gray);
+    }
+
+    .header-cell,
+    .user-name,
+    .table-last-active,
+    .team-row {
+        padding-left: 1.05rem;
+        display: flex;
+        align-items: center;
+    }
+
+    .user-name,
+    .table-last-active {
+        font-size: 0.7rem;
+        font-weight: 400;
+    }
+
+    .header-cell.header-user {
+        gap: 0.5rem;
+    }
+
+    .header-cell.header-date {
+        padding: 0.4rem 0 0.3rem 0;
+        border-left: 0;
+        border-right: 0;
+        font-size: 0.9rem;
+        font-weight: 500;
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        gap: 0.3rem;
+        position: relative;
+    }
+
+    .header-cell.header-date>.day-span {
+        height: 0.9rem;
+        font-size: 0.6rem;
+        font-weight: 400;
+        color: #9F9EA4;
+    }
+
+    .header-cell.header-date::after {
+        position: absolute;
+        left: 100%;
+        top: 20%;
+        width: 1px;
+        height: 66.6%;
+        font-size: 12px;
+        background-color: var(--theme-color-gray);
+        color: black;
+        border-radius: 5px;
+        content: "";
+        z-index: 200;
+    }
+
+    .header-cell.header-date.header-today,
+    .header-cell.header-date.header-today>* {
+        color: #195CE5;
+    }
+
+    .header-cell.header-date.header-today::before {
+        position: absolute;
+        left: 30%;
+        top: calc(100% - 0.15rem);
+        width: 2.25rem;
+        height: 0.15rem;
+        font-size: 12px;
+        background-color: #195CE5;
+        color: black;
+        border-radius: 5px;
+        content: "";
+        z-index: 201;
+    }
+
+    .header-cell.header-empty {
+        border-left: 0;
+    }
+
+    .user-count-span {
+        width: 1.5rem;
+        height: 1.1rem;
+        padding-top: 0.15rem;
+        border-radius: 1.5rem;
+        font-size: 0.6rem;
+        color: #9F9EA4;
+        border: 1px solid var(--theme-color-gray)
+    }
+
+    .table-row.team-row {
+        height: 1.6rem;
+        color: #799F79;
+        background-color: #F5FBF5;
+        font-size: 0.6rem;
+        font-weight: 700;
+
+    }
+
+    .header-last-active,
+    .table-last-active {}
+</style>
+
+@* //question 为什么scroll无效—?因为是动态的?\ *@

@@ -3,7 +3,7 @@
 html,
 body {
   font-family: "Inter", sans-serif;
-  background-color: #eceef6;
+  background-color: var(--theme-color-background);
   margin-bottom: 5rem;
 }
 * {
@@ -15,6 +15,8 @@ body {
   --text-color-light: #ffffff;
   --text-color-subtitle: #4d4d4d;
   --theme-color-main: #001360;
+  --theme-color-background: #eceef6;
+  --theme-color-gray: #dfdddd;
   /* --text-subtitle: #464648; */
 }
 

@@ -1,5 +1,6 @@
 ﻿@page "/"
 @rendermode InteractiveServer
+@using BlazorApp.Components.Shared
 
 <PageTitle>Home</PageTitle>
 <div class="container">
@@ -32,22 +33,19 @@
         </div>
     </div>
     <div class="filter-sort-container">
-        <SfDropDownList Width="108px" TValue="string" TItem="DropListItem" Placeholder="Filter by"
+        <SfDropDownList Width="auto" TValue="string" TItem="DropListItem" Placeholder="Filter by"
             DataSource="@_filterDropList" @bind-Value="SelectedFilter" PopupHeight="500px" PopupWidth="250px"
             CssClass="filter-sort">
             <DropDownListFieldSettings Value="Text" Text="Text"></DropDownListFieldSettings>
         </SfDropDownList>
         @* question 这里有个问题, 如果filter选择了一个项次,超出的text可能会被省略, 建议不要固定filter宽度 *@
-        <SfDropDownList Width="108px" TValue="string" TItem="DropListItem" Placeholder="Filter by"
+        <SfDropDownList Width="108px" TValue="string" TItem="DropListItem" Placeholder="Sort by"
             DataSource="@_sortDropList" @bind-Value="SelectedSort" PopupHeight="500px" PopupWidth="250px"
             CssClass="filter-sort">
             <DropDownListFieldSettings Value="Text" Text="Text"></DropDownListFieldSettings>
         </SfDropDownList>
     </div>
-    <div class="infos-container">
-        <h3 class="inof-title">Acme Inc</h3>
-        <Table />
-    </div>
+    <TableComponent />
 </div>
 
 @code {
@@ -73,7 +71,6 @@ new DropListItem() { Id= "1", Text= "Last Active" },
     public string? SelectedFilter;
     public string? SelectedSort;
 }
-
 
 <style>
     .company-users-dropdown-list.e-ddl.e-input-group.e-control-container.e-control-wrapper.e-lib {
@@ -103,18 +100,18 @@ new DropListItem() { Id= "1", Text= "Last Active" },
         background-color: white;
         -webkit-text-fill-color: #212121;
         box-shadow: none;
-        display: flex;
+        display: inline-flex;
         align-items: center;
     }
 
-    //TO DO:不起作用
-    .e-input-group-icon.e-ddl-icon.e-icons.e-ddl-disable-icon {
-        width: 0.8rem;
+    //question:是否需要设定宽度为最长的option,以免内容被省略而看不清
+    .filter-sort.e-ddl.e-input-group.e-control-container.e-control-wrapper.e-lib>input {
+        width: auto;
     }
 
     .filter-sort.e-ddl.e-input-group.e-control-wrapper .e-ddl-icon::before {
         content: '\e7f7';
     }
 
-    //TO DO: 如果没有check box , edit button是不是也不需要了?
+    //question: 如果没有check box , edit button是不是也不需要了?
 </style>

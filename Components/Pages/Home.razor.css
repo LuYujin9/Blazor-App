@@ -42,15 +42,3 @@
   display: flex;
   gap: 0.6rem;
 }
-
-.infos-container {
-  background-color: white;
-  padding: 1.2rem;
-  height: 40rem;
-  border-radius: 0.8rem;
-  margin-top: -1.5rem;
-}
-
-.info-title {
-  margin-top: 1.6rem;
-}
