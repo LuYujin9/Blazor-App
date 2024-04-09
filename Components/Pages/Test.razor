@@ -1,25 +1,7 @@
 @page "/test"
-@using static Shared.TestComponent
 @rendermode InteractiveServer
 
-
-<div class="container">
-
-    <h1>Test</h1>
-    <div>@Number</div>
-    <BlazorApp.Components.Shared.TestComponent @bind-Number="Number" />
-
-</div>
-
-@code {
-    private int Number { get; set; } = 1;
-
-    private Task NumberChanged(int value)
-    {
-        Number = value;
-        return Task.CompletedTask;
-    }
-}
+<h1>Counter</h1>
 
 <style>
     .container {
