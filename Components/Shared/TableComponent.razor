@@ -48,7 +48,8 @@
 </div>
 
 <SfPager @ref="@Page" PageSize="5" PageSizes=@pagesizes NumericItemsCount=5 TotalItemsCount=@_userInofs.Count()
-    ItemClick="Click">
+    ItemClick="Click" CssClass="schedule-Table-Pager" ShowPagerMessage="false">@(SkipValue + 1) - @LastItemInThePage of
+    @_userInofs.Count() items
 </SfPager>
 
 @code {
@@ -70,8 +71,8 @@ new DropListItem() { Id= "2", Text= "16 - 22 February 2024" }
 new UserInfo(){Id="0",Name="Javier Holloway",LastActive="22/02/24", Team="MARKETING", Appointments=new
 List<Appointment>(){
 new Appointment(){Content="How to Overcome Procrastination", Date="03.02.2024", BeginnTime="14:00", EndTime="14:27",
-Background="#EEF5FC", Color="#001360", Duration=1, Info="Module: Module 1, Started: Yes, Start Times: 3"},
-new Appointment(){Content="The 25-5 Rule",Date="05.02.2024", BeginnTime="14:00", Background="#FFEDD1", Color="#9B5E08",
+Background="#EEF5FC", BorderColor="rgba(0, 19, 96, 0.5)", Color="#001360", Duration=1, Info="Module: Module 1, Started: Yes, Start Times: 3"},
+new Appointment(){Content="The 25-5 Rule",Date="05.02.2024", BeginnTime="14:00", Background="#FFEDD1", BorderColor="rgba(155, 94, 8, 0.5)", Color="#9B5E08",
 Duration=2, Info="Module: Module 1, Started: Yes, Start Times: 3"}
 }},
 new UserInfo(){Id="1",Name="Javier Holloway",LastActive="22/02/24", Team="MARKETING"},
@@ -82,8 +83,8 @@ new UserInfo(){Id="5",Name="Javier Holloway",LastActive="22/02/24", Team="MARKET
 new UserInfo(){Id="0",Name="Derek Larson 1",LastActive="12/02/24", Team="DEPARTMENT", Appointments=new
 List<Appointment>(){
 new Appointment(){Content="How to Overcome Procrastination", Date="03.02.2024", BeginnTime="14:00", EndTime="14:27",
-Background="#EEF5FC", Color="#001360", Duration=2, Info="Module: Module 1, Started: Yes, Start Times: 3"},
-new Appointment(){Content="The 25-5 Rule", Date="05.02.2024", BeginnTime="14:00", Background="#FFEDD1", Color="#9B5E08",
+Background="#EEF5FC", BorderColor="rgba(0, 19, 96, 0.5)", Color="#001360", Duration=2, Info="Module: Module 1, Started: Yes, Start Times: 3"},
+new Appointment(){Content="The 25-5 Rule", Date="05.02.2024", BeginnTime="14:00", Background="#FFEDD1", BorderColor="rgba(155, 94, 8, 0.5)", Color="#9B5E08",
 Duration=1, Info="Module: Module 1, Started: No, Start Times: 0"}
 }
 },
@@ -100,19 +101,26 @@ new UserInfo(){Id="0",Name="Derek Larson",LastActive="22/02/24", Team="DEPARTMEN
     SfPager? Page;
     public int SkipValue;
     public int TakeValue;
+    public int LastItemInThePage;
     public List<int> pagesizes = new List<int> { 5, 10, 12, 20 };
     //TO DO:也许可以加一个功能,选择pagesizes时, 刷新页面.即当pagesize改变的时候 ,rerender
     protected override void OnInitialized()
     {
         base.OnInitialized();
         TakeValue = pagesizes[0];
+        LastItemInThePage = SkipValue + TakeValue;
     }
     public void Click(PagerItemClickEventArgs args)
     {
         SkipValue = (args.CurrentPage * Page!.PageSize) - Page.PageSize;
         TakeValue = Page.PageSize;
+        if (SkipValue >= Page.TotalItemsCount - TakeValue)
+        {
+            LastItemInThePage = Page.TotalItemsCount;
+            return;
+        }
+        LastItemInThePage = SkipValue + TakeValue;
     }
-
     public class Team
     {
         public required string TeamName { get; set; }
@@ -289,7 +297,7 @@ new UserInfo(){Id="0",Name="Derek Larson",LastActive="22/02/24", Team="DEPARTMEN
         padding-top: 0.15rem;
         border-radius: 1.5rem;
         font-size: 12px;
-        color: #9F9EA4;
+        color: #9F9EA4
         border: 1px solid var(--theme-color-gray)
     }
 
@@ -299,11 +307,83 @@ new UserInfo(){Id="0",Name="Derek Larson",LastActive="22/02/24", Team="DEPARTMEN
         background-color: #F5FBF5;
         font-size: 12px;
         font-weight: 700;
-
     }
 
-    .header-last-active,
-    .table-last-active {}
+    .schedule-Table-Pager.sf-pager.e-control.e-pager.e-lib {
+        width: 65.5rem;
+        height: 1.6rem;
+        margin-top: -1.7rem;
+        font-size: 14px;
+        background-color: inherit;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .schedule-Table-Pager>.e-pagercontainer {
+        order: 3;
+    }
+
+    .schedule-Table-Pager>.e-pagesizes {
+        position: absolute;
+        left: 12rem;
+        display: flex;
+        align-items: center;
+    }
+
+    .e-pager .e-pagerconstant{
+        margin:0.3rem 0.4rem;
+    }   
+
+    .schedule-Table-Pager .e-pagerdropdown {
+        width: 3.4rem;
+        height: 1.6rem;
+        margin-top: 0;
+    }
+    
+    .e-ddl.e-input-group.e-control-wrapper .e-ddl-icon::before{
+        font-size: 16px;
+        color: black;
+    }
+
+    .schedule-Table-Pager .e-ddl.e-lib.e-input-group.e-control-container.e-control-wrapper.e-valid-input {
+        border: 1px solid var(--theme-color-main);
+        padding: 0 0.15rem ;
+        border-radius: 0.2rem;
+        font-size: 16px;
+        background-color: inherit;
+        text-align: center;
+    }
+
+    .schedule-Table-Pager.sf-pager.e-control.e-pager.e-lib .e-pagercontainer {
+        border: none;
+        background-color: inherit;
+        col
+    }
+
+    .schedule-Table-Pager.sf-pager.e-control.e-pager.e-lib .e-pagercontainer>* {
+        background-color: inherit;
+        color: black;
+        border: none; 
+    }
+
+    .schedule-Table-Pager .e-numericcontainer>* {
+        width: 1.6rem;
+        height: 1.6rem;
+        background-color: inherit;
+        color: black;
+        border: none;
+    }
+
+    .schedule-Table-Pager.sf-pager.e-control.e-pager.e-lib .e-numericcontainer>.e-active {
+        padding-top: 0.4rem;
+        background-color: var(--theme-color-main);
+        color: white;
+        border-radius: 4px;
+    }
 </style>
 
-@* //question 为什么scroll无效—?因为是动态的?\ *@
+
+@* //question 10 items per page是不是更好?\ *@
+@* //question : 如果硬要一个,可以建立一个display absulute的block 来显示页码信息?\ *@

@@ -1,0 +1,13 @@
+<p>@Number</p>
+<button @onclick="HandleSubmit">Click</button>
+
+@code {
+    [Parameter]
+    public int Number { get; set; }
+
+
+    public void HandleSubmit()
+    {
+        Number++;
+    }
+}

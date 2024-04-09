@@ -2,13 +2,13 @@
     @if (AppointmentParameter != null)
     {
         //Question: is there a way to simplify the code and avoid repeating AppointmentParameter?. multiple times?
-        <div class="appointment-box"
-            style="background-color: @AppointmentParameter?.Background; border: 2px solid @AppointmentParameter?.Color; width: calc(@_width - 4px);">
-            <div class="appointment-content-container" info=@AppointmentParameter?.Info>
-                <div class="appointment-content" style="color:@AppointmentParameter?.Color"> @AppointmentParameter?.Content
+        <div class="appointment" info=@AppointmentParameter?.Info
+            style="background-color: @AppointmentParameter?.Background; border: 2px solid @AppointmentParameter?.BorderColor; width: calc(@_width - 4px);">
+            <div class="appointment-content">
+                <div class="appointment-title" style="color:@AppointmentParameter?.Color"> @AppointmentParameter?.Content
                 </div>
                 <div class="appointment-time">
-                    @AppointmentParameter?.BeginnTime
+                    <span class="start-time">@AppointmentParameter?.BeginnTime</span>
                     @if (AppointmentParameter?.EndTime != null)
                     {
                         <span class="end-time"> | @AppointmentParameter?.EndTime</span>
@@ -39,6 +39,7 @@
         public required string BeginnTime { get; set; }
         public string? EndTime { get; set; }
         public required string Background { get; set; }
+        public required string BorderColor { get; set; }
         public required string Color { get; set; }
         public required int Duration { get; set; }
         public required string Info { get; set; }
