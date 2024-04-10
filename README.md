@@ -24,7 +24,16 @@
 - change some class name
 - add a color to the frame of appointment box
 
-# Questions
+# style 的标准
 
 - what is the better way to organize the css files and component? 我觉得不要怕重复, 应该分开, 谁更优先呢? 如果都是同样的 Selector Specificity, 谁会在后面? component?
 - should I avoid to use ">" in CSS selector
+
+# question
+
+- import.cs 某些内容不能 global
+-
+
+# tasks
+
+-

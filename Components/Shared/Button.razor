@@ -1,0 +1,21 @@
+<div @onclick="InvokeOnClick" class="test-button">@Text</div>
+
+@code
+{
+    [Parameter]
+    public EventCallback<MouseEventArgs> OnClick { get; set; }
+    [Parameter]
+    public string? Text { get; set; }
+
+    private async Task InvokeOnClick()
+    {
+        await OnClick.InvokeAsync();
+    }
+
+}
+
+<style>
+    .test-button {
+        border: #195CE5 1px solid;
+    }
+</style>

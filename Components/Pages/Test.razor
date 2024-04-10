@@ -1,20 +1,22 @@
 @page "/test"
 @rendermode InteractiveServer
 
-<h1>Counter</h1>
+<div class="container">
+    <h1>Counter</h1>
+    <p>Current count: @currentCount</p>
+    <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+    <Button OnClick="@((args) => btnForms_Clicked(args))" @ref="formsButton" Text="@_text">
+    </Button>
+</div>
 
-<style>
-    .container {
-        margin: 100px;
-    }
+@code {
+    private Button? formsButton;
 
-    .ull {
-        height: 100px;
-        border: solid 1px black;
-        overflow-y: scroll;
-    }
+    // Define a local variable wich is bound to the Text parameter
+    private string _text = "Click me now...";
 
-    .ull>li {
-        height: 20px;
+    public void btnForms_Clicked(MouseEventArgs e)
+    {
+        _text = "You're a good clicker.";
     }
-</style>
+}

@@ -1,4 +1,5 @@
-namespace Pages{
+
+namespace BlazorApp.Components.Pages;
 public partial class Test
 {
     private int currentCount = 0;
@@ -7,5 +8,5 @@ public partial class Test
     {
         currentCount++;
     }
-}
+
 }

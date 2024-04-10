@@ -1,35 +1,21 @@
 <div class="date-block">
-    @if (AppointmentParameter != null)
+    @if (Appointment != null)
     {
-        //Question: is there a way to simplify the code and avoid repeating AppointmentParameter?. multiple times?
-        <div class="appointment" info=@AppointmentParameter?.Info
-            style="background-color: @AppointmentParameter?.Background; border: 2px solid @AppointmentParameter?.BorderColor; width: calc(@_width - 4px);">
+        var (Color, BorderColor, falksdfj) = Appointment.GetColors();
+        //Question: is there a way to simplify the code and avoid repeating Appointment?. multiple times?
+        <div class="appointment" info=@Appointment?.Info
+            style="background-color: @Appointment?.Background; border: 2px solid @Appointment?.BorderColor; width: calc(@_width - 4px);">
             <div class="appointment-content">
-                <div class="appointment-title" style="color:@AppointmentParameter?.Color"> @AppointmentParameter?.Content
+                <div class="appointment-title" style="color:@Appointment?.Color"> @Appointment?.Content
                 </div>
                 <div class="appointment-time">
-                    <span class="start-time">@AppointmentParameter?.BeginnTime</span>
-                    @if (AppointmentParameter?.EndTime != null)
+                    <span class="start-time">@Appointment?.BeginTime</span>
+                    @if (Appointment?.EndTime != null)
                     {
-                        <span class="end-time"> | @AppointmentParameter?.EndTime</span>
+                        <span class="end-time"> | @Appointment?.EndTime</span>
                     }
                 </div>
             </div>
         </div>
     }
 </div>
-
-@code {
-    [Parameter]
-    public Appointment? AppointmentParameter { get; set; }
-
-    protected override void OnInitialized()
-    {
-        if (AppointmentParameter != null)
-        {
-            _width = ((AppointmentParameter?.Duration ?? 0) * 100).ToString() + "%";
-        }
-        //question: 为什么当超过100%的时候,是用113.75来算的.
-    }
-    private string _width = "100%";
-}
