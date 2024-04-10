@@ -1,9 +1,10 @@
-  
 namespace BlazorApp.Components.Shared;
+
 using Global;
 using Microsoft.AspNetCore.Components;
 
-public partial class TableRow{
+public partial class TableRow
+{
   [Parameter]
-    public UserInfo? UserData { get; set; }
+  public UserInfo? UserData { get; set; }
 }

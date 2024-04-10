@@ -11,7 +11,6 @@ class Dog : Animal
     {
         Console.WriteLine("meow");
     }
-
 }
 
 class Cat : Dog
@@ -20,7 +19,6 @@ class Cat : Dog
     {
         Console.WriteLine("woof");
     }
-
 }
 
 class FDSLKFD
@@ -30,5 +28,4 @@ class FDSLKFD
         Animal c = new Cat();
         b.sound();
     }
-
 }

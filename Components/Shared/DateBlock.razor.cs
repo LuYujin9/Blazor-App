@@ -1,11 +1,12 @@
 namespace BlazorApp.Components.Shared;
-using Global;
 
+using Global;
 
 public partial class DateBlock
 {
     [Parameter]
     public Appointment? Appointment { get; set; }
+
     protected override void OnInitialized()
     {
         if (Appointment != null)
@@ -14,6 +15,6 @@ public partial class DateBlock
         }
         //question: 为什么当超过100%的时候,是用113.75来算的.
     }
-    private string _width = "100%";
 
+    private string _width = "100%";
 }

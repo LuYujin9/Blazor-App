@@ -47,30 +47,6 @@
     <Table />
 </div>
 
-@code {
-    private List<DropListItem> _companyDropList = new List<DropListItem> {
-new DropListItem() { Id= "0", Text= "Acme Inc" },
-};
-    private List<DropListItem> _userDropList = new List<DropListItem> {
-new DropListItem() { Id= "0", Text= "Label, Label, Label, Label, Label, Label," },
-new DropListItem() { Id= "1", Text= "Label, Label, Label, Label, Label, Label," },
-new DropListItem() { Id= "2", Text= "Label, Label, Label, Label, Label, Label," },
-new DropListItem() { Id= "3", Text= "Label, Label, Label, Label, Label, Label," }
-};
-
-    private List<DropListItem> _filterDropList = new List<DropListItem> {
-new DropListItem() { Id= "0", Text= "Having Course today" }
-};
-    private List<DropListItem> _sortDropList = new List<DropListItem> {
-new DropListItem() { Id= "0", Text= "Newest Users" },
-new DropListItem() { Id= "1", Text= "Last Active" },
-};
-    public string? SelectedCompany;
-    public string? SelectedUser;
-    public string? SelectedFilter;
-    public string? SelectedSort;
-}
-
 <style>
     .company-users-dropdown-list.e-ddl.e-input-group.e-control-container.e-control-wrapper.e-lib {
         width: 9.1rem;

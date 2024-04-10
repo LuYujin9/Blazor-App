@@ -5,6 +5,7 @@ public class DropListItem
     public string? Id { get; set; }
     public string? Text { get; set; }
 }
+
 public class Appointment
 {
     public required string Content { get; set; }
@@ -22,6 +23,7 @@ public class Appointment
         return (Color, BorderColor, Background);
     }
 }
+
 public class UserInfo
 {
     public required string Id { get; set; }
@@ -29,4 +31,17 @@ public class UserInfo
     public required string LastActive { get; set; }
     public required string Team { get; set; }
     public List<Appointment>? Appointments { get; set; }
+}
+
+public class TableHeaderDate
+{
+    public required int Date { get; set; }
+    public required string Day { get; set; }
+    public required bool IsToday { get; set; }
+}
+
+public class Team
+{
+    public required string TeamName { get; set; }
+    public required List<UserInfo> Users { get; set; }
 }
