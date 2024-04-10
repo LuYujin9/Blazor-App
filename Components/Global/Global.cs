@@ -5,6 +5,11 @@ public class DropListItem
     public string? Id { get; set; }
     public string? Text { get; set; }
 }
+public class DateDropListItem
+{
+    public int? DateSkipValue { get; set; }
+    public string? Text { get; set; }
+}
 
 public class Appointment
 {

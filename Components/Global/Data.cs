@@ -22,6 +22,13 @@ public class Data
         new() { Id = "0", Text = "Newest Users" },
         new() { Id = "1", Text = "Last Active" },
     ];
+    public static readonly List<DateDropListItem> DateDropList =
+    [
+        new() { DateSkipValue = 0, Text = "02 - 08 February 2024" },
+        new() { DateSkipValue = 7, Text = "09 - 15 February 2024" },
+        new() { DateSkipValue = 14, Text = "16 - 22 February 2024" },
+        new() { DateSkipValue = 21, Text = "23 - 28 February 2024" }
+    ];
     public static readonly List<TableHeaderDate> TableHeaderDates =
     [
         new()
@@ -65,13 +72,134 @@ public class Data
             Date = 8,
             Day = "Sun",
             IsToday = false
+        },
+        new()
+        {
+            Date = 9,
+            Day = "Mon",
+            IsToday = false
+        },
+        new()
+        {
+            Date = 10,
+            Day = "Tue",
+            IsToday = false
+        },
+        new()
+        {
+            Date = 11,
+            Day = "Wed",
+            IsToday = false
+        },
+        new()
+        {
+            Date = 12,
+            Day = "Thu",
+            IsToday = false
+        },
+        new()
+        {
+            Date = 13,
+            Day = "Fri",
+            IsToday = false
+        },
+        new()
+        {
+            Date = 14,
+            Day = "Sat",
+            IsToday = false
+        },
+        new()
+        {
+            Date = 15,
+            Day = "Sun",
+            IsToday = false
+        },
+
+        new()
+        {
+            Date = 16,
+            Day = "Mon",
+            IsToday = false
+        },
+        new()
+        {
+            Date = 17,
+            Day = "Tue",
+            IsToday = false
+        },
+        new()
+        {
+            Date = 18,
+            Day = "Wed",
+            IsToday = false
+        },
+        new()
+        {
+            Date = 19,
+            Day = "Thu",
+            IsToday = false
+        },
+        new()
+        {
+            Date = 20,
+            Day = "Fri",
+            IsToday = false
+        },
+        new()
+        {
+            Date = 21,
+            Day = "Sat",
+            IsToday = false
+        },
+        new()
+        {
+            Date = 22,
+            Day = "Sun",
+            IsToday = false
+        },
+        new()
+        {
+            Date = 23,
+            Day = "Mon",
+            IsToday = false
+        },
+        new()
+        {
+            Date = 24,
+            Day = "Tue",
+            IsToday = false
+        },
+        new()
+        {
+            Date = 25,
+            Day = "Wed",
+            IsToday = false
+        },
+        new()
+        {
+            Date = 26,
+            Day = "Thu",
+            IsToday = false
+        },
+        new()
+        {
+            Date = 27,
+            Day = "Fri",
+            IsToday = false
+        },
+        new()
+        {
+            Date = 28,
+            Day = "Sat",
+            IsToday = false
+        },
+        new()
+        {
+            Date = 29,
+            Day = "Sun",
+            IsToday = false
         }
-    ];
-    public static readonly List<DropListItem> DateDropList =
-    [
-        new() { Id = "0", Text = "02 - 08 February 2024" },
-        new() { Id = "1", Text = "09 - 15 February 2024" },
-        new() { Id = "2", Text = "16 - 22 February 2024" }
     ];
     public static readonly List<UserInfo> UserInofs =
     [

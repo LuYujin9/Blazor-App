@@ -6,25 +6,31 @@
     <h3 class="inof-title">Acme Inc</h3>
     <div class="week-choose-container">
         <SfButtonGroup CssClass="week-change-btn-group">
-            <ButtonGroupButton IconCss="e-icons e-chevron-left" CssClass="week-change-button prev-week-button">
+            <ButtonGroupButton IconCss="e-icons e-chevron-left" @onclick="PrevWeekClick"
+                CssClass="week-change-button prev-week-button">
             </ButtonGroupButton>
-            <ButtonGroupButton IconCss="e-icons e-chevron-right" CssClass="week-change-button next-week-button">
+            <ButtonGroupButton IconCss="e-icons e-chevron-right" @onclick="NextWeekClick"
+                CssClass="week-change-button next-week-button">
             </ButtonGroupButton>
         </SfButtonGroup>
-        <SfDropDownList Width="200px" TValue="string" TItem="DropListItem" Placeholder="@_dateDropList[0].Text"
-            DataSource="@_dateDropList" PopupHeight="500px" PopupWidth="250px" CssClass="week-change-list">
-            <DropDownListFieldSettings Value="Text" Text="Text"></DropDownListFieldSettings>
+        <SfDropDownList Width="200px" TValue="int" TItem="DateDropListItem" Placeholder="@_dateDropList[0].Text"
+            DataSource="@_dateDropList" @bind-Value="@DateSkipValue" PopupHeight="500px" PopupWidth="250px"
+            CssClass="week-change-list">
+            <DropDownListFieldSettings Value="DateSkipValue" Text="Text"></DropDownListFieldSettings>
         </SfDropDownList>
     </div>
     <ul class="table-container">
         <li class="table-row table-header">
             <div class="header-cell header-user">User <span class="user-count-span">@_userInofs.Count()</span></div>
             <div class="header-cell header-last-active"> Last Active</div>
-            @foreach (var date in _tableHeaderDates)
-            {
-                <div class="header-cell header-date @(date.IsToday?"header-today":"")">@date.Date <span
-                        class="day-span">@date.Day</span>
-                </div>
+            @{
+                var currentDate = _tableHeaderDates.Skip(DateSkipValue).Take(7).ToList();
+                @foreach (var date in currentDate)
+                {
+                    <div class="header-cell header-date @(date.IsToday?"header-today":"")">@date.Date <span
+                            class="day-span">@date.Day</span>
+                    </div>
+                }
             }
             <div class="header-cell header-empty"></div>
         </li>
