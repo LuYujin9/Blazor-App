@@ -12,8 +12,8 @@
         </div>
     </div>
     <div class="dropdown">
-        <div class="dropdown-container">
-            <label class="dropdown-item-title">Company
+        <div class="dropdown-box">
+            <label class="dropdown-title">Company
             </label>
             <SfDropDownList PopupHeight="500px" Width="300px" TValue="string" TItem="DropListItem"
                 Placeholder="@_companyDropList[0].Text" DataSource="@_companyDropList" @bind-Value="SelectedCompany"
@@ -22,8 +22,8 @@
                 </DropDownListFieldSettings>
             </SfDropDownList>
         </div>
-        <div class="dropdown-container">
-            <label class="dropdown-item-title">Users
+        <div class="dropdown-box">
+            <label class="dropdown-title">Users
             </label>
             <SfDropDownList Width="300px" TValue="string" TItem="DropListItem" Placeholder="@_userDropList[0].Text"
                 DataSource="@_userDropList" @bind-Value="SelectedUser" PopupHeight="500px"
@@ -38,7 +38,7 @@
             CssClass="filter-sort">
             <DropDownListFieldSettings Value="Text" Text="Text"></DropDownListFieldSettings>
         </SfDropDownList>
-        <SfDropDownList Width="108px" TValue="string" TItem="DropListItem" Placeholder="Sort by"
+        <SfDropDownList Width="auto" TValue="string" TItem="DropListItem" Placeholder="Sort by"
             DataSource="@_sortDropList" @bind-Value="SelectedSort" PopupHeight="500px" PopupWidth="250px"
             CssClass="filter-sort">
             <DropDownListFieldSettings Value="Text" Text="Text"></DropDownListFieldSettings>
@@ -47,43 +47,4 @@
     <Table />
 </div>
 
-<style>
-    .company-users-dropdown-list.e-ddl.e-input-group.e-control-container.e-control-wrapper.e-lib {
-        width: 9.1rem;
-        height: 2.5rem;
-        padding-left: 0;
-        border: 1px solid #001360;
-        font-size: 16px;
-        color: #212121;
-        -webkit-text-fill-color: #212121;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1rem;
-        //TO DO: 设定为1px的话,和figma上看起来不一样粗
-        //TO DO: 如何加上项目的数量? 也许取消?
-        //TO DO: 点击的时候 icon 没有改变
-    }
-
-    .filter-sort.e-ddl.e-input-group.e-control-container.e-control-wrapper.e-lib {
-        height: 2rem;
-        padding: 0 12px;
-        border: 0;
-        border-radius: 1.6rem;
-        font-size: 14px;
-        color: #0c1116;
-        background-color: white;
-        -webkit-text-fill-color: #212121;
-        box-shadow: none;
-        display: inline-flex;
-        align-items: center;
-    }
-
-    .filter-sort.e-ddl.e-input-group.e-control-container.e-control-wrapper.e-lib>input {
-        width: auto;
-    }
-
-    .filter-sort.e-ddl.e-input-group.e-control-wrapper .e-ddl-icon::before {
-        content: '\e7f7';
-    }
-</style>
+@* 强行加个option数量也许也是可以的,有下拉list的时候消失, 处于绝对位置. *@

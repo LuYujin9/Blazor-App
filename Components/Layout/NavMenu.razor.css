@@ -1,0 +1,43 @@
+::deep .e-sidebar {
+  background-color: red;
+}
+
+::deep .e-sidebar {
+  display: grid;
+  grid-template-rows: 5.4rem repeat(4, 2.6rem);
+  min-height: 97.4rem;
+  border-radius: 0.8rem;
+  margin: 0.8rem;
+  padding: 0.8rem;
+  padding-top: 1.2rem;
+  background-color: var(--theme-color-main);
+}
+
+::deep .sidebar-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 0.6rem;
+}
+
+::deep .sidebar-head {
+  background-color: white;
+}
+
+::deep .sidebar-head-img {
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+::deep .nav-link {
+  background-color: inherit;
+  color: white;
+  text-decoration: none;
+}
+
+::deep .selected.nav-link {
+  background-color: white;
+  color: var(--theme-color-main);
+}

@@ -35,9 +35,9 @@ public partial class Table : ComponentBase
     //TO DO:也许可以加一个功能,选择_pageSizes时, 刷新页面.即当pagesize改变的时候 ,rerender
     protected override void OnInitialized()
     {
-        base.OnInitialized();
         TakeValue = _pageSizes[0];
         LastItemInThePage = SkipValue + TakeValue;
+        base.OnInitialized();
     }
 
     public void Click(PagerItemClickEventArgs args)
