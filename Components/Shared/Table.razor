@@ -2,63 +2,117 @@
 @using static BlazorApp.Components.Shared.TableRow
 @rendermode InteractiveServer
 
-<div class="infos-container">
-    <h3 class="inof-title">Acme Inc</h3>
-    <div class="week-choose-container">
-        <SfButtonGroup CssClass="week-change-btn-group">
-            <ButtonGroupButton IconCss="e-icons e-chevron-left" @onclick="PrevWeekClick"
-                CssClass="week-change-button prev-week-button">
-            </ButtonGroupButton>
-            <ButtonGroupButton IconCss="e-icons e-chevron-right" @onclick="NextWeekClick"
-                CssClass="week-change-button next-week-button">
-            </ButtonGroupButton>
-        </SfButtonGroup>
-        <SfDropDownList Width="200px" TValue="int" TItem="DateDropListItem" Placeholder="@_dateDropList[0].Text"
-            DataSource="@_dateDropList" @bind-Value="@DateSkipValue" PopupHeight="500px" PopupWidth="250px"
-            CssClass="week-change-list">
-            <DropDownListFieldSettings Value="DateSkipValue" Text="Text"></DropDownListFieldSettings>
+<div class="container">
+    <div class="filter-sort-container">
+        <SfDropDownList DataSource="@_filterDropList" @bind-Value="SelectedFilter" TValue="string" TItem="DropListItem"
+            Width="auto" PopupHeight="500px" PopupWidth="250px" Placeholder="Filter by" CssClass="filter-sort">
+            <DropDownListFieldSettings Value="Text" Text="Text"></DropDownListFieldSettings>
+        </SfDropDownList>
+        <SfDropDownList DataSource="@_sortDropList" @bind-Value="SelectedSort" TValue="string" TItem="DropListItem"
+            Width="auto" PopupHeight="500px" PopupWidth="250px" Placeholder="Sort by" CssClass="filter-sort">
+            <DropDownListFieldSettings Value="Text" Text="Text"></DropDownListFieldSettings>
         </SfDropDownList>
     </div>
-    <ul class="table-container">
-        <li class="table-row table-header">
-            <div class="header-cell header-user">User <span class="user-count-span">@_userInofs.Count()</span></div>
-            <div class="header-cell header-last-active"> Last Active</div>
+    <div class="infos-container">
+        <h3 class="inof-title">Acme Inc</h3>
+        <div class="week-choose-container">
+            <SfButtonGroup CssClass="week-change-btn-group">
+                <ButtonGroupButton IconCss="e-icons e-chevron-left" @onclick="PrevWeekClick"
+                    CssClass="week-change-button prev-week-button">
+                </ButtonGroupButton>
+                <ButtonGroupButton IconCss="e-icons e-chevron-right" @onclick="NextWeekClick"
+                    CssClass="week-change-button next-week-button">
+                </ButtonGroupButton>
+            </SfButtonGroup>
+            <SfDropDownList Width="200px" TValue="int" TItem="DateDropListItem" Placeholder="@_dateDropList[0].Text"
+                DataSource="@_dateDropList" @bind-Value="@DateSkipValue" PopupHeight="500px" PopupWidth="250px"
+                CssClass="week-change-list">
+                <DropDownListFieldSettings Value="DateSkipValue" Text="Text"></DropDownListFieldSettings>
+            </SfDropDownList>
+        </div>
+        <div class="table">
+            <div class="table-header">
+                @{
+                    var currentUsers = _userInofs.Skip(SkipValue).Take(TakeValue).ToList();
+                    List<Team> Teams = currentUsers
+                    .GroupBy(u => u.Team)
+                    .Select(g => new Team { TeamName = g.Key, Users = g.ToList() })
+                    .ToList();
+                    <TableLeftHeader TeamInfo="Teams" UserCount="currentUsers.Count()" />
+                }
+            </div>
+            <div class="table-right">
+                <div class="top-header">
+                @{
+                    var currentDate = _tableHeaderDates.Skip(DateSkipValue).Take(7).ToList();
+                    @foreach (var date in currentDate)
+                    {
+                        <div class=" header-date @(date.IsToday?"header-today":"")">@date.Date <span
+                                class="day-span">@date.Day</span>
+                        </div>
+                    }
+                }
+                <div class="header-cell header-empty"></div>
+                </div>
+                <div class="table-content">
+
+                     @{
+                var currentUsers2 = _userInofs.Skip(SkipValue).Take(TakeValue).ToList();
+                List<Team> Teams2= currentUsers2
+                .GroupBy(u => u.Team)
+                .Select(g => new Team { TeamName = g.Key, Users = g.ToList() })
+                .ToList();
+                @foreach (var team in Teams)
+                {
+                  
+                    @foreach (var user in team.Users)
+                    {
+                        <TableRow UserData="user" />
+                    }
+                }
+            }
+                </div>
+            </div>
+        </div>
+        @* <ul class="table-container">
+            <li class="table-row table-header">
+                <div class="header-cell header-user">User <span class="user-count-span">@_userInofs.Count()</span></div>
+                <div class="header-cell header-last-active"> Last Active</div>
+                @{
+                    var currentDate2 = _tableHeaderDates.Skip(DateSkipValue).Take(7).ToList();
+                    @foreach (var date in currentDate2)
+                    {
+                        <div class="header-cell header-date @(date.IsToday?"header-today":"")">@date.Date <span
+                                class="day-span">@date.Day</span>
+                        </div>
+                    }
+                }
+                <div class="header-cell header-empty"></div>
+            </li>
             @{
-                var currentDate = _tableHeaderDates.Skip(DateSkipValue).Take(7).ToList();
-                @foreach (var date in currentDate)
+                var currentUsersTwo = _userInofs.Skip(SkipValue).Take(TakeValue).ToList();
+                List<Team> TeamsTwo = currentUsersTwo
+                .GroupBy(u => u.Team)
+                .Select(g => new Team { TeamName = g.Key, Users = g.ToList() })
+                .ToList();
+                @foreach (var team in TeamsTwo)
                 {
-                    <div class="header-cell header-date @(date.IsToday?"header-today":"")">@date.Date <span
-                            class="day-span">@date.Day</span>
-                    </div>
+                    <li class="table-row team-row">@team.TeamName TEAM</li>
+                    @foreach (var user in team.Users)
+                    {
+                        <TableRow UserData="user" />
+                    }
                 }
             }
-            <div class="header-cell header-empty"></div>
-        </li>
-        @{
-            var currentUsers = _userInofs.Skip(SkipValue).Take(TakeValue).ToList();
-            List<Team> Teams = currentUsers
-            .GroupBy(u => u.Team)
-            .Select(g => new Team { TeamName = g.Key, Users = g.ToList() })
-            .ToList();
-            @foreach (var team in Teams)
-            {
-                <li class="table-row team-row">@team.TeamName TEAM</li>
-                @foreach (var user in team.Users)
-                {
-                    <TableRow UserData="user" />
-                }
-            }
-        }
-    </ul>
-</div>
-
-<div>
-
+        </ul> *@
+    </div>
     <SfPager @ref="@Page" PageSize="5" PageSizes=@_pageSizes NumericItemsCount=5 TotalItemsCount=@_userInofs.Count()
-        ItemClick="Click" CssClass="schedule-Table-Pager" ShowPagerMessage="false">@(SkipValue + 1) - @LastItemInThePage
+        ItemClick="Click" CssClass="schedule-Table-Pager" ShowPagerMessage="false">@(SkipValue + 1) -
+        @LastItemInThePage
         of
         @_userInofs.Count() items
     </SfPager>
+
 </div>
 
 @* question: error when ShowPagerMessage="false"; *@

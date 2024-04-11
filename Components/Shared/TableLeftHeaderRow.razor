@@ -1,0 +1,23 @@
+<div class="left-header-row">
+    <div class="user-name">@UserData.Name</div>
+    <div class="last-active">@UserData.LastActive</div>
+</div>
+@code {
+    [Parameter]
+    public required UserInfo UserData { get; set; }
+}
+
+<style>
+    .user-name {
+        padding-left: 1.05rem;
+        display: flex;
+        align-items: center;
+    }
+
+    .last-active {
+        font-size: 14px;
+        font-weight: 400;
+    }
+</style>
+
+@*.left-header-row{display:flex;flex-direction:row;}*@

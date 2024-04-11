@@ -22,7 +22,8 @@ public partial class Table : ComponentBase
             DateSkipValue += 7;
     }
 
-
+    private readonly List<DropListItem> _filterDropList = FilterDropList;
+    private readonly List<DropListItem> _sortDropList = SortDropList;
     private readonly List<TableHeaderDate> _tableHeaderDates = TableHeaderDates;
     private readonly List<DateDropListItem> _dateDropList = DateDropList;
     private readonly List<UserInfo> _userInofs = UserInofs;
@@ -30,6 +31,8 @@ public partial class Table : ComponentBase
     public int SkipValue;
     public int TakeValue;
     public int LastItemInThePage;
+    public string? SelectedFilter;
+    public string? SelectedSort;
     private readonly List<int> _pageSizes = [5, 10, 12, 20];
 
     //TO DO:也许可以加一个功能,选择_pageSizes时, 刷新页面.即当pagesize改变的时候 ,rerender

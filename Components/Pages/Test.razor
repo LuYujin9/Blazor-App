@@ -1,62 +1,28 @@
 @page "/test"
 @rendermode InteractiveServer
 @using Syncfusion.Blazor.Grids
-
-
-<div class="container">
-    <h1>Counter</h1>
-    <p>Current count: @currentCount</p>
-    <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
-    <Button OnClick="@((args) => btnForms_Clicked(args))" @ref="formsButton" Text="@_text">
-    </Button>
-</div>
+@using static Global.Data
 
 <div>
-    <SfGrid DataSource="@Orders" AllowPaging="true">
-        <GridColumns>
-            <GridColumn Field=@nameof(Order.OrderID) HeaderText="Order ID" TextAlign="TextAlign.Right" Width="120">
-            </GridColumn>
-            <GridColumn Field=@nameof(Order.CustomerID) HeaderText="Customer Name" Width="120"></GridColumn>
-            <GridColumn Field=@nameof(Order.OrderDate) HeaderText=" Order Date" EditType="EditType.DatePickerEdit"
-                Format="d" TextAlign="TextAlign.Right" Width="130" Type="ColumnType.Date"></GridColumn>
-            <GridColumn Field=@nameof(Order.Freight) HeaderText="Freight" Format="C2" TextAlign="TextAlign.Right"
-                EditType="EditType.NumericEdit" Width="120"></GridColumn>
-            <GridColumn Field=@nameof(Order.ShipCountry) HeaderText="Ship Country" EditType="EditType.DropDownEdit"
-                Width="150"></GridColumn>
-        </GridColumns>
-    </SfGrid>
+    <div class="table-header">
+        @{
+            List<Team> Teams = _userInfo
+            .GroupBy(u => u.Team)
+            .Select(g => new Team { TeamName = g.Key, Users = g.ToList() })
+            .ToList();
+            <TableLeftHeader TeamInfo="Teams" UserCount="_userInfo.Count()" />
+        }
+    </div>
 </div>
 
 @code {
-    private Button? formsButton;
+    private readonly List<UserInfo> _userInfo = Data.UserInofs;
 
-    // Define a local variable wich is bound to the Text parameter
-    private string _text = "Click me now...";
-
-    public void btnForms_Clicked(MouseEventArgs e)
-    {
-        _text = "You're a good clicker.";
-    }
-    public List<Order>? Orders { get; set; }
-
-    protected override void OnInitialized()
-    {
-        Orders = Enumerable.Range(1, 75).Select(x => new Order()
-            {
-                OrderID = 1000 + x,
-                CustomerID = (new string[] { "ALFKI", "ANANTR", "ANTON", "BLONP", "BOLID" })[new Random().Next(5)],
-                Freight = 2.1 * x,
-                OrderDate = DateTime.Now.AddDays(-x),
-                ShipCountry = (new string[] { "USA", "UK", "CHINA", "RUSSIA", "INDIA" })[new Random().Next(5)]
-            }).ToList();
-    }
-
-    public class Order
-    {
-        public int? OrderID { get; set; }
-        public string CustomerID { get; set; }
-        public DateTime? OrderDate { get; set; }
-        public double? Freight { get; set; }
-        public string ShipCountry { get; set; }
-    }
 }
+
+<style>
+    .table-header {
+        display: flex;
+        flex-direction: column;
+    }
+</style>

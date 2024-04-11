@@ -3,8 +3,6 @@
 @if (UserData != null)
 {
     <li class="table-row user-row">
-    <div class="user-name">@UserData.Name</div>
-    <div class="table-last-active">@UserData.LastActive</div>
     <DateBlock Appointment=null />
     <DateBlock Appointment=@UserData.Appointments?[0] />
     <DateBlock />

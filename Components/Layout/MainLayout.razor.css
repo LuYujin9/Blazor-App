@@ -9,8 +9,9 @@ main {
 }
 
 .px-4 {
-  margin-left: 5.2rem;
-  margin-right: 0.4rem;
+  position: absolute;
+  top: 4.4rem;
+  left: 5.6rem;
 }
 
 @media (max-width: 1440px) {

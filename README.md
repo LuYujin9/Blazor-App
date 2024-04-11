@@ -24,6 +24,7 @@
 - make the border of table better
 - input place holder 的 fontweight 改细
 - pager component is responsive, make the look better, when it is narrow
+- let the header of table freezing, when the table be scrolled.
 
 # style 的标准
 
@@ -35,6 +36,7 @@
 - import.cs 某些内容不能 global
 - error when Pager ShowPagerMessage="false";
 - 不同的 components 共享相同的 style, 有办法 inject 吗?
+- change the page size 时, 可以及时响应吗
 
 # tasks
 

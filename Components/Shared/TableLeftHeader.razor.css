@@ -1,0 +1,11 @@
+.header-row {
+  display: flex;
+  flex-direction: row;
+}
+
+::deep.left-header-row {
+  display: flex;
+  flex-direction: row;
+  width: 10rem;
+}
+/* 为什么deep没有影响到? */

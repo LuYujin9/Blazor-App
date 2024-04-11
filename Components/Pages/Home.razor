@@ -11,9 +11,9 @@
             micro-learning paths.
         </div>
     </div>
-    <div class="dropdown">
+    <div class="dropdown-box-container">
         <div class="dropdown-box">
-            <label class="dropdown-title">Company
+            <label class="dropdown-box-title">Company
             </label>
             <SfDropDownList PopupHeight="500px" Width="300px" TValue="string" TItem="DropListItem"
                 Placeholder="@_companyDropList[0].Text" DataSource="@_companyDropList" @bind-Value="SelectedCompany"
@@ -23,7 +23,7 @@
             </SfDropDownList>
         </div>
         <div class="dropdown-box">
-            <label class="dropdown-title">Users
+            <label class="dropdown-box-title">Users
             </label>
             <SfDropDownList Width="300px" TValue="string" TItem="DropListItem" Placeholder="@_userDropList[0].Text"
                 DataSource="@_userDropList" @bind-Value="SelectedUser" PopupHeight="500px"
@@ -31,18 +31,6 @@
                 <DropDownListFieldSettings Value="Text" Text="Text"></DropDownListFieldSettings>
             </SfDropDownList>
         </div>
-    </div>
-    <div class="filter-sort-container">
-        <SfDropDownList Width="auto" TValue="string" TItem="DropListItem" Placeholder="Filter by"
-            DataSource="@_filterDropList" @bind-Value="SelectedFilter" PopupHeight="500px" PopupWidth="250px"
-            CssClass="filter-sort">
-            <DropDownListFieldSettings Value="Text" Text="Text"></DropDownListFieldSettings>
-        </SfDropDownList>
-        <SfDropDownList Width="auto" TValue="string" TItem="DropListItem" Placeholder="Sort by"
-            DataSource="@_sortDropList" @bind-Value="SelectedSort" PopupHeight="500px" PopupWidth="250px"
-            CssClass="filter-sort">
-            <DropDownListFieldSettings Value="Text" Text="Text"></DropDownListFieldSettings>
-        </SfDropDownList>
     </div>
     <Table />
 </div>

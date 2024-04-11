@@ -3,17 +3,21 @@
 }
 
 ::deep .e-sidebar {
-  display: grid;
-  grid-template-rows: 5.4rem repeat(4, 2.6rem);
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  position: absolute;
+  top: 0.8rem;
+  left: 0.8rem;
+
   min-height: 97.4rem;
   border-radius: 0.8rem;
-  margin: 0.8rem;
   padding: 0.8rem;
   padding-top: 1.2rem;
   background-color: var(--theme-color-main);
 }
 
-::deep .sidebar-item {
+::deep .item {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -22,13 +26,19 @@
   border-radius: 0.6rem;
 }
 
-::deep .sidebar-head {
+::deep .head {
   background-color: white;
 }
 
-::deep .sidebar-head-img {
+::deep .head-img {
   width: 1.6rem;
   height: 1.6rem;
+}
+
+.link-container {
+  display: flex;
+  flex-direction: column;
+  height: 10rem;
 }
 
 ::deep .nav-link {
