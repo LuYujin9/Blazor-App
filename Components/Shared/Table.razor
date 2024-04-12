@@ -43,68 +43,37 @@
             </div>
             <div class="table-right">
                 <div class="top-header">
-                @{
-                    var currentDate = _tableHeaderDates.Skip(DateSkipValue).Take(7).ToList();
-                    @foreach (var date in currentDate)
-                    {
-                        <div class=" header-date @(date.IsToday?"header-today":"")">@date.Date <span
-                                class="day-span">@date.Day</span>
-                        </div>
+                    @{
+                        var currentDate = _tableHeaderDates.Skip(DateSkipValue).Take(7).ToList();
+                        @foreach (var date in currentDate)
+                        {
+                            <div class=" header-date @(date.IsToday?"header-today":"")">@date.Date <span
+                                    class="day-span">@date.Day</span>
+                            </div>
+                        }
                     }
-                }
-                <div class="header-cell header-empty"></div>
+                    <div class="header-cell header-empty"></div>
                 </div>
                 <div class="table-content">
 
-                     @{
-                var currentUsers2 = _userInofs.Skip(SkipValue).Take(TakeValue).ToList();
-                List<Team> Teams2= currentUsers2
-                .GroupBy(u => u.Team)
-                .Select(g => new Team { TeamName = g.Key, Users = g.ToList() })
-                .ToList();
-                @foreach (var team in Teams)
-                {
-                  
-                    @foreach (var user in team.Users)
-                    {
-                        <TableRow UserData="user" />
+                    @{
+                        var currentUsers2 = _userInofs.Skip(SkipValue).Take(TakeValue).ToList();
+                        List<Team> Teams2 = currentUsers2
+                        .GroupBy(u => u.Team)
+                        .Select(g => new Team { TeamName = g.Key, Users = g.ToList() })
+                        .ToList();
+                        @foreach (var team in Teams)
+                        {
+                            <li class="table-row team-leer-row"></li>
+                            @foreach (var user in team.Users)
+                            {
+                                <TableRow UserData="user" />
+                            }
+                        }
                     }
-                }
-            }
                 </div>
             </div>
         </div>
-        @* <ul class="table-container">
-            <li class="table-row table-header">
-                <div class="header-cell header-user">User <span class="user-count-span">@_userInofs.Count()</span></div>
-                <div class="header-cell header-last-active"> Last Active</div>
-                @{
-                    var currentDate2 = _tableHeaderDates.Skip(DateSkipValue).Take(7).ToList();
-                    @foreach (var date in currentDate2)
-                    {
-                        <div class="header-cell header-date @(date.IsToday?"header-today":"")">@date.Date <span
-                                class="day-span">@date.Day</span>
-                        </div>
-                    }
-                }
-                <div class="header-cell header-empty"></div>
-            </li>
-            @{
-                var currentUsersTwo = _userInofs.Skip(SkipValue).Take(TakeValue).ToList();
-                List<Team> TeamsTwo = currentUsersTwo
-                .GroupBy(u => u.Team)
-                .Select(g => new Team { TeamName = g.Key, Users = g.ToList() })
-                .ToList();
-                @foreach (var team in TeamsTwo)
-                {
-                    <li class="table-row team-row">@team.TeamName TEAM</li>
-                    @foreach (var user in team.Users)
-                    {
-                        <TableRow UserData="user" />
-                    }
-                }
-            }
-        </ul> *@
     </div>
     <SfPager @ref="@Page" PageSize="5" PageSizes=@_pageSizes NumericItemsCount=5 TotalItemsCount=@_userInofs.Count()
         ItemClick="Click" CssClass="schedule-Table-Pager" ShowPagerMessage="false">@(SkipValue + 1) -

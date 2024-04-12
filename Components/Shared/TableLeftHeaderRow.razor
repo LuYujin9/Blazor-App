@@ -8,16 +8,27 @@
 }
 
 <style>
-    .user-name {
-        padding-left: 1.05rem;
+    .left-header-row,
+    .left-header-row>* {
         display: flex;
+        flex-direction: row;
         align-items: center;
-    }
-
-    .last-active {
+        height: 3rem;
         font-size: 14px;
         font-weight: 400;
     }
-</style>
 
-@*.left-header-row{display:flex;flex-direction:row;}*@
+
+
+    .user-name {
+        width: 10rem;
+        padding-left: 1.05rem;
+        border: 0.5px solid var(--theme-color-gray);
+    }
+
+    .last-active {
+        padding-left: 1.05rem;
+        width: 7rem;
+        border: 0.5px solid var(--theme-color-gray);
+    }
+</style>

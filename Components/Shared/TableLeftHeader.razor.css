@@ -9,3 +9,56 @@
   width: 10rem;
 }
 /* 为什么deep没有影响到? */
+
+.header-cell {
+  height: 3rem;
+  border: 1px solid var(--theme-color-gray);
+  padding-left: 1.05rem;
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.header-user {
+  width: 10rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.header-last-active {
+  width: 7rem;
+}
+
+.user-count-span {
+  width: 1.5rem;
+  height: 1.1rem;
+  padding: 0.15rem 0.3rem;
+  border-radius: 1.5rem;
+  font-size: 12px;
+  color: #9f9ea4;
+  border: 1px solid var(--theme-color-gray);
+}
+
+.left-header-list {
+  max-height: 27.4rem;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* TO DO: let it move with table content */
+
+.team-row {
+  display: flex;
+  align-items: center;
+  height: 1.6rem;
+  padding-left: 1.05rem;
+  border: 1px solid var(--theme-color-gray);
+  border-right: none;
+  color: #799f79;
+  background-color: #f5fbf5;
+  font-size: 0.6rem;
+  font-weight: 700;
+}
