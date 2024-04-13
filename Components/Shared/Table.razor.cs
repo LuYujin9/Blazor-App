@@ -46,12 +46,12 @@ public partial class Table : ComponentBase
     public int LastItemInThePage;
     public string? SelectedFilter;
     public string? SelectedSort;
-    private readonly List<int> _pageSizes = [5, 12, 20];
+    private readonly List<int> _pageSizes = [5, 10, 20];
 
     //TO DO:也许可以加一个功能,选择_pageSizes时, 刷新页面.即当pagesize改变的时候 ,rerender
     protected override void OnInitialized()
     {
-        TakeValue = _pageSizes[0];
+        TakeValue = _pageSizes[1];
         LastItemInThePage = SkipValue + TakeValue;
         base.OnInitialized();
     }

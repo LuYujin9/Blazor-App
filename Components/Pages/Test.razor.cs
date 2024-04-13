@@ -19,4 +19,6 @@ public partial class Test
             .ToList();
     }
 
+    private readonly DateTime time = new(2024, 2, 5, 14, 0, 0);
+
 }

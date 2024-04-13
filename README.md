@@ -42,7 +42,13 @@
 
 # tasks
 
+- change the date, can't change the appointments block
+
 # comulicat
 
 - the width of Filter und sort
 - icons should be the same?
+- appointments blocks are under others and without end time?
+- appointments block 可能会叠在一起吗?
+- appointments 跨过 2 个星期的时候怎么办?begin time 不写?
+- endTime 是 required 的吗?

@@ -14,10 +14,8 @@ public class DateDropListItem
 public class Appointment
 {
     public required string Content { get; set; }
-    public required string Date { get; set; }
-    // TODO: change string to DateTime datatype
-    public required string BeginTime { get; set; }
-    public string? EndTime { get; set; }
+    public required DateTime BeginTime { get; set; }
+    public required DateTime EndTime { get; set; }
     public required string Background { get; set; }
     public required string BorderColor { get; set; }
     public required string Color { get; set; }

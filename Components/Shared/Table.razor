@@ -44,42 +44,40 @@
                 {
                     <DateHeaderBlock Date=date />
                 }
+
                 <li class="empty-block"></li>
                 var teams = GetTeams();
+                int rowCount = 1;
                 for (int i = 0; i < teams.Count; i++)
                 {
-                    <li class="team-block" style="grid-column: 1 / -1">@teams[i].TeamName TEAM</li>
+                    <li class="team-block" style="grid-column: 1/-1; grid-row:@(rowCount+1);">@teams[i].TeamName TEAM</li>
+                    rowCount++;
                     for (int j = 0; j < teams[i].Users.Count; j++)
                     {
                         var user = teams[i].Users[j];
-                        <li class="user-block">@user.Name</li>
-                        <li class="last-active-block">@user.LastActive</li>
+                        <li class="user-block" style="grid-column:1; grid-row:@(rowCount+1);">@user.Name</li>
+                        <li class="last-active-block" style="grid-column:2; grid-row:@(rowCount+1);">@user.LastActive</li>
                         for (int l = 0; l < 7; l++)
                         {
-                            <li class="content-block"></li>
+                            <li class="content-block" style="grid-column:@(l+3); grid-row:@(rowCount+1);"></li>
                         }
-                        <button class="edit-button">
-                            <SfIcon Name="IconName.Edit" Title="edit"></SfIcon>
+                        <button class="edit-button" style="grid-row:@(rowCount+1)">
+                            <SfIcon Name=" IconName.Edit" Title="edit"></SfIcon>
                         </button>
-                        @* var releventAppointsments = teams[i].Users[j].Appointments.Where(appointment => appointment.BeginTime >=
-            dates[0] && appointment.EndTime <= dates.Last()); *@
-                        @* for (int k = 0; k < releventAppointsments.Count; k++)
-            {
-            var appointment = releventAppointsments[k];
-
-            // Sunday (0 - 1 + 7) = 6
-            // Monday (1 - 1 + 7) = 0
-            // Tuesday (2 - 1 + 7) = 1
-            int weekDayIndex = (appointment.BeginTime.Date.DayOfWeek - 1 + 7) % 7;
-
-            <li grid-row=i+3+j grid-row=i+3+j grid-column="3 + weekDayIndex">teams[i].Users[j].Appointments[k]</li>
-            } *@
+                        var releventAppointsments = user.Appointments?.Where(appointment =>
+                        (DateOnly.FromDateTime(appointment.BeginTime) >=
+                        dates[0] && DateOnly.FromDateTime(appointment.BeginTime) <= dates.Last())).ToList();
+                        for (int k = 0; k < releventAppointsments?.Count; k++)
+                        {
+                            <AppointmentBlock Appointment="releventAppointsments[k]" AppointmentIndex="k" RowCount="rowCount" />
+                        }
+                        rowCount++;
                     }
                 }
             }
         </div>
     </div>
-    <SfPager @ref="@Page" PageSize="5" PageSizes=@_pageSizes NumericItemsCount=5 TotalItemsCount=@_userInofs.Count()
+    <SfPager @ref="@Page" PageSize="10" PageSizes=@_pageSizes NumericItemsCount=5 TotalItemsCount=@_userInofs.Count()
         ItemClick="Click" CssClass="schedule-Table-Pager" ShowPagerMessage="false">
         @(SkipValue + 1) -
         @LastItemInThePage

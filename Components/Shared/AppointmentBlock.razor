@@ -1,0 +1,21 @@
+@{
+    var (Color, BorderColor, Background) = Appointment.GetColors();
+    <div class="appointment-block" info=@Appointment.Info
+        style="background-color: @Background; border: 1.5px solid @BorderColor; width: calc(@_width - 4px);grid-column:@(3+weekDayIndex); grid-row:@(RowCount+1);">
+        <div class="appointment-title" style="color:@Color"> @Appointment.Content
+        </div>
+        <div class="appointment-time">
+            <span class="start-time"
+                style="padding-left: @(durationDay==1? "1rem" : "2rem")">@Appointment.BeginTime.ToString("HH:mm")</span>
+            @if (durationDay == 1)
+            {
+                <span class="start-time"> | </span>
+            }
+            @if (durationDay + weekDayIndex < 8)
+            {
+                <span class="end-time"
+                    style="padding-right: @(durationDay==1? "1rem" : "2rem")">@Appointment.EndTime.ToString("HH:mm")</span>
+            }
+        </div>
+    </div>
+}
