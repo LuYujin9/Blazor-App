@@ -2,6 +2,8 @@ global using Microsoft.AspNetCore.Components;
 global using static Microsoft.AspNetCore.Components.Web.RenderMode;
 global using BlazorApp.Components;
 global using Syncfusion.Blazor;
+global using Global;
+global using static Global.Data;
 
 // question: 为什么以下内容在这个文件夹里不可用
 

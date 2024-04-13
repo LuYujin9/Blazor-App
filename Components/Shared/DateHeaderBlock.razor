@@ -1,0 +1,16 @@
+<li class="date-header">
+    <div class="">@Date.Day</div>
+    <div class="weekday">@WeekDay</div>
+</li>
+
+
+@code {
+    [Parameter]
+    public required DateOnly Date { get; set; }
+
+    public string WeekDay
+    {
+        get { return WeekList[(int)Date.DayOfWeek]; }
+    }
+    private List<string> WeekList = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+}

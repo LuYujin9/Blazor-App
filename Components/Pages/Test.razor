@@ -1,24 +1,11 @@
 @page "/test"
 @rendermode InteractiveServer
-@using Syncfusion.Blazor.Grids
-@using static Global.Data
 
 <div>
     <div class="table-header">
-        @{
-            List<Team> Teams = _userInfo
-            .GroupBy(u => u.Team)
-            .Select(g => new Team { TeamName = g.Key, Users = g.ToList() })
-            .ToList();
-            <TableLeftHeader TeamInfo="Teams" UserCount="_userInfo.Count()" />
-        }
+        <TableLeftHeader TeamInfo="GetUsers()" UserCount="_userInfo.Count()" />
     </div>
 </div>
-
-@code {
-    private readonly List<UserInfo> _userInfo = Data.UserInofs;
-
-}
 
 <style>
     .table-header {

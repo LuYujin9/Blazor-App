@@ -25,6 +25,9 @@
 - input place holder 的 fontweight 改细
 - pager component is responsive, make the look better, when it is narrow
 - let the header of table freezing, when the table be scrolled.
+- team 的 color
+- appointments that do not fit int o the week need to render differently
+- table corner border-radius
 
 # style 的标准
 
@@ -33,14 +36,11 @@
 
 # question
 
-- import.cs 某些内容不能 global
-- error when Pager ShowPagerMessage="false";
-- 不同的 components 共享相同的 style, 有办法 inject 吗?
-- change the page size 时, 可以及时响应吗
+- error when Pager ShowPagerMessage="false"; 先这样
+- change the page size, rerender? 目前无解
+- pager component is responsive, make the look better, when it is narrow 先这样
 
 # tasks
-
-- team 的 color
 
 # comulicat
 

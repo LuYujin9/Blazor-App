@@ -15,6 +15,7 @@ public class Appointment
 {
     public required string Content { get; set; }
     public required string Date { get; set; }
+    // TODO: change string to DateTime datatype
     public required string BeginTime { get; set; }
     public string? EndTime { get; set; }
     public required string Background { get; set; }
@@ -43,6 +44,13 @@ public class TableHeaderDate
     public required int Date { get; set; }
     public required string Day { get; set; }
     public required bool IsToday { get; set; }
+}
+
+public class Date
+{
+    public required int Day { get; set; }
+    public required int Month { get; set; }
+    public required int Year { get; set; }
 }
 
 public class Team

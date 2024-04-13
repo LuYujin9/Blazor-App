@@ -24,182 +24,34 @@ public class Data
     ];
     public static readonly List<DateDropListItem> DateDropList =
     [
-        new() { DateSkipValue = 0, Text = "02 - 08 February 2024" },
-        new() { DateSkipValue = 7, Text = "09 - 15 February 2024" },
-        new() { DateSkipValue = 14, Text = "16 - 22 February 2024" },
-        new() { DateSkipValue = 21, Text = "23 - 28 February 2024" }
+        new() { DateSkipValue = 0, Text = "05 - 11 February 2024" },
+        new() { DateSkipValue = 7, Text = "12 - 18 February 2024" },
+        new() { DateSkipValue = 14, Text = "19 - 25 February 2024" }
     ];
-    public static readonly List<TableHeaderDate> TableHeaderDates =
-    [
-        new()
-        {
-            Date = 2,
-            Day = "Mon",
-            IsToday = false
-        },
-        new()
-        {
-            Date = 3,
-            Day = "Tue",
-            IsToday = false
-        },
-        new()
-        {
-            Date = 4,
-            Day = "Wed",
-            IsToday = true
-        },
-        new()
-        {
-            Date = 5,
-            Day = "Thu",
-            IsToday = false
-        },
-        new()
-        {
-            Date = 6,
-            Day = "Fri",
-            IsToday = false
-        },
-        new()
-        {
-            Date = 7,
-            Day = "Sat",
-            IsToday = false
-        },
-        new()
-        {
-            Date = 8,
-            Day = "Sun",
-            IsToday = false
-        },
-        new()
-        {
-            Date = 9,
-            Day = "Mon",
-            IsToday = false
-        },
-        new()
-        {
-            Date = 10,
-            Day = "Tue",
-            IsToday = false
-        },
-        new()
-        {
-            Date = 11,
-            Day = "Wed",
-            IsToday = false
-        },
-        new()
-        {
-            Date = 12,
-            Day = "Thu",
-            IsToday = false
-        },
-        new()
-        {
-            Date = 13,
-            Day = "Fri",
-            IsToday = false
-        },
-        new()
-        {
-            Date = 14,
-            Day = "Sat",
-            IsToday = false
-        },
-        new()
-        {
-            Date = 15,
-            Day = "Sun",
-            IsToday = false
-        },
 
-        new()
-        {
-            Date = 16,
-            Day = "Mon",
-            IsToday = false
-        },
-        new()
-        {
-            Date = 17,
-            Day = "Tue",
-            IsToday = false
-        },
-        new()
-        {
-            Date = 18,
-            Day = "Wed",
-            IsToday = false
-        },
-        new()
-        {
-            Date = 19,
-            Day = "Thu",
-            IsToday = false
-        },
-        new()
-        {
-            Date = 20,
-            Day = "Fri",
-            IsToday = false
-        },
-        new()
-        {
-            Date = 21,
-            Day = "Sat",
-            IsToday = false
-        },
-        new()
-        {
-            Date = 22,
-            Day = "Sun",
-            IsToday = false
-        },
-        new()
-        {
-            Date = 23,
-            Day = "Mon",
-            IsToday = false
-        },
-        new()
-        {
-            Date = 24,
-            Day = "Tue",
-            IsToday = false
-        },
-        new()
-        {
-            Date = 25,
-            Day = "Wed",
-            IsToday = false
-        },
-        new()
-        {
-            Date = 26,
-            Day = "Thu",
-            IsToday = false
-        },
-        new()
-        {
-            Date = 27,
-            Day = "Fri",
-            IsToday = false
-        },
-        new()
-        {
-            Date = 28,
-            Day = "Sat",
-            IsToday = false
-        },
-        new()
-        {
-            Date = 29,
-            Day = "Sun",
-            IsToday = false
-        }
+    public static readonly List<DateOnly> TableHeaderDates =
+    [
+        new(2024, 2, 5),
+        new(2024, 2, 6),
+        new(2024, 2, 7),
+        new(2024, 2, 8),
+        new(2024, 2, 9),
+        new(2024, 2, 10),
+        new(2024, 2, 11),
+        new(2024, 2, 12),
+        new(2024, 2, 13),
+        new(2024, 2, 14),
+        new(2024, 2, 15),
+        new(2024, 2, 16),
+        new(2024, 2, 17),
+        new(2024, 2, 18),
+        new(2024, 2, 19),
+        new(2024, 2, 20),
+        new(2024, 2, 21),
+        new(2024, 2, 22),
+        new(2024, 2, 23),
+        new(2024, 2, 24),
+        new(2024, 2, 25)
     ];
     public static readonly List<UserInfo> UserInofs =
     [
