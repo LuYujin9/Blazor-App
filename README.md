@@ -44,7 +44,7 @@
 
 - change the date, can't change the appointments block
 
-# comulicat
+# communicate
 
 - the width of Filter und sort
 - icons should be the same?

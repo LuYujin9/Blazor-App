@@ -24,7 +24,7 @@ public partial class AppointmentBlock
 
 
     // question 结束时间超过星期天, 就不显示
-    // qutstion 为什么第一个appointment的位置没有更新, 内容却更新了
+    // question 为什么第一个appointment的位置没有更新, 内容却更新了
     protected override void OnParametersSet()
     {
         if (Appointment != null)

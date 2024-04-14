@@ -33,11 +33,12 @@
             </SfDropDownList>
         </div>
         <div class="table">
+            @* <li class="column-deco-one"></li> *@
             @* <li class="decoretion-top"></li> *@
-            <li class="user-header">User
+            <li class="user-header" style="grid-column: 1; grid-row:1;">User
                 <div class="user-count">@_userInofs.Count()</div>
             </li>
-            <li class="last-active-header">Last Active</li>
+            <li class="last-active-header" style="grid-column: 2; grid-row:1;">Last Active</li>
             @{
                 var dates = GetDate();
                 @foreach (var date in dates)
@@ -45,7 +46,7 @@
                     <DateHeaderBlock Date=date />
                 }
 
-                <li class="empty-block"></li>
+                <li class="empty-block" style="grid-column: 10; grid-row:1;"></li>
                 var teams = GetTeams();
                 int rowCount = 1;
                 for (int i = 0; i < teams.Count; i++)
@@ -61,7 +62,7 @@
                         {
                             <li class="content-block" style="grid-column:@(l+3); grid-row:@(rowCount+1);"></li>
                         }
-                        <button class="edit-button" style="grid-row:@(rowCount+1)">
+                        <button class="edit-button" style="grid-row:@(rowCount+1); grid-column:10;">
                             <SfIcon Name=" IconName.Edit" Title="edit"></SfIcon>
                         </button>
                         var releventAppointsments = user.Appointments?.Where(appointment =>
@@ -75,15 +76,15 @@
                     }
                 }
             }
-        </div>
     </div>
-    <SfPager @ref="@Page" PageSize="10" PageSizes=@_pageSizes NumericItemsCount=5 TotalItemsCount=@_userInofs.Count()
-        ItemClick="Click" CssClass="schedule-Table-Pager" ShowPagerMessage="false">
-        @(SkipValue + 1) -
-        @LastItemInThePage
-        of
-        @_userInofs.Count() items
-    </SfPager>
+</div>
+<SfPager @ref="@Page" PageSize="10" PageSizes=@_pageSizes NumericItemsCount=5 TotalItemsCount=@_userInofs.Count()
+    ItemClick="Click" CssClass="schedule-Table-Pager" ShowPagerMessage="false">
+    @(SkipValue + 1) -
+    @LastItemInThePage
+    of
+    @_userInofs.Count() items
+</SfPager>
 </div>
 
 

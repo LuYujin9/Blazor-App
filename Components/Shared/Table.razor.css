@@ -98,6 +98,17 @@ h3 {
 
 /* table */
 
+.column-deco-one {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 10rem;
+  width: 1px;
+  height: inherit;
+  background: red;
+  z-index: 300;
+}
+
 .table {
   display: grid;
   grid-template-columns: 10rem 6.7rem repeat(7, 5.7rem) 4.6rem;
@@ -107,6 +118,7 @@ h3 {
   padding: 1px;
   background-color: var(--theme-color-gray);
   overflow: scroll;
+  position: relative;
 }
 
 /* .decoretion-top,
@@ -150,6 +162,52 @@ h3 {
   background-color: white;
 }
 
+/* question: 如何加边框, 如何给team sticky */
+
+.user-header {
+  position: sticky;
+  left: 0;
+  top: 0;
+  z-index: 212;
+}
+
+.user-block {
+  position: sticky;
+  left: 0;
+  z-index: 210;
+}
+
+.team-block {
+  position: sticky;
+  left: 0;
+  z-index: 210;
+}
+
+.last-active-header {
+  position: sticky;
+  left: 10rem;
+  top: 0;
+  z-index: 212;
+}
+
+.last-active-block {
+  position: sticky;
+  left: 10rem;
+  z-index: 210;
+}
+
+::deep .date-header {
+  position: sticky;
+  top: 0;
+  z-index: 211;
+}
+
+.empty-block {
+  position: sticky;
+  top: 0;
+  z-index: 211;
+}
+
 .user-header,
 .last-active-header {
   font-size: 0.75rem;
@@ -189,7 +247,6 @@ h3 {
   padding: 0.4rem 0 0.3rem 0;
   font-size: 0.9rem;
   font-weight: 500;
-  position: relative;
 }
 
 ::deep .weekday {
