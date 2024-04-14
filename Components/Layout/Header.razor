@@ -1,45 +1,23 @@
 @using Syncfusion.Blazor.Inputs
+@using BlazorApp.Components.Layout
 
 <header>
-    <div class='header-input-group'>
+    <div class='input-box'>
         <SfIcon Name="IconName.Search"></SfIcon>
-        <InputText class='header-search-bar' @bind-Value="@Search" Placeholder='Search' />
+        <InputText class='search-bar' @bind-Value="@Search" Placeholder='Search' />
     </div>
-    <div class="header-icon-container">
-        <div class="header-icon-frame">
-            <SfIcon Name="IconName.LineNormal"></SfIcon>
+    <div class="container">
+        <div class="icon-box">
+            <div class="icon-frame">
+                <SfIcon Name="IconName.LineNormal"></SfIcon>
+            </div>
+            <div class="icon-frame">
+                <SfIcon Name="IconName.Clock"></SfIcon>
+            </div>
+            <div class="icon-frame">
+                <SfIcon Name="IconName.Brightness"></SfIcon>
+            </div>
         </div>
-        <div class="header-icon-frame">
-            <SfIcon Name="IconName.Clock"></SfIcon>
-        </div>
-        <div class="header-icon-frame">
-            <SfIcon Name="IconName.Brightness"></SfIcon>
-        </div>
+        <img alt="user photo" class="photo" src="./images/Ellipse 961.png" />
     </div>
-    <img alt="user photo" class="header-photo" src="./images/Ellipse 961.png" />
 </header>
-
-@code {
-    public string Search = "";
-}
-
-<style>
-    .e-icons.e-search.e-medium {
-        margin-left: 0.4rem;
-    }
-
-    .header-search-bar {
-        margin-left: 0.2rem;
-        width: 13.7rem;
-        border: none;
-        background-color: inherit;
-    }
-
-    .header-search-bar::placeholder {
-        color: var(--text-color-dark);
-        opacity: 1;
-    }
-</style>
-
-@* TODO: use the custom icon *@
-@* TODO: why the photo with border-radius *@

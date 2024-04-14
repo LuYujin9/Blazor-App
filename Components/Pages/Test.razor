@@ -1,38 +1,28 @@
 @page "/test"
-@using static Shared.TestComponent
 @rendermode InteractiveServer
+@using Syncfusion.Blazor.Grids
+@using static Global.Data
 
-
-<div class="container">
-
-    <h1>Test</h1>
-    <div>@Number</div>
-    <BlazorApp.Components.Shared.TestComponent @bind-Number="Number" />
-
+<div>
+    <div class="table-header">
+        @{
+            List<Team> Teams = _userInfo
+            .GroupBy(u => u.Team)
+            .Select(g => new Team { TeamName = g.Key, Users = g.ToList() })
+            .ToList();
+            <TableLeftHeader TeamInfo="Teams" UserCount="_userInfo.Count()" />
+        }
+    </div>
 </div>
 
 @code {
-    private int Number { get; set; } = 1;
+    private readonly List<UserInfo> _userInfo = Data.UserInofs;
 
-    private Task NumberChanged(int value)
-    {
-        Number = value;
-        return Task.CompletedTask;
-    }
 }
 
 <style>
-    .container {
-        margin: 100px;
-    }
-
-    .ull {
-        height: 100px;
-        border: solid 1px black;
-        overflow-y: scroll;
-    }
-
-    .ull>li {
-        height: 20px;
+    .table-header {
+        display: flex;
+        flex-direction: column;
     }
 </style>

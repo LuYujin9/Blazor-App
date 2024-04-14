@@ -1,0 +1,21 @@
+@using Global
+<div class="header-row">
+    <div class="header-cell header-user">User <span class="user-count-span">@UserCount</span></div>
+    <div class="header-cell header-last-active"> Last Active</div>
+</div>
+<ul class="left-header-list">
+
+@{
+    @if (TeamInfo != null)
+    {
+        @foreach (var team in TeamInfo)
+        {
+            <li class="table-row team-row">@team.TeamName TEAM</li>
+            @foreach (var user in team.Users)
+            {
+                <TableLeftHeaderRow UserData="user" />
+            }
+        }
+    }
+}
+</ul>

@@ -3,6 +3,7 @@
 
   background-color: #f3f3f3;
   font-weight: 400;
+  border: 0.5px solid var(--theme-color-gray);
 }
 
 .appointment {
