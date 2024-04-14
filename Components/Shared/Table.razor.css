@@ -29,10 +29,10 @@ h3 {
 ::deep
   .filter-sort.e-ddl.e-input-group.e-control-container.e-control-wrapper.e-lib {
   height: 2rem;
-  padding: 0 12px;
+  padding: 0 0.6rem;
   border: 0;
   border-radius: 1.6rem;
-  font-size: 14px;
+  font-size: 0.7rem;
   color: #0c1116;
   background-color: white;
   -webkit-text-fill-color: #212121;
@@ -49,9 +49,6 @@ h3 {
 
 ::deep .filter-sort.e-ddl.e-input-group.e-control-wrapper .e-ddl-icon::before {
   content: "\e7f7";
-}
-
-.info-title {
 }
 
 ::deep .week-change-btn-group.e-btn-group {
@@ -84,7 +81,7 @@ h3 {
 ::deep
   .week-change-list
   > .e-lib.e-input.e-control.e-dropdownlist::placeholder {
-  font-size: 15px;
+  font-size: 0.75rem;
   color: black;
 }
 
@@ -92,22 +89,11 @@ h3 {
   .week-change-list.e-ddl.e-lib.e-input-group
   > .e-input-group-icon.e-ddl-icon.e-icons.e-ddl-disable-icon::before {
   width: 0.9rem;
-  font-size: 16px;
+  font-size: 0.8rem;
   color: black;
 }
 
 /* table */
-
-.column-deco-one {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 10rem;
-  width: 1px;
-  height: inherit;
-  background: red;
-  z-index: 300;
-}
 
 .table {
   display: grid;
@@ -119,32 +105,6 @@ h3 {
   background-color: var(--theme-color-gray);
   overflow: scroll;
   position: relative;
-}
-
-/* .decoretion-top,
-.decoretion-bottom {
-  width: 42rem;
-  height: 0.5rem;
-  background: white;
-  position: relative;
-}
-.decoretion-top {
-  left: 16.76rem;
-}
-.decoretion-bottom {
-  top: 0.5rem;
-  left: 16.7rem;
-} */
-
-.user-count {
-  width: 1.5rem;
-  height: 1.1rem;
-  padding: 0.15rem;
-  border-radius: 1.5rem;
-  font-size: 0.6rem;
-  text-align: center;
-  color: #9f9ea4;
-  border: 1px solid var(--theme-color-gray);
 }
 
 .user-header,
@@ -162,25 +122,59 @@ h3 {
   background-color: white;
 }
 
-/* question: 如何加边框, 如何给team sticky */
+/* question: 如何加边框, temporary solution*/
+.user-header,
+.last-active-header,
+.user-block,
+.last-active-block,
+.team-block-background,
+::deep .date-header,
+.empty-block {
+  border: 0.3px solid var(--theme-color-gray);
+}
 
 .user-header {
   position: sticky;
   left: 0;
   top: 0;
   z-index: 212;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.user-count {
+  width: 1.5rem;
+  height: 1.1rem;
+  padding: 0.15rem;
+  border-radius: 1.5rem;
+  font-size: 0.6rem;
+  text-align: center;
+  color: #9f9ea4;
+  border: 1px solid var(--theme-color-gray);
 }
 
 .user-block {
   position: sticky;
   left: 0;
   z-index: 210;
+  font-size: 0.7rem;
+  font-weight: 400;
 }
 
-.team-block {
+.team-block,
+.team-block-background {
   position: sticky;
   left: 0;
   z-index: 210;
+  height: 1.6rem;
+  color: #799f79;
+  background-color: #f5fbf5;
+  font-size: 0.6rem;
+  font-weight: 700;
+}
+
+.team-block-background {
+  z-index: 209;
 }
 
 .last-active-header {
@@ -188,44 +182,33 @@ h3 {
   left: 10rem;
   top: 0;
   z-index: 212;
+  font-size: 0.75rem;
+  font-weight: 700;
 }
 
 .last-active-block {
   position: sticky;
   left: 10rem;
   z-index: 210;
+  font-size: 0.7rem;
+  font-weight: 400;
 }
 
 ::deep .date-header {
   position: sticky;
   top: 0;
   z-index: 211;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 0.4rem 0 0.3rem 0;
+  font-size: 0.9rem;
+  font-weight: 500;
 }
 
 .empty-block {
   position: sticky;
   top: 0;
   z-index: 211;
-}
-
-.user-header,
-.last-active-header {
-  font-size: 0.75rem;
-  font-weight: 700;
-}
-
-.user-block,
-.last-active-block {
-  font-size: 0.7rem;
-  font-weight: 400;
-}
-
-.team-block {
-  height: 1.6rem;
-  color: #799f79;
-  background-color: #f5fbf5;
-  font-size: 0.6rem;
-  font-weight: 700;
 }
 
 .content-block {
@@ -241,23 +224,15 @@ h3 {
   z-index: 201;
 }
 
-::deep .date-header {
-  flex-direction: column;
-  gap: 0.3rem;
-  padding: 0.4rem 0 0.3rem 0;
-  font-size: 0.9rem;
-  font-weight: 500;
-}
-
 ::deep .weekday {
   height: 0.9rem;
-  font-size: 12px;
+  font-size: 0.6rem;
   font-weight: 400;
   color: #9f9ea4;
 }
 
 .appointment-block {
-  height: 55px;
+  height: 2.75rem;
   z-index: 300;
 }
 
@@ -266,7 +241,7 @@ h3 {
 ::deep .schedule-Table-Pager.sf-pager.e-control.e-pager.e-lib {
   width: 65.5rem;
   height: 1.6rem;
-  font-size: 14px;
+  font-size: 0.7rem;
   background-color: inherit;
   border: none;
   display: flex;
@@ -286,9 +261,6 @@ h3 {
   align-items: center;
 }
 
-::deep .e-pager .e-pagerconstant {
-}
-
 ::deep .schedule-Table-Pager .e-pagerdropdown {
   width: 3.4rem;
   height: 1.6rem;
@@ -296,7 +268,7 @@ h3 {
 }
 
 ::deep .e-ddl.e-input-group.e-control-wrapper .e-ddl-icon::before {
-  font-size: 16px;
+  font-size: 0.8rem;
   color: black;
 }
 
@@ -306,7 +278,7 @@ h3 {
   border: 1px solid var(--theme-color-main);
   padding: 0 0.15rem;
   border-radius: 0.2rem;
-  font-size: 16px;
+  font-size: 0.8rem;
   background-color: inherit;
   text-align: center;
 }
@@ -347,21 +319,15 @@ h3 {
 
 @media (max-width: 1440px) {
   .infos-container {
-    max-width: 1310px;
+    max-width: 65.5rem;
     width: 100%;
     min-width: 30rem;
   }
 
-  ::deep .table-row .team-row {
-    width: 100%;
-  }
-  .table-container > * {
-    max-width: 1310px;
+  .table {
+    max-width: 65.5rem;
     width: 100%;
     min-width: 30rem;
-  }
-  .table {
-    width: 100%;
   }
 
   ::deep .schedule-Table-Pager.sf-pager.e-control.e-pager.e-lib {

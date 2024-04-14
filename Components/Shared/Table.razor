@@ -7,11 +7,11 @@
 <div class="container">
     <div class="filter-sort-container">
         <SfDropDownList DataSource="@_filterDropList" @bind-Value="SelectedFilter" TValue="string" TItem="DropListItem"
-            Width="auto" PopupHeight="500px" PopupWidth="250px" Placeholder="Filter by" CssClass="filter-sort">
+            Width="auto" PopupHeight="500px" PopupWidth="12.5rem" Placeholder="Filter by" CssClass="filter-sort">
             <DropDownListFieldSettings Value="Text" Text="Text"></DropDownListFieldSettings>
         </SfDropDownList>
         <SfDropDownList DataSource="@_sortDropList" @bind-Value="SelectedSort" TValue="string" TItem="DropListItem"
-            Width="auto" PopupHeight="500px" PopupWidth="250px" Placeholder="Sort by" CssClass="filter-sort">
+            Width="auto" PopupHeight="500px" PopupWidth="12.5rem" Placeholder="Sort by" CssClass="filter-sort">
             <DropDownListFieldSettings Value="Text" Text="Text"></DropDownListFieldSettings>
         </SfDropDownList>
     </div>
@@ -26,8 +26,8 @@
                     CssClass="week-change-button next-week-button">
                 </ButtonGroupButton>
             </SfButtonGroup>
-            <SfDropDownList Width="200px" TValue="int" TItem="DateDropListItem" Placeholder="@_dateDropList[0].Text"
-                DataSource="@_dateDropList" @bind-Value="@DateSkipValue" PopupHeight="500px" PopupWidth="250px"
+            <SfDropDownList Width="10rem" TValue="int" TItem="DateDropListItem" Placeholder="@_dateDropList[0].Text"
+                DataSource="@_dateDropList" @bind-Value="@DateSkipValue" PopupHeight="500px" PopupWidth="12.5rem"
                 CssClass="week-change-list">
                 <DropDownListFieldSettings Value="DateSkipValue" Text="Text"></DropDownListFieldSettings>
             </SfDropDownList>
@@ -51,7 +51,8 @@
                 int rowCount = 1;
                 for (int i = 0; i < teams.Count; i++)
                 {
-                    <li class="team-block" style="grid-column: 1/-1; grid-row:@(rowCount+1);">@teams[i].TeamName TEAM</li>
+                    <li class="team-block" style="grid-column: 1; grid-row:@(rowCount+1);">@teams[i].TeamName TEAM</li>
+                    <li class="team-block-background" style="grid-column: 1/-1; grid-row:@(rowCount+1);"></li>
                     rowCount++;
                     for (int j = 0; j < teams[i].Users.Count; j++)
                     {
@@ -86,90 +87,3 @@
     @_userInofs.Count() items
 </SfPager>
 </div>
-
-
-@*
-
-
-
-.header-date {
-padding: 0.4rem 0 0.3rem 0;
-border-left: 0;
-border-right: 0;
-font-size: 18px;
-font-weight: 500;
-display: flex;
-flex-direction: column;
-align-content: center;
-gap: 0.3rem;
-position: relative;
-}
-
-.header-date > .day-span {
-height: 0.9rem;
-font-size: 12px;
-font-weight: 400;
-color: #9f9ea4;
-}
-
-.header-date::after {
-position: absolute;
-left: 100%;
-top: 20%;
-width: 1px;
-height: 66.6%;
-font-size: 12px;
-background-color: var(--theme-color-gray);
-color: black;
-border-radius: 5px;
-content: "";
-z-index: 200;
-}
-
-.header-date.header-today,
-.header-date.header-today > * {
-color: #195ce5;
-}
-
-.header-date.header-today::before {
-position: absolute;
-left: 30%;
-top: calc(100% - 0.15rem);
-width: 2.25rem;
-height: 0.15rem;
-font-size: 12px;
-background-color: #195ce5;
-color: black;
-border-radius: 5px;
-content: "";
-z-index: 201;
-}
-
-.header-cell.header-empty {
-border-left: 0;
-}
-
-.table-content {
-width: 45.4rem;
-overflow-y: scroll;
-overflow-x: hidden;
-}
-
-.team-leer-row {
-height: 1.6rem;
-border: 1px solid var(--theme-color-gray);
-border-left: none;
-background-color: #f5fbf5;
-}
-.team-row {
-display: flex;
-align-items: center;
-height: 1.6rem;
-padding-left: 1.05rem;
-border: 1px solid var(--theme-color-gray);
-border-right: none;
-color: #799f79;
-background-color: #f5fbf5;
-font-size: 0.6rem;
-font-weight: 700;
-} *@

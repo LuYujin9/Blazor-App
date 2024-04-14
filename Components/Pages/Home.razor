@@ -15,7 +15,7 @@
         <div class="dropdown-box">
             <label class="dropdown-box-title">Company
             </label>
-            <SfDropDownList PopupHeight="500px" Width="300px" TValue="string" TItem="DropListItem"
+            <SfDropDownList PopupHeight="500px" Width="15rem" TValue="string" TItem="DropListItem"
                 Placeholder="@_companyDropList[0].Text" DataSource="@_companyDropList" @bind-Value="SelectedCompany"
                 CssClass="company-users-dropdown-list">
                 <DropDownListFieldSettings Value="Text" Text="Text">
@@ -25,7 +25,7 @@
         <div class="dropdown-box">
             <label class="dropdown-box-title">Users
             </label>
-            <SfDropDownList Width="300px" TValue="string" TItem="DropListItem" Placeholder="@_userDropList[0].Text"
+            <SfDropDownList Width="15rem" TValue="string" TItem="DropListItem" Placeholder="@_userDropList[0].Text"
                 DataSource="@_userDropList" @bind-Value="SelectedUser" PopupHeight="500px"
                 CssClass="company-users-dropdown-list">
                 <DropDownListFieldSettings Value="Text" Text="Text"></DropDownListFieldSettings>

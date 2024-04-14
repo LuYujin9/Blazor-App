@@ -24,14 +24,14 @@
 - make the border of table better
 - input place holder 的 fontweight 改细
 - pager component is responsive, make the look better, when it is narrow
-- let the header of table freezing, when the table be scrolled.
 - team 的 color
-- appointments that do not fit int o the week need to render differently
 - table corner border-radius
+- hover:after 修改一下, 因为会被挡住
+- date header 的边框
 
 # style 的标准
 
-- what is the better way to organize the css files and component? 我觉得不要怕重复, 应该分开, 谁更优先呢? 如果都是同样的 Selector Specificity, 谁会在后面? component?
+- what is the better way to organize the css files and component? 我觉得不要怕重复, 应该分开, 谁更优先呢? 如果都是同样的 - - Selector Specificity, 谁会在后面? component?
 - should I avoid to use ">" in CSS selector
 
 # question
@@ -39,10 +39,10 @@
 - error when Pager ShowPagerMessage="false"; 先这样
 - change the page size, rerender? 目前无解
 - pager component is responsive, make the look better, when it is narrow 先这样
+- 为什么在我的电脑上, root rem 是 16px, synfusion input 的 input 却歪掉
+- 不要 gap 如何, 太难 style 了?
 
 # tasks
-
-- change the date, can't change the appointments block
 
 # communicate
 
@@ -52,3 +52,4 @@
 - appointments block 可能会叠在一起吗?
 - appointments 跨过 2 个星期的时候怎么办?begin time 不写?
 - endTime 是 required 的吗?
+- 当 endtime 不在该 week 的时候, 需要显示 appoint 吗?
