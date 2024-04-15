@@ -33,11 +33,10 @@
             </SfDropDownList>
         </div>
         <div class="table">
-            @* <li class="column-deco-one"></li> *@
-            @* <li class="decoretion-top"></li> *@
             <li class="user-header" style="grid-column: 1; grid-row:1;">User
                 <div class="user-count">@_userInofs.Count()</div>
             </li>
+            <li class="user-header-background" style="grid-column: 1; grid-row:1;"></li>
             <li class="last-active-header" style="grid-column: 2; grid-row:1;">Last Active</li>
             @{
                 var dates = GetDate();

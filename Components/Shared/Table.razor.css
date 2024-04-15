@@ -108,6 +108,7 @@ h3 {
 }
 
 .user-header,
+.user-header-background,
 .last-active-header,
 .user-block,
 .last-active-block,
@@ -123,7 +124,7 @@ h3 {
 }
 
 /* question: 如何加边框, temporary solution*/
-.user-header,
+/* .user-header,
 .last-active-header,
 .user-block,
 .last-active-block,
@@ -131,15 +132,19 @@ h3 {
 ::deep .date-header,
 .empty-block {
   border: 0.3px solid var(--theme-color-gray);
-}
+} */
 
-.user-header {
+.user-header,
+.user-header-background {
   position: sticky;
   left: 0;
   top: 0;
-  z-index: 212;
+  z-index: 250;
   font-size: 0.75rem;
   font-weight: 700;
+}
+
+.user-header::after {
 }
 
 .user-count {
@@ -153,9 +158,33 @@ h3 {
   border: 1px solid var(--theme-color-gray);
 }
 
+.user-header-background {
+  z-index: 249;
+  background-color: red;
+  width: calc(10rem + 1px);
+  height: calc(3rem + 1px);
+}
+
 .user-block {
   position: sticky;
   left: 0;
+  z-index: 210;
+  font-size: 0.7rem;
+  font-weight: 400;
+}
+
+.last-active-header {
+  position: sticky;
+  left: calc(10rem + 1px);
+  top: 0;
+  z-index: 212;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.last-active-block {
+  position: sticky;
+  left: calc(10rem + 1px);
   z-index: 210;
   font-size: 0.7rem;
   font-weight: 400;
@@ -175,23 +204,6 @@ h3 {
 
 .team-block-background {
   z-index: 209;
-}
-
-.last-active-header {
-  position: sticky;
-  left: 10rem;
-  top: 0;
-  z-index: 212;
-  font-size: 0.75rem;
-  font-weight: 700;
-}
-
-.last-active-block {
-  position: sticky;
-  left: 10rem;
-  z-index: 210;
-  font-size: 0.7rem;
-  font-weight: 400;
 }
 
 ::deep .date-header {
