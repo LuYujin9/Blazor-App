@@ -1,0 +1,65 @@
+@rendermode InteractiveServer
+
+@using Microsoft.AspNetCore.Components
+@* question 这个using 不能在_import.cs 也不能在imports.razor里 ?? *@
+
+
+<div class="container">
+    <div class="filter-sort-container">
+        <SfDropDownList DataSource="@_filterDropList" @bind-Value="SelectedFilter" TValue="string" TItem="DropListItem"
+            Width="auto" PopupHeight="500px" PopupWidth="12.5rem" Placeholder="Filter by" CssClass="filter-sort">
+            <DropDownListFieldSettings Value="Text" Text="Text"></DropDownListFieldSettings>
+        </SfDropDownList>
+        <SfDropDownList DataSource="@_sortDropList" @bind-Value="SelectedSort" TValue="string" TItem="DropListItem"
+            Width="auto" PopupHeight="500px" PopupWidth="12.5rem" Placeholder="Sort by" CssClass="filter-sort">
+            <DropDownListFieldSettings Value="Text" Text="Text"></DropDownListFieldSettings>
+        </SfDropDownList>
+    </div>
+    <div class="infos-container">
+        <h3 class="inof-title">Acme Inc</h3>
+        <div class="week-choose-container">
+            <SfButtonGroup CssClass="week-change-btn-group">
+                <ButtonGroupButton IconCss="e-icons e-chevron-left" @onclick="PrevWeekClick"
+                    CssClass="week-change-button prev-week-button">
+                </ButtonGroupButton>
+                <ButtonGroupButton IconCss="e-icons e-chevron-right" @onclick="NextWeekClick"
+                    CssClass="week-change-button next-week-button">
+                </ButtonGroupButton>
+            </SfButtonGroup>
+            <SfDropDownList Width="10rem" TValue="int" TItem="DateDropListItem" Placeholder="@_dateDropList[0].Text"
+                DataSource="@_dateDropList" @bind-Value="@DateSkipValue" PopupHeight="500px" PopupWidth="12.5rem"
+                CssClass="week-change-list">
+                <DropDownListFieldSettings Value="DateSkipValue" Text="Text"></DropDownListFieldSettings>
+            </SfDropDownList>
+        </div>
+        <div class="table">
+            @{
+                var dates = GetDate();
+                <HeaderRow UserCount=@_userInofs.Count Dates=dates />
+                var teams = GetTeams();
+                var rowCount = 1;
+                for (int i = 0; i < teams.Count; i++)
+                {
+                    <TeamRow Team="@teams[i]" />
+                    rowCount++;
+                    for (int j = 0; j < teams[i].Users.Count; j++)
+                    {
+                        var user = teams[i].Users[j];
+                        var releventAppointsments = user.Appointments?.Where(appointment =>
+                        (DateOnly.FromDateTime(appointment.BeginTime) >=
+                        dates[0] && DateOnly.FromDateTime(appointment.BeginTime) <= dates.Last())).ToList();
+                        <ContentRow User="user" Appointsments="releventAppointsments" />
+                        rowCount++;
+                    }
+                }
+            }
+        </div>
+    </div>
+    <SfPager @ref="@Page" PageSize="10" PageSizes=@_pageSizes NumericItemsCount=5 TotalItemsCount=@_userInofs.Count()
+        ItemClick="Click" CssClass="schedule-Table-Pager" ShowPagerMessage="false">
+        @(SkipValue + 1) -
+        @LastItemInThePage
+        of
+        @_userInofs.Count() items
+    </SfPager>
+</div>

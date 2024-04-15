@@ -1,0 +1,41 @@
+<li class="team-block">
+    <div class="team-context" style="grid-column: 1; grid-row:1;">@Team.TeamName TEAM</div>
+    <div class="team-background" style="grid-column: 2/-1; grid-row:1;"></div>
+</li>
+
+@code {
+    [Parameter]
+    public required Team Team { get; set; }
+}
+<style>
+    .team-block {
+        display: grid;
+        grid-template-columns: 10rem 6.7rem repeat(7, 5.7rem) 5.1rem;
+        height: 1.6rem;
+        border-bottom: 1px solid var(--theme-color-gray);
+        padding-left: 0;
+        color: #799f79;
+        background-color: #f5fbf5;
+        font-size: 0.6rem;
+        font-weight: 700;
+        box-sizing: content-box;
+    }
+
+    .team-context {
+        position: sticky;
+        left: 0;
+        z-index: 210;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        height: 1.6rem;
+        padding-left: 1.05rem;
+        border-left: 1px solid var(--theme-color-gray);
+        background-color: #f5fbf5;
+    }
+
+    .team-background {
+        z-index: 209;
+        border-right: 1px solid var(--theme-color-gray);
+    }
+</style>

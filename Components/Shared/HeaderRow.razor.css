@@ -1,0 +1,80 @@
+.header-row {
+  position: sticky;
+  top: 0;
+  box-sizing: content-box;
+  display: grid;
+  height: 3rem;
+  grid-template-columns: 10rem 6.7rem repeat(7, 5.7rem) 5.1rem;
+  border: 1px solid var(--theme-color-gray);
+  border-right: none;
+  border-left: none;
+  z-index: 260;
+}
+
+.user-header,
+.last-active-header,
+.empty-block,
+::deep .date-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-left: 1.05rem;
+  border-right: 1px solid var(--theme-color-gray);
+  height: 3rem;
+  background-color: white;
+}
+
+.user-header {
+  position: sticky;
+  left: 0;
+  z-index: 250;
+  border-left: 1px solid var(--theme-color-gray);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.user-count {
+  width: 1.5rem;
+  height: 1.1rem;
+  padding: 0.15rem;
+  border-radius: 1.5rem;
+  font-size: 0.6rem;
+  text-align: center;
+  color: #9f9ea4;
+  border: 1px solid var(--theme-color-gray);
+}
+
+.last-active-header {
+  position: sticky;
+  left: 10rem;
+  z-index: 212;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+::deep .date-header {
+  position: sticky;
+  top: 0;
+  z-index: 211;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 0.5rem 0 0.3rem 0;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-right: none;
+}
+
+::deep .weekday {
+  font-size: 0.6rem;
+  font-weight: 400;
+  color: #9f9ea4;
+}
+
+::deep .date-header::before {
+  position: absolute;
+  width: 1px;
+  height: 2rem;
+  content: "";
+  background-color: var(--theme-color-gray);
+  right: 0;
+}

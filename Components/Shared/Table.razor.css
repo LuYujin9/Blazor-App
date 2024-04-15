@@ -1,0 +1,203 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.infos-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  width: 65.5rem;
+  background-color: white;
+  padding: 1.2rem;
+  height: 40rem;
+  border-radius: 0.8rem;
+}
+
+h3 {
+  height: 2.8rem;
+  padding: 0.9rem;
+  margin: 0;
+}
+
+.filter-sort-container {
+  display: flex;
+  gap: 0.6rem;
+}
+
+::deep
+  .filter-sort.e-ddl.e-input-group.e-control-container.e-control-wrapper.e-lib {
+  height: 2rem;
+  padding: 0 0.6rem;
+  border: 0;
+  border-radius: 1.6rem;
+  font-size: 0.7rem;
+  color: #0c1116;
+  background-color: white;
+  -webkit-text-fill-color: #212121;
+  box-shadow: none;
+  display: inline-flex;
+  align-items: center;
+}
+
+::deep
+  .filter-sort.e-ddl.e-input-group.e-control-container.e-control-wrapper.e-lib
+  > input {
+  width: auto;
+}
+
+::deep .filter-sort.e-ddl.e-input-group.e-control-wrapper .e-ddl-icon::before {
+  content: "\e7f7";
+}
+
+::deep .week-change-btn-group.e-btn-group {
+  box-shadow: none;
+}
+
+.week-choose-container {
+  height: 2.8rem;
+  border-radius: 0.8rem;
+  background-color: var(--theme-color-background);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+::deep .week-change-button.e-btn.e-lib.e-icon-btn {
+  width: 1.6rem;
+  padding: 0;
+  border: none;
+  background-color: inherit;
+  color: black;
+}
+
+::deep .week-change-list.e-ddl.e-lib.e-input-group {
+  width: 9.15rem;
+  border: none;
+  background-color: inherit;
+}
+
+::deep
+  .week-change-list
+  > .e-lib.e-input.e-control.e-dropdownlist::placeholder {
+  font-size: 0.75rem;
+  color: black;
+}
+
+::deep
+  .week-change-list.e-ddl.e-lib.e-input-group
+  > .e-input-group-icon.e-ddl-icon.e-icons.e-ddl-disable-icon::before {
+  width: 0.9rem;
+  font-size: 0.8rem;
+  color: black;
+}
+
+.table {
+  display: grid;
+  grid-auto-flow: row;
+  overflow: scroll;
+  position: relative;
+  width: 62.5rem;
+  background-color: var(--theme-color-gray);
+}
+
+/* pager */
+
+::deep .schedule-Table-Pager.sf-pager.e-control.e-pager.e-lib {
+  width: 65.5rem;
+  height: 1.6rem;
+  font-size: 0.7rem;
+  background-color: inherit;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+::deep .schedule-Table-Pager > .e-pagercontainer {
+  min-width: 13rem;
+  order: 3;
+}
+
+::deep .schedule-Table-Pager > .e-pagesizes {
+  position: absolute;
+  left: 11rem;
+  display: flex;
+  align-items: center;
+}
+
+::deep .schedule-Table-Pager .e-pagerdropdown {
+  width: 3.4rem;
+  height: 1.6rem;
+  margin-top: 0;
+}
+
+::deep .e-ddl.e-input-group.e-control-wrapper .e-ddl-icon::before {
+  font-size: 0.8rem;
+  color: black;
+}
+
+::deep
+  .schedule-Table-Pager
+  .e-ddl.e-lib.e-input-group.e-control-container.e-control-wrapper.e-valid-input {
+  border: 1px solid var(--theme-color-main);
+  padding: 0 0.15rem;
+  border-radius: 0.2rem;
+  font-size: 0.8rem;
+  background-color: inherit;
+  text-align: center;
+}
+
+::deep
+  .schedule-Table-Pager.sf-pager.e-control.e-pager.e-lib
+  .e-pagercontainer {
+  border: none;
+  background-color: inherit;
+}
+
+::deep
+  .schedule-Table-Pager.sf-pager.e-control.e-pager.e-lib
+  .e-pagercontainer
+  > * {
+  background-color: inherit;
+  color: black;
+  border: none;
+}
+
+::deep .schedule-Table-Pager .e-numericcontainer > * {
+  width: 1.6rem;
+  height: 1.6rem;
+  background-color: inherit;
+  color: black;
+  border: none;
+}
+
+::deep
+  .schedule-Table-Pager.sf-pager.e-control.e-pager.e-lib
+  .e-numericcontainer
+  > .e-active {
+  padding-top: 0.4rem;
+  background-color: var(--theme-color-main);
+  color: white;
+  border-radius: 4px;
+}
+
+@media (max-width: 1440px) {
+  .infos-container {
+    max-width: 65.5rem;
+    width: 100%;
+    min-width: 30rem;
+  }
+
+  .table {
+    max-width: 65.5rem;
+    width: 100%;
+    min-width: 30rem;
+  }
+
+  ::deep .schedule-Table-Pager.sf-pager.e-control.e-pager.e-lib {
+    width: 100%;
+    min-width: 30rem;
+  }
+}

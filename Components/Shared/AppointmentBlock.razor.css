@@ -1,0 +1,49 @@
+.appointment-block {
+  height: 2.6rem;
+  border-radius: 0.2rem;
+  margin: 0.2rem auto 0.2rem 0.1rem;
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  z-index: 200;
+  padding: 0.2rem;
+}
+
+.appointment-block:hover:after {
+  position: absolute;
+  z-index: 205;
+  top: 0;
+  left: 0;
+
+  width: 5.1rem;
+  height: 2.2rem;
+  padding: 0.15rem;
+  border-radius: 5px;
+  color: black;
+  background-color: white;
+  font-size: 0.55rem;
+  content: attr(info);
+}
+
+.appointment-title {
+  width: 5rem;
+  height: 1.25rem;
+  font-size: 0.55rem;
+  line-height: 0.55rem;
+  text-align: center;
+}
+
+.appointment-time {
+  height: 0.65rem;
+  color: #747474;
+  font-size: 0.5rem;
+  line-height: 0.8rem;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.end-time {
+  color: #121d22;
+}
