@@ -1,0 +1,18 @@
+<div class="header-row">
+    <li class="user-header" style="grid-column: 1; grid-row:1;">User
+        <div class="user-count">@UserCount</div>
+    </li>
+    <li class="last-active-header" style="grid-column: 2; grid-row:1;">Last Active</li>
+    @foreach (var date in Dates)
+    {
+        <DateHeaderBlock Date=date />
+    }
+    <li class="empty-block" style="grid-column: 10; grid-row:1;"></li>
+</div>
+
+@code {
+    [Parameter]
+    public int UserCount { get; set; }
+    [Parameter]
+    public required List<DateOnly> Dates { get; set; }
+}

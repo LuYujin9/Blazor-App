@@ -1,0 +1,22 @@
+<div class="content-row">
+    <li class="user-block" style="grid-column:1; grid-row:1;">@User.Name</li>
+    <li class="last-active-block" style="grid-column:2;  grid-row:1;">@User.LastActive</li>
+    @for (int l = 0; l < 7; l++)
+    {
+        <li class="content-block" style="grid-column:@(l+3);  grid-row:1;"></li>
+    }
+    <button class="edit-button" style="grid-column:10;  grid-row:1;">
+        <SfIcon Name=" IconName.Edit" Title="edit"></SfIcon>
+    </button>
+    @for (int k = 0; k < Appointsments?.Count; k++)
+    {
+        <AppointmentBlock Appointment="Appointsments[k]" AppointmentIndex="k" RowCount="0" />
+    }
+</div>
+
+@code {
+    [Parameter]
+    public required UserInfo User { get; set; }
+    [Parameter]
+    public required List<Appointment> Appointsments { get; set; }
+}
