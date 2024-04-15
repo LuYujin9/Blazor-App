@@ -1,70 +1,23 @@
-﻿<SfSidebar Width="80px">
-    <ChildContent>
-        <div class="sidebar-item sidebar-head">
-            <img src="./images/home.png" />
-        </div>
-        <NavLink class="sidebar-item nav-link selected" href="/">
-            <SfIcon Name="IconName.GridView" Size="IconSize.Medium"></SfIcon>
-        </NavLink>
-        <NavLink class="sidebar-item nav-link" href="/test">
-            <SfIcon Name="IconName.CriticalPath"></SfIcon>
-        </NavLink>
-        <NavLink class="sidebar-item nav-link" href="base64Converter">
-            <SfIcon Name="IconName.Settings"></SfIcon>
-        </NavLink>
-        <NavLink class="sidebar-item nav-link" href="classCollision">
-            <SfIcon Name="IconName.TableNested"></SfIcon>
-        </NavLink>
-    </ChildContent>
-</SfSidebar>
-
-<style>
-    .e-sidebar {
-        height: 97.4rem;
-        margin: 0.8rem;
-        padding: 0.8rem;
-        padding-top: 1.2rem;
-        background-color: var(--theme-color-main);
-        border-radius: 0.8rem;
-        display: grid;
-        grid-template-rows: 5.4rem repeat(4, 2.6rem);
-    }
-
-    .sidebar-item {
-        width: 2.4rem;
-        height: 2.4rem;
-        border-radius: 0.6rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .sidebar-head {
-        background-color: white;
-    }
-
-    .sidebar-head>img {
-        width: 1.6rem;
-        height: 1.6rem;
-    }
-
-    .nav-link {
-        background-color: inherit;
-        color: white;
-        text-decoration: none;
-    }
-
-    .selected.nav-link {
-        background-color: white;
-        color: #255157;
-    }
-
-    .text-content {
-        font-size: 30px;
-        padding: 3rem;
-    }
-
-    .main>div {
-        padding: 0px !important;
-    }
-</style>
+﻿<div class="nav-menu">
+    <SfSidebar Width="4rem">
+        <ChildContent>
+            <div class="item head">
+                <img src="./images/home.png" class="head-img" />
+            </div>
+            <div class="link-container">
+                <NavLink class="item nav-link selected" href="/">
+                    <SfIcon Name="IconName.GridView" Size="IconSize.Medium"></SfIcon>
+                </NavLink>
+                <NavLink class="item nav-link" href="/test">
+                    <SfIcon Name="IconName.CriticalPath"></SfIcon>
+                </NavLink>
+                <NavLink class="item nav-link" href="/">
+                    <SfIcon Name="IconName.Settings"></SfIcon>
+                </NavLink>
+                <NavLink class="item nav-link" href="/">
+                    <SfIcon Name="IconName.TableNested"></SfIcon>
+                </NavLink>
+            </div>
+        </ChildContent>
+    </SfSidebar>
+</div>

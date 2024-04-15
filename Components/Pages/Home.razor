@@ -11,107 +11,28 @@
             micro-learning paths.
         </div>
     </div>
-    <div class="dropdown">
-        <div class="dropdown-container">
-            <label class="dropdown-item-title">Company
+    <div class="dropdown-box-container">
+        <div class="dropdown-box">
+            <label class="dropdown-box-title">Company
             </label>
-            <SfDropDownList PopupHeight="500px" Width="300px" TValue="string" TItem="DropListItem"
+            <SfDropDownList PopupHeight="500px" Width="15rem" TValue="string" TItem="DropListItem"
                 Placeholder="@_companyDropList[0].Text" DataSource="@_companyDropList" @bind-Value="SelectedCompany"
                 CssClass="company-users-dropdown-list">
                 <DropDownListFieldSettings Value="Text" Text="Text">
                 </DropDownListFieldSettings>
             </SfDropDownList>
         </div>
-        <div class="dropdown-container">
-            <label class="dropdown-item-title">Users
+        <div class="dropdown-box">
+            <label class="dropdown-box-title">Users
             </label>
-            <SfDropDownList Width="300px" TValue="string" TItem="DropListItem" Placeholder="@_userDropList[0].Text"
+            <SfDropDownList Width="15rem" TValue="string" TItem="DropListItem" Placeholder="@_userDropList[0].Text"
                 DataSource="@_userDropList" @bind-Value="SelectedUser" PopupHeight="500px"
                 CssClass="company-users-dropdown-list">
                 <DropDownListFieldSettings Value="Text" Text="Text"></DropDownListFieldSettings>
             </SfDropDownList>
         </div>
     </div>
-    <div class="filter-sort-container">
-        <SfDropDownList Width="auto" TValue="string" TItem="DropListItem" Placeholder="Filter by"
-            DataSource="@_filterDropList" @bind-Value="SelectedFilter" PopupHeight="500px" PopupWidth="250px"
-            CssClass="filter-sort">
-            <DropDownListFieldSettings Value="Text" Text="Text"></DropDownListFieldSettings>
-        </SfDropDownList>
-        @* question 这里有个问题, 如果filter选择了一个项次,超出的text可能会被省略, 建议不要固定filter宽度 *@
-        <SfDropDownList Width="108px" TValue="string" TItem="DropListItem" Placeholder="Sort by"
-            DataSource="@_sortDropList" @bind-Value="SelectedSort" PopupHeight="500px" PopupWidth="250px"
-            CssClass="filter-sort">
-            <DropDownListFieldSettings Value="Text" Text="Text"></DropDownListFieldSettings>
-        </SfDropDownList>
-    </div>
-    <TableComponent />
+    <Table />
 </div>
 
-@code {
-    private List<DropListItem> _companyDropList = new List<DropListItem> {
-new DropListItem() { Id= "0", Text= "Acme Inc" },
-};
-    private List<DropListItem> _userDropList = new List<DropListItem> {
-new DropListItem() { Id= "0", Text= "Label, Label, Label, Label, Label, Label," },
-new DropListItem() { Id= "1", Text= "Label, Label, Label, Label, Label, Label," },
-new DropListItem() { Id= "2", Text= "Label, Label, Label, Label, Label, Label," },
-new DropListItem() { Id= "3", Text= "Label, Label, Label, Label, Label, Label," }
-};
-
-    private List<DropListItem> _filterDropList = new List<DropListItem> {
-new DropListItem() { Id= "0", Text= "Having Course today" }
-};
-    private List<DropListItem> _sortDropList = new List<DropListItem> {
-new DropListItem() { Id= "0", Text= "Newest Users" },
-new DropListItem() { Id= "1", Text= "Last Active" },
-};
-    public string? SelectedCompany;
-    public string? SelectedUser;
-    public string? SelectedFilter;
-    public string? SelectedSort;
-}
-
-<style>
-    .company-users-dropdown-list.e-ddl.e-input-group.e-control-container.e-control-wrapper.e-lib {
-        width: 9.1rem;
-        height: 2.5rem;
-        padding-left: 0;
-        border: 1px solid #001360;
-        font-size: 16px;
-        color: #212121;
-        -webkit-text-fill-color: #212121;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1rem;
-        //TO DO: 设定为1px的话,和figma上看起来不一样粗
-        //TO DO: 如何加上项目的数量? 也许取消?
-        //TO DO: 点击的时候 icon 没有改变
-    }
-
-    .filter-sort.e-ddl.e-input-group.e-control-container.e-control-wrapper.e-lib {
-        height: 2rem;
-        padding: 0 12px;
-        border: 0;
-        border-radius: 1.6rem;
-        font-size: 14px;
-        color: #0c1116;
-        background-color: white;
-        -webkit-text-fill-color: #212121;
-        box-shadow: none;
-        display: inline-flex;
-        align-items: center;
-    }
-
-    //question:是否需要设定宽度为最长的option,以免内容被省略而看不清
-    .filter-sort.e-ddl.e-input-group.e-control-container.e-control-wrapper.e-lib>input {
-        width: auto;
-    }
-
-    .filter-sort.e-ddl.e-input-group.e-control-wrapper .e-ddl-icon::before {
-        content: '\e7f7';
-    }
-
-    //question: 如果没有check box , edit button是不是也不需要了?
-</style>
+@* 强行加个option数量也许也是可以的,有下拉list的时候消失, 处于绝对位置. *@
